@@ -10,7 +10,6 @@
 #import "JLCycScrollDefaultCell.h"
 #import "JLCycSrollCellDataProtocol.h"
 #import "JLPageControl.h"
-#import "UIView+JLFrame.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

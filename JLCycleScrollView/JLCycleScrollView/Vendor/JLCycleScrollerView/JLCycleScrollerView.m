@@ -54,7 +54,7 @@ static NSString* JLCycScrollDefaultCellResign = @"JLCycScrollDefaultCellResign";
 {
     [super layoutSubviews];
     self.collectionView.frame = self.bounds;
-    [self reloadDataSpecifyAtItem:NO Item:-1];//Frame改变时同步刷新colloection和pagecontrol
+    [self reloadDataSpecifyAtItem:NO Item:-1];
 }
 -(void)initDefaultData
 {
@@ -329,7 +329,7 @@ static NSString* JLCycScrollDefaultCellResign = @"JLCycScrollDefaultCellResign";
             if ([self dataIsUnavailable]) {
                 [self.custonCollectioncell setJLCycSrollCellData:self.arrayData[indexPath.row]];
             }else{
-                if (indexPath.row == 0) {//第一张
+                if (indexPath.row == 0) {
                     [self.custonCollectioncell setJLCycSrollCellData:self.arrayData[self.arrayData.count-1]];
                 }else{
                     NSInteger item = (indexPath.row-1)%self.arrayData.count;
@@ -347,7 +347,7 @@ static NSString* JLCycScrollDefaultCellResign = @"JLCycScrollDefaultCellResign";
                 if ([self dataIsUnavailable]) {
                     [defaultCell setJLCycSrollCellData:[self.datasource jl_cycleScrollerView:self defaultCell:defaultCell cellForItemAtInteger:indexPath.row sourceArray:self.arrayData]];
                 }else{
-                    if (indexPath.row == 0) {//第一张
+                    if (indexPath.row == 0) {
                         id data = [self.datasource jl_cycleScrollerView:self defaultCell:defaultCell cellForItemAtInteger:self.arrayData.count-1 sourceArray:self.arrayData];
                         [defaultCell setJLCycSrollCellData:data];
                     }else{
@@ -366,7 +366,7 @@ static NSString* JLCycScrollDefaultCellResign = @"JLCycScrollDefaultCellResign";
                 if ([self dataIsUnavailable]) {
                     [defaultCell setJLCycSrollCellData:self.arrayData[indexPath.row]];
                 }else{
-                    if (indexPath.row == 0) {//第一张
+                    if (indexPath.row == 0) {
                         [defaultCell setJLCycSrollCellData:self.arrayData[self.arrayData.count-1]];
                     }else{
                         NSInteger item = (indexPath.row-1)%self.arrayData.count;
@@ -391,7 +391,7 @@ static NSString* JLCycScrollDefaultCellResign = @"JLCycScrollDefaultCellResign";
             if ([self dataIsUnavailable]) {
                 [self.delegate jl_cycleScrollerView:self didSelectItemAtInteger:indexPath.row sourceArray:self.arrayData];
             }else{
-                if (indexPath.row == 0) {//第一张
+                if (indexPath.row == 0) {
                     [self.delegate jl_cycleScrollerView:self didSelectItemAtInteger:self.arrayData.count-1 sourceArray:self.arrayData];
                 }else{
                     NSInteger item = (indexPath.row-1)%self.arrayData.count;
@@ -464,7 +464,7 @@ static NSString* JLCycScrollDefaultCellResign = @"JLCycScrollDefaultCellResign";
             }
         }
     }
-    if (self.collectionView.tracking && ![self dataIsUnavailable] &&self.infiniteDrag) { //解决两只手玩的情况
+    if (self.collectionView.tracking && ![self dataIsUnavailable] &&self.infiniteDrag) {
         CGFloat pageFloat = [self getCurryPageFloat];
         if (pageFloat > self.arrayData.count+1) {
             [self scrollToItemAtIndex:1 animated:NO];
@@ -591,12 +591,12 @@ static NSString* JLCycScrollDefaultCellResign = @"JLCycScrollDefaultCellResign";
 }
 -(void)setTimeDuration:(NSTimeInterval)timeDuration
 {
-    _timeDuration = timeDuration>=0.5?timeDuration:0.5; //系统scrollToItemAtIndexPath滚动方法时间需要0.3s左右，不能小于这个值
+    _timeDuration = timeDuration>=0.5?timeDuration:0.5; //系统scrollToItemAtIndexPath带动画滚动方法时间需要0.3s左右，不能小于这个值
     [self setupTimer];
 }
 -(void)pauseTimer
 {
-    if(self.timer&&[self.timer isValid]){ //是否在运行
+    if(self.timer&&[self.timer isValid]){
         [self.timer setFireDate:[NSDate distantFuture]];
     }
 }
@@ -627,7 +627,7 @@ static NSString* JLCycScrollDefaultCellResign = @"JLCycScrollDefaultCellResign";
 - (void)willMoveToWindow:(UIWindow *)newWindow
 {
     [super willMoveToWindow:newWindow];
-    if (newWindow) { //pop后矫正页码
+    if (newWindow) { 
         if (self.pagingEnabled) {
             NSInteger item = [self getCurryPageInteger];
             [self scrollToItemAtIndex:item animated:NO];
