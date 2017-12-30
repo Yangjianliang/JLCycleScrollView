@@ -65,7 +65,7 @@
     }
 }
 - (IBAction)infiniteDraggingSwitch:(UISwitch *)sender {
-    self.jiCycScrollerView.infiniteDrag = sender.on;
+    self.jiCycScrollerView.infiniteDragging = sender.on;
     if (sender.on) {
         self.infiniteDraggingLabel.textColor = [UIColor purpleColor];
     }else{

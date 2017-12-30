@@ -51,7 +51,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (nonatomic, strong) NSArray *sourceArray;
 
-#pragma mark ------UICollectionView设置
+// -------------UICollectionView设置------------
 /**
  使用默认的cell创建轮播图则必须设置datasource,默认cell只添加了imageview子视图
  datasource只用于系统自带默认cell数据的设置，如果使用自定义的cell,即
@@ -73,14 +73,14 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) UICollectionViewScrollDirection scrollDirection;
 /** default is YES. */
 @property(nonatomic) BOOL scrollEnabled;
-/**每行、列cell个数,default is 1. */
+/**每行、列cell个数,default is 1 */
 @property(nonatomic) NSInteger cellsOfLine;    
-/**当每行、列cell个数大于一个时，是否以单个cell分页, default is YES. */
+/**default is YES. */
 @property(nonatomic) BOOL pagingEnabled;
 /**是否需要无限拖动，default is YES*/
-@property(nonatomic) BOOL infiniteDrag;
+@property(nonatomic) BOOL infiniteDragging;
 
-#pragma mark ------pageControl设置
+// --------------pageControl设置------------
 /**获取pageControl进行属性设置eg:pageControl.currentPageIndicatorTintColor...*/
 @property (nonatomic, strong, nullable) JLPageControl* pageControl;
 /**是否需要pageControl，默认YES;设置NO后pageControl=nil,如果再次设置为YES,将重新创建默认pageControl*/
@@ -101,6 +101,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, assign) CGFloat pageControl_botton;
 @property(nonatomic, assign) CGFloat pageControl_centerY;
 
+// --------------timer设置------------
 /**是否需要定时器,默认YES*/
 @property(nonatomic, assign) BOOL timerNeed;
 /**定时器时间间隔(默认2.5s)*/

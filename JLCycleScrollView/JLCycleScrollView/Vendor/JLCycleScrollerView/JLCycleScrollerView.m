@@ -66,7 +66,7 @@ static NSString* JLCycScrollDefaultCellResign = @"JLCycScrollDefaultCellResign";
     _pageControl_centerX = 0.f;
     _cellsOfLine = 1 ;
     _timerNeed = YES;
-    _infiniteDrag = YES;
+    _infiniteDragging = YES;
     _scrollEnabled = YES;
     _pageControlNeed = YES;
     _pagingEnabled = YES;
@@ -88,7 +88,7 @@ static NSString* JLCycScrollDefaultCellResign = @"JLCycScrollDefaultCellResign";
         if (flag) {
             [self scrollToItemAtIndex:lastItem animated:NO];
         }else{
-            BOOL scrollToFirst = self.infiniteDrag&&![self dataIsUnavailable]?YES:NO;
+            BOOL scrollToFirst = self.infiniteDragging&&![self dataIsUnavailable]?YES:NO;
             if (scrollToFirst && [self getCurryPageInteger]==0) {
                 [self scrollToItemAtIndex:1 animated:NO];
             }
@@ -266,15 +266,15 @@ static NSString* JLCycScrollDefaultCellResign = @"JLCycScrollDefaultCellResign";
     _scrollDirection = scrollDirection;
     self.flowLayout.scrollDirection = scrollDirection;
 }
--(void)setInfiniteDrag:(BOOL)infiniteDrag
+-(void)setInfiniteDragging:(BOOL)infiniteDragging
 {
-    BOOL changed =_infiniteDrag==infiniteDrag?NO:YES;
+    BOOL changed =_infiniteDragging==infiniteDragging?NO:YES;
     NSInteger lastItem = [self getCurryPageInteger];
     BOOL last = [self dataIsUnavailable];
-    _infiniteDrag = infiniteDrag;
+    _infiniteDragging = infiniteDragging;
     BOOL curry = [self dataIsUnavailable];
     if (changed) {
-        if (_infiniteDrag) {
+        if (_infiniteDragging) {
             if (!curry) {
                 lastItem++;
             }
@@ -325,7 +325,7 @@ static NSString* JLCycScrollDefaultCellResign = @"JLCycScrollDefaultCellResign";
 {
     if (self.reuseIdentifier) {
         self.custonCollectioncell = [collectionView dequeueReusableCellWithReuseIdentifier:self.reuseIdentifier forIndexPath:indexPath];
-        if (self.infiniteDrag) {
+        if (self.infiniteDragging) {
             if ([self dataIsUnavailable]) {
                 [self.custonCollectioncell setJLCycSrollCellData:self.arrayData[indexPath.row]];
             }else{
@@ -343,7 +343,7 @@ static NSString* JLCycScrollDefaultCellResign = @"JLCycScrollDefaultCellResign";
     }else{
         JLCycScrollDefaultCell* defaultCell = [collectionView dequeueReusableCellWithReuseIdentifier:JLCycScrollDefaultCellResign forIndexPath:indexPath];
         if (self.datasource && [self.datasource respondsToSelector:@selector(jl_cycleScrollerView:defaultCell:cellForItemAtInteger:sourceArray:)]) {
-            if (self.infiniteDrag) {
+            if (self.infiniteDragging) {
                 if ([self dataIsUnavailable]) {
                     [defaultCell setJLCycSrollCellData:[self.datasource jl_cycleScrollerView:self defaultCell:defaultCell cellForItemAtInteger:indexPath.row sourceArray:self.arrayData]];
                 }else{
@@ -362,7 +362,7 @@ static NSString* JLCycScrollDefaultCellResign = @"JLCycScrollDefaultCellResign";
             }
             
         }else{
-            if (self.infiniteDrag) {
+            if (self.infiniteDragging) {
                 if ([self dataIsUnavailable]) {
                     [defaultCell setJLCycSrollCellData:self.arrayData[indexPath.row]];
                 }else{
@@ -387,7 +387,7 @@ static NSString* JLCycScrollDefaultCellResign = @"JLCycScrollDefaultCellResign";
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     if (self.delegate && [self.delegate respondsToSelector:@selector(jl_cycleScrollerView:didSelectItemAtInteger:sourceArray:)]) {
-        if (self.infiniteDrag) {
+        if (self.infiniteDragging) {
             if ([self dataIsUnavailable]) {
                 [self.delegate jl_cycleScrollerView:self didSelectItemAtInteger:indexPath.row sourceArray:self.arrayData];
             }else{
@@ -405,7 +405,7 @@ static NSString* JLCycScrollDefaultCellResign = @"JLCycScrollDefaultCellResign";
 }
 -(NSInteger)getNumberOfSections
 {
-    if (self.infiniteDrag) {
+    if (self.infiniteDragging) {
         if ([self dataIsUnavailable]) {
             return self.arrayData.count;
         }else{
@@ -441,7 +441,7 @@ static NSString* JLCycScrollDefaultCellResign = @"JLCycScrollDefaultCellResign";
 {
     if (self.pageControlNeed) {
         NSInteger page = [self getCurryPageInteger];
-        if (self.infiniteDrag) {
+        if (self.infiniteDragging) {
             if ([self dataIsUnavailable]) {
                 if (self.pageControl.currentPage != page) {
                     self.pageControl.currentPage = page; //减少set方法调用次数
@@ -464,7 +464,7 @@ static NSString* JLCycScrollDefaultCellResign = @"JLCycScrollDefaultCellResign";
             }
         }
     }
-    if (self.collectionView.tracking && ![self dataIsUnavailable] &&self.infiniteDrag) {
+    if (self.collectionView.tracking && ![self dataIsUnavailable] &&self.infiniteDragging) {
         CGFloat pageFloat = [self getCurryPageFloat];
         if (pageFloat > self.arrayData.count+1) {
             [self scrollToItemAtIndex:1 animated:NO];
@@ -497,14 +497,14 @@ static NSString* JLCycScrollDefaultCellResign = @"JLCycScrollDefaultCellResign";
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
     [self resumeTimerAfterDuration:_timeDuration];
-    if (self.infiniteDrag) {
+    if (self.infiniteDragging) {
         [self switchTheForeAndAft];
     }
 }
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView
 {
     self.timerIsNowScrollingAnimation = NO;
-    if (self.infiniteDrag) {
+    if (self.infiniteDragging) {
         [self switchTheForeAndAft];
     }
 }
@@ -553,7 +553,7 @@ static NSString* JLCycScrollDefaultCellResign = @"JLCycScrollDefaultCellResign";
     
     if ([self dataIsUnavailable])return;
     NSInteger page = [self getCurryPageInteger];;
-    if (self.infiniteDrag) {
+    if (self.infiniteDragging) {
         if (page<self.arrayData.count+1) {
             self.timerIsNowScrollingAnimation = YES;
             [self scrollToItemAtIndex:page+1 animated:YES];
