@@ -28,7 +28,6 @@ typedef NS_ENUM(NSInteger, PageControlMode) {
 @property(nonatomic, assign) PageControlMode pageControl_Y;
 @property(nonatomic, assign) CGFloat pageControl_BH;
 @property(nonatomic, copy) NSString *reuseIdentifier;
-@property(nonatomic) BOOL timerIsNowScrollingAnimation;
 @end
 static NSString* JLCycScrollDefaultCellResign = @"JLCycScrollDefaultCellResign";
 @implementation JLCycleScrollerView
@@ -409,7 +408,7 @@ static NSString* JLCycScrollDefaultCellResign = @"JLCycScrollDefaultCellResign";
         if ([self dataIsUnavailable]) {
             return self.arrayData.count;
         }else{
-            return self.arrayData.count+self.cellsOfLine+1;//无限轮播，首部加1个，尾部加cellsOfLine个
+            return self.arrayData.count+self.cellsOfLine+1;
         }
     }else{
         return self.arrayData.count;
@@ -503,7 +502,6 @@ static NSString* JLCycScrollDefaultCellResign = @"JLCycScrollDefaultCellResign";
 }
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView
 {
-    self.timerIsNowScrollingAnimation = NO;
     if (self.infiniteDragging) {
         [self switchTheForeAndAft];
     }
@@ -555,7 +553,6 @@ static NSString* JLCycScrollDefaultCellResign = @"JLCycScrollDefaultCellResign";
     NSInteger page = [self getCurryPageInteger];;
     if (self.infiniteDragging) {
         if (page<self.arrayData.count+1) {
-            self.timerIsNowScrollingAnimation = YES;
             [self scrollToItemAtIndex:page+1 animated:YES];
         }
         if (page == self.arrayData.count+1) {
@@ -563,7 +560,6 @@ static NSString* JLCycScrollDefaultCellResign = @"JLCycScrollDefaultCellResign";
         }
     }else{
         if (page<self.arrayData.count-1 ) {
-            self.timerIsNowScrollingAnimation = YES;
             [self scrollToItemAtIndex:page+1 animated:YES];
         }
         if (page == self.arrayData.count-1) {
@@ -591,7 +587,7 @@ static NSString* JLCycScrollDefaultCellResign = @"JLCycScrollDefaultCellResign";
 }
 -(void)setTimeDuration:(NSTimeInterval)timeDuration
 {
-    _timeDuration = timeDuration>=0.5?timeDuration:0.5; //系统scrollToItemAtIndexPath带动画滚动方法时间需要0.3s左右，不能小于这个值
+    _timeDuration = timeDuration>=0.5?timeDuration:0.5;
     [self setupTimer];
 }
 -(void)pauseTimer
