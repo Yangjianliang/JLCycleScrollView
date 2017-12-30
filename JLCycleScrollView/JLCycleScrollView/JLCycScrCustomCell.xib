@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="JLCycScrCustomCell">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="title" lineBreakMode="headTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m0f-6Y-qtM">
+                        <rect key="frame" x="120" y="41.5" width="235" height="17"/>
+                        <color key="backgroundColor" red="0.95294117649999999" green="0.95294117649999999" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="FCP-6l-DV1">
+                        <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="FCP-6l-DV1" secondAttribute="height" multiplier="1:1" id="vAP-Xq-gUq"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+            </view>
+            <color key="backgroundColor" red="1" green="0.3373703602" blue="0.34358745019999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+            <constraints>
+                <constraint firstItem="m0f-6Y-qtM" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="I29-h6-Y4F"/>
+                <constraint firstAttribute="trailing" secondItem="m0f-6Y-qtM" secondAttribute="trailing" constant="20" id="MSL-Xo-Xnq"/>
+                <constraint firstItem="m0f-6Y-qtM" firstAttribute="leading" secondItem="FCP-6l-DV1" secondAttribute="trailing" constant="20" id="Oot-dr-AqL"/>
+                <constraint firstItem="FCP-6l-DV1" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="RPN-Vi-yjk"/>
+                <constraint firstItem="FCP-6l-DV1" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="l2Y-YH-Ldc"/>
+                <constraint firstItem="FCP-6l-DV1" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="non-FK-UlP"/>
+                <constraint firstAttribute="bottom" secondItem="FCP-6l-DV1" secondAttribute="bottom" id="ubd-b5-39b"/>
+            </constraints>
+            <size key="customSize" width="369" height="104"/>
+            <connections>
+                <outlet property="imageView" destination="FCP-6l-DV1" id="EZF-ds-W1L"/>
+                <outlet property="titleLabel" destination="m0f-6Y-qtM" id="aWa-75-Kyp"/>
+            </connections>
+            <point key="canvasLocation" x="58.5" y="-10"/>
+        </collectionViewCell>
+    </objects>
+</document>
