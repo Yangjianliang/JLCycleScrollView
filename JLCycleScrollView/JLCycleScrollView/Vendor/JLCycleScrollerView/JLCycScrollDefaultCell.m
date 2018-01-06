@@ -33,7 +33,7 @@
             }
         }
     }else if ([data isKindOfClass:[NSURL class]]) {
-        [self.imageView sd_setImageWithURL:[NSURL URLWithString:data] placeholderImage:nil];
+        [self.imageView sd_setImageWithURL:data placeholderImage:nil];
     }else if ([data isKindOfClass:[UIImage class]]) {
         self.imageView.image = data;
     }else{

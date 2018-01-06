@@ -55,7 +55,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 // -------------UICollectionView设置------------
 /**
- 使用默认的cell创建轮播图则必须设置datasource,默认cell只添加了imageview子视图
+ 使用默认的cell创建轮播图设置datasource,默认cell只添加了imageview子视图
  datasource只用于系统自带默认cell数据的设置，如果使用自定义的cell,即
  [useCustomCell: isXibBuild:]方法后，datasource设置无效，此时需要使用协议设置数据
  eg:参考JLCycScrollDefaultCell
@@ -106,7 +106,7 @@ NS_ASSUME_NONNULL_BEGIN
 // --------------timer设置------------
 /**是否需要定时器,default is YES */
 @property(nonatomic, assign) BOOL timerNeed;
-/**定时器时间间隔(default is 2.5s)*/
+/**定时器时间间隔(default is 2.5)*/
 @property(nonatomic, assign)NSTimeInterval timeDuration;
 /**多少秒后启动,note:当视图添加、移除、push-pop等时,定时器会自动重新创建激活、销毁定时器，eg：当push时，你不必考虑暂停定时器，当pop回来时，你也不必激活定时器*/
 -(void)resumeTimerAfterDuration:(NSTimeInterval)duration;
