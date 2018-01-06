@@ -10,7 +10,7 @@
 
 @interface JLPageControl : UIPageControl
 
-@property(nonatomic ,assign) BOOL allowChangeFrame; // default is NO,将以下需要修改属性设置后再设置YES
+@property(nonatomic ,assign) BOOL allowChangeFrame; // default is NO,推荐将以下需要修改属性设置后再设置YES
 
 @property(nonatomic, readonly) CGSize jl_MinimumSize; // returns minimum size required to display dots for given page count. can be used to size control if page count could change
 

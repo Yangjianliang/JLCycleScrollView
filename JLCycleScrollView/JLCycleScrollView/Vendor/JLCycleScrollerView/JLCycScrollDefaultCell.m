@@ -26,11 +26,6 @@
     if ([data isKindOfClass:[NSString class]]) {
         if ([data hasPrefix:@"http"]) {
             [self.imageView sd_setImageWithURL:[NSURL URLWithString:data] placeholderImage:nil ];
-        } else {
-            UIImage *image = [UIImage imageNamed:data];
-            if (image) {
-                self.imageView.image = image;
-            }
         }
     }else if ([data isKindOfClass:[NSURL class]]) {
         [self.imageView sd_setImageWithURL:data placeholderImage:nil];
