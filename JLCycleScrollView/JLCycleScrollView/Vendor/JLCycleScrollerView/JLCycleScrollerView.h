@@ -46,23 +46,22 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithFrame:(CGRect)frame NS_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
 /**数据源
- 默认支持数据类型(NSString,NSURL,UIImage),其他类型可以在DataSource直接根据代理方法cel进行设置
+ 数组内默认支持数据类型(NSString,NSURL,UIImage),其他类型可以在DataSource直接根据代理方法cel进行设置
  eg：
  ExampleModel *model = = sourceArray[integer];
  [cell.imageView sd_setImageWithURL:[NSURL URLWithString:model.url] placeholderImage:nil];
  */
 @property (nonatomic, strong) NSArray *sourceArray;
-
-// -------------UICollectionView设置------------
 /**
  使用默认的cell创建轮播图设置datasource,默认cell只添加了imageview子视图
  datasource只用于系统自带默认cell数据的设置，如果使用自定义的cell,即
- [useCustomCell: isXibBuild:]方法后，datasource设置无效，此时需要使用协议设置数据
- eg:参考JLCycScrollDefaultCell
+ [useCustomCell: isXibBuild:]方法后，datasource设置无效，此时需要使用协议设置Cell数据
+ eg:JLCycScrollDefaultCell
  */
 @property (nonatomic, weak, nullable) id<JLCycleScrollerViewDatasource>datasource;
 @property (nonatomic, weak, nullable) id<JLCycleScrollerViewDelegate>delegate;
 
+// -------------UICollectionView设置------------
 /**
  轮播图使用自定义的cell创建,cell上子控件可高度自定义
  @param cell  自定义cell必须遵循JLCycleScrollDataProtocol协议，cell执行协议方法给cell赋值,使用自定义cell不再需要datasource
@@ -70,17 +69,21 @@ NS_ASSUME_NONNULL_BEGIN
  eg:[self.jLCycleScrollerView useCustomCell:[[JLLunBoCollectionViewCell alloc] init] isXibBuild:YES];
  */
 -(void)useCustomCell:(UICollectionViewCell<JLCycSrollCellDataProtocol>*)cell isXibBuild:(BOOL)isxib ;
-
+/** default is nil */
+@property (nonatomic, strong) UIImage *placeholderImage;
 /** default is UICollectionViewScrollDirectionHorizontal */
 @property (nonatomic) UICollectionViewScrollDirection scrollDirection;
 /** default is YES */
-@property(nonatomic) BOOL scrollEnabled;
-/**每行、列cell个数,default is 1 */
-@property(nonatomic) NSInteger cellsOfLine;    
+@property (nonatomic) BOOL scrollEnabled;
+/**default is 1.0,每行、列cell个数,*/
+@property (nonatomic) CGFloat cellsOfLine;
 /**default is YES */
-@property(nonatomic) BOOL pagingEnabled;
-/**是否需要无限拖动，default is YES*/
-@property(nonatomic) BOOL infiniteDragging;
+@property (nonatomic) BOOL pagingEnabled;
+/**default is YES,是否需要无限拖拽*/
+@property (nonatomic) BOOL infiniteDragging;
+/**default is NO,eg:sourceArray.count=1、cellsOfLine<=1.0时不能被无限拖拽*/
+@property (nonatomic) BOOL infiniteDraggingForSinglePage;
+@property (nonatomic) NSInteger curryIndex;
 
 // --------------pageControl设置------------
 /**if pageControlNeed=NO,pageControl is nil; eg:pageControl.currentPageIndicatorTintColor...*/
@@ -108,7 +111,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, assign) BOOL timerNeed;
 /**定时器时间间隔(default is 2.5)*/
 @property(nonatomic, assign)NSTimeInterval timeDuration;
-/**多少秒后启动,note:当视图添加、移除、push-pop等时,定时器会自动重新创建激活、销毁定时器，eg：当push时，你不必考虑暂停定时器，当pop回来时，你也不必激活定时器*/
+/**note:当视图添加、移除、push-pop等时,定时器会自动重新创建激活、销毁定时器，
+ eg：当push时，你不必考虑暂停定时器，当pop回来时，你也不必激活定时器
+ 多少秒后启动*/
 -(void)resumeTimerAfterDuration:(NSTimeInterval)duration;
 /**暂停*/
 -(void)pauseTimer;

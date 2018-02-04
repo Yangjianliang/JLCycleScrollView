@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "JLCycSrollCellDataProtocol.h"
 @interface JLCycScrollDefaultCell : UICollectionViewCell<JLCycSrollCellDataProtocol>
-@property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@property (nonatomic, strong) UIImageView *imageView;
 
 @end

@@ -48,18 +48,40 @@
    
     self.firstJLView.datasource = self;
      self.firstJLView.delegate = self;
-    self.firstJLView.sourceArray = @[self.arrayData.lastObject];
-    
+//    self.firstJLView.sourceArray = @[self.arrayData.lastObject];
+//    self.firstJLView.sourceArray = self.arrayData;
+
     self.firstJLView.pageControl.pageIndicatorTintColor = [UIColor purpleColor];
     self.firstJLView.pageControl.currentPageIndicatorTintColor = [UIColor redColor];
     
 //    self.firstJLView.pageControl.jl_norImage = [UIImage imageNamed:@"nor"];
 //    self.firstJLView.pageControl.jl_selImage = [UIImage imageNamed:@"sel"];
 //    self.firstJLView.pageControl.allowChangeFrame = YES;
-}
-- (IBAction)firstClcik:(id)sender {
     
-    self.firstJLView.sourceArray = self.arrayData;
+
+}
+- (IBAction)firstClcik:(UIButton *)sender {
+
+    //1.
+//    sender.selected = !sender.selected;
+//    self.firstJLView.placeholderImage = sender.selected?nil: [UIImage imageNamed:@"placeholderImage"];
+
+    //2.
+//   NSMutableArray *arr = [NSMutableArray arrayWithArray:self.arrayData];
+//    [arr removeLastObject];
+//    self.firstJLView.sourceArray = arr;
+
+    //3.
+//    self.firstJLView.cellsOfLine = 1.7;
+    
+    //4.
+//    self.firstJLView.curryIndex = 3;
+    
+//    self.firstJLView.infiniteDraggingForSinglePage = YES;
+//    self.firstJLView.sourceArray = @[self.arrayData.lastObject];
+
+        self.firstJLView.sourceArray = self.arrayData;
+
 }
 - (IBAction)secondClick:(id)sender {
     self.firstJLView.scrollDirection = UICollectionViewScrollDirectionVertical;
@@ -85,14 +107,15 @@
 
 - (IBAction)threeClcik:(id)sender {
     
-    self.firstheight.constant = 350;
-    self.firstLeft.constant = 35;
+    self.firstheight.constant = 50;
+    self.firstLeft.constant = 65;
     self.firstright.constant = 35;
+//    self.firstJLView.sourceArray = self.arrayData;
 
-    self.firstJLView.cellsOfLine = 5;
-    [self.firstJLView useCustomCell:[JLCycScrCustomCell new] isXibBuild:YES];//cell协议赋值;使用自定义cell的话self.firstJLView.datasource = self; 这个不再需要设置，设置了也没什么用
+//    self.firstJLView.cellsOfLine = 5;
+//    [self.firstJLView useCustomCell:[JLCycScrCustomCell new] isXibBuild:YES];//cell协议赋值;使用自定义cell的话self.firstJLView.datasource = self; 这个不再需要设置，设置了也没什么用
 
-    self.firstJLView.pageControlNeed = NO;
+//    self.firstJLView.pageControlNeed = NO;
 
 }
 

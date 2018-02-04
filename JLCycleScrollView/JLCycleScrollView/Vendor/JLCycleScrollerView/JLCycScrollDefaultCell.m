@@ -10,7 +10,28 @@
 #import "UIImageView+WebCache.h"
 
 @implementation JLCycScrollDefaultCell
-
+- (instancetype)initWithFrame:(CGRect)frame {
+    if (self = [super initWithFrame:frame]) {
+        self.backgroundColor = [UIColor whiteColor];
+        [self.contentView addSubview:self.imageView];
+    }
+    return self;
+}
+- (UIImageView *)imageView
+{
+    if (!_imageView) {
+        UIImageView *imageView = [[UIImageView alloc] init];
+        imageView.contentMode = UIViewContentModeScaleAspectFill;
+        imageView.clipsToBounds = YES;
+        _imageView = imageView;
+    }
+    return _imageView;
+}
+-(void)layoutSubviews
+{
+    [super layoutSubviews];
+    self.imageView.frame = self.bounds;
+}
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
@@ -26,6 +47,8 @@
     if ([data isKindOfClass:[NSString class]]) {
         if ([data hasPrefix:@"http"]) {
             [self.imageView sd_setImageWithURL:[NSURL URLWithString:data] placeholderImage:nil ];
+        } else {
+            self.imageView.image = [UIImage imageNamed:data];
         }
     }else if ([data isKindOfClass:[NSURL class]]) {
         [self.imageView sd_setImageWithURL:data placeholderImage:nil];

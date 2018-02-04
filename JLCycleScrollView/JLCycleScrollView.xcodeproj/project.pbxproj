@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2B1C96261F95B70600B040F6 /* ExampleOneController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B1C96251F95B70600B040F6 /* ExampleOneController.m */; };
+		2B488CC0202580F90004BACA /* placeholderImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B488CBF202580F90004BACA /* placeholderImage.png */; };
 		2B92751B1FD8E3F900D177E1 /* JLCycScrCustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B9275191FD8E3F900D177E1 /* JLCycScrCustomCell.m */; };
 		2B92751C1FD8E3F900D177E1 /* JLCycScrCustomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B92751A1FD8E3F900D177E1 /* JLCycScrCustomCell.xib */; };
 		2B9275291FD90CB000D177E1 /* ExampleModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B9275281FD90CB000D177E1 /* ExampleModel.m */; };
@@ -20,7 +21,6 @@
 		2BBCB6271FF1581700A5CE10 /* ExampleTwoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BBCB6251FF1581700A5CE10 /* ExampleTwoController.m */; };
 		2BF34B1C1FD5452E00F30ECD /* JLCycleScrollerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BF34B141FD5452E00F30ECD /* JLCycleScrollerView.m */; };
 		2BF34B1D1FD5452E00F30ECD /* JLCycScrollDefaultCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BF34B161FD5452E00F30ECD /* JLCycScrollDefaultCell.m */; };
-		2BF34B1E1FD5452E00F30ECD /* JLCycScrollDefaultCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BF34B171FD5452E00F30ECD /* JLCycScrollDefaultCell.xib */; };
 		2BF34B1F1FD5452E00F30ECD /* JLPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BF34B191FD5452E00F30ECD /* JLPageControl.m */; };
 		8E561FAD63EA633EF405E9D6 /* libPods-JLCycleScrollView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8231E785ADE7AAE4ACB602F1 /* libPods-JLCycleScrollView.a */; };
 /* End PBXBuildFile section */
@@ -29,6 +29,7 @@
 		2B18CAA11FDDA5B60089E353 /* JLCycSrollCellDataProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JLCycSrollCellDataProtocol.h; sourceTree = "<group>"; };
 		2B1C96241F95B70600B040F6 /* ExampleOneController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExampleOneController.h; sourceTree = "<group>"; };
 		2B1C96251F95B70600B040F6 /* ExampleOneController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExampleOneController.m; sourceTree = "<group>"; };
+		2B488CBF202580F90004BACA /* placeholderImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = placeholderImage.png; sourceTree = "<group>"; };
 		2B9275181FD8E3F900D177E1 /* JLCycScrCustomCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JLCycScrCustomCell.h; sourceTree = "<group>"; };
 		2B9275191FD8E3F900D177E1 /* JLCycScrCustomCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JLCycScrCustomCell.m; sourceTree = "<group>"; };
 		2B92751A1FD8E3F900D177E1 /* JLCycScrCustomCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JLCycScrCustomCell.xib; sourceTree = "<group>"; };
@@ -50,7 +51,6 @@
 		2BF34B141FD5452E00F30ECD /* JLCycleScrollerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JLCycleScrollerView.m; sourceTree = "<group>"; };
 		2BF34B151FD5452E00F30ECD /* JLCycScrollDefaultCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JLCycScrollDefaultCell.h; sourceTree = "<group>"; };
 		2BF34B161FD5452E00F30ECD /* JLCycScrollDefaultCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JLCycScrollDefaultCell.m; sourceTree = "<group>"; };
-		2BF34B171FD5452E00F30ECD /* JLCycScrollDefaultCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JLCycScrollDefaultCell.xib; sourceTree = "<group>"; };
 		2BF34B181FD5452E00F30ECD /* JLPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JLPageControl.h; sourceTree = "<group>"; };
 		2BF34B191FD5452E00F30ECD /* JLPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JLPageControl.m; sourceTree = "<group>"; };
 		5E0D799F586CD931AD93A2BF /* Pods-JLCycleScrollView.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JLCycleScrollView.release.xcconfig"; path = "Pods/Target Support Files/Pods-JLCycleScrollView/Pods-JLCycleScrollView.release.xcconfig"; sourceTree = "<group>"; };
@@ -154,6 +154,7 @@
 				2B9927DE1F77FE7F00FBC958 /* AppDelegate.m */,
 				2B9927E31F77FE8000FBC958 /* Main.storyboard */,
 				2B9927E61F77FE8000FBC958 /* Assets.xcassets */,
+				2B488CBF202580F90004BACA /* placeholderImage.png */,
 				2B9927E81F77FE8000FBC958 /* LaunchScreen.storyboard */,
 				2B9927EB1F77FE8000FBC958 /* Info.plist */,
 				2B9927DB1F77FE7F00FBC958 /* main.m */,
@@ -178,7 +179,6 @@
 				2BF34B141FD5452E00F30ECD /* JLCycleScrollerView.m */,
 				2BF34B151FD5452E00F30ECD /* JLCycScrollDefaultCell.h */,
 				2BF34B161FD5452E00F30ECD /* JLCycScrollDefaultCell.m */,
-				2BF34B171FD5452E00F30ECD /* JLCycScrollDefaultCell.xib */,
 				2BF34B181FD5452E00F30ECD /* JLPageControl.h */,
 				2BF34B191FD5452E00F30ECD /* JLPageControl.m */,
 			);
@@ -265,8 +265,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				2B92751C1FD8E3F900D177E1 /* JLCycScrCustomCell.xib in Resources */,
-				2BF34B1E1FD5452E00F30ECD /* JLCycScrollDefaultCell.xib in Resources */,
 				2B9927EA1F77FE8000FBC958 /* LaunchScreen.storyboard in Resources */,
+				2B488CC0202580F90004BACA /* placeholderImage.png in Resources */,
 				2B9927E71F77FE8000FBC958 /* Assets.xcassets in Resources */,
 				2B9927E51F77FE8000FBC958 /* Main.storyboard in Resources */,
 			);

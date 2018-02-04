@@ -20,8 +20,8 @@
 @property(nonatomic, assign) CGFloat jl_norDotCornerRadius; // default is 3.5f;
 @property(nonatomic, assign) CGFloat jl_selDotCornerRadius; // default is 3.5f;
 
-@property(nonatomic, assign) CGFloat jl_norMagrin; // default is 4.f;
-@property(nonatomic, assign) CGFloat jl_selMagrin; // default is 4.f;|o-O-o--o|
+@property(nonatomic, assign) CGFloat jl_norMagrin; // default is 9.f;
+@property(nonatomic, assign) CGFloat jl_selMagrin; // default is 9.f;|o-O-o--o|
 
 @property (nullable, nonatomic, strong) UIImage *jl_norImage; // default is nil
 @property (nullable, nonatomic, strong) UIImage *jl_selImage; // default is nil
