@@ -9,6 +9,6 @@
 #import <Foundation/Foundation.h>
 
 @protocol JLCycSrollCellDataProtocol <NSObject>
-@optional
+@required
 -(void)setJLCycSrollCellData:(nullable id)data;
 @end

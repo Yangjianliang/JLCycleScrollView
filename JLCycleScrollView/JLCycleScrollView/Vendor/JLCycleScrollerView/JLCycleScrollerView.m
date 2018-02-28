@@ -16,24 +16,23 @@ typedef NS_ENUM(NSInteger, PageControlMode) {
     PageControlModeTop     = 3,
     PageControlModeBottom  = 4,
     PageControlModeCenterY = 5,
-
 };
 @interface JLCycleScrollerView ()<UICollectionViewDelegate,UICollectionViewDataSource>
-@property (nonatomic, strong ) UICollectionView *collectionView;
-@property (nonatomic, strong ) UICollectionViewFlowLayout *flowLayout;
-@property(nonatomic, strong) UICollectionViewCell<JLCycSrollCellDataProtocol>*custonCollectioncell;
-@property(nonatomic, strong) NSArray*arrayData;
-@property(nonatomic, weak) NSTimer *timer;
-@property(nonatomic, assign) PageControlMode pageControl_X;
-@property(nonatomic, assign) PageControlMode pageControl_Y;
-@property(nonatomic, assign) CGFloat pageControl_BH;
-@property(nonatomic, copy) NSString *reuseIdentifier;
-@property(nonatomic, strong) NSString *minCellValue;
-@property(nonatomic, assign) BOOL invalidPage;
-
+@property (nonatomic, strong) UICollectionView *collectionView;
+@property (nonatomic, strong) UICollectionViewFlowLayout *flowLayout;
+@property (nonatomic, strong) UICollectionViewCell<JLCycSrollCellDataProtocol>*custonCollectioncell;
+//@property (nonatomic, strong) NSMutableArray<__kindof UICollectionViewLayoutAttributes *> *arrayAttributes;
+@property (nonatomic, strong) NSArray *arrayData;
+@property (nonatomic, copy) NSString *reuseIdentifier;
+@property (nonatomic, weak) NSTimer *timer;
+@property (nonatomic) PageControlMode pageControl_X;
+@property (nonatomic) PageControlMode pageControl_Y;
+@property (nonatomic) CGFloat pageControl_BH;
+@property (nonatomic) BOOL transformSize;
+@property (nonatomic) BOOL ignorePage;
 
 @end
-static NSString* JLCycScrollDefaultCellResign = @"JLCycScrollDefaultCellResign";
+static NSString * const JLCycScrollDefaultCellResign = @"JLCycScrollDefaultCellResign";
 @implementation JLCycleScrollerView
 @synthesize pageControl = _pageControl;
 @synthesize curryIndex = _curryIndex;
@@ -56,9 +55,8 @@ static NSString* JLCycScrollDefaultCellResign = @"JLCycScrollDefaultCellResign";
 }
 -(void)initDefaultData
 {
-    self.arrayData = [NSArray array];
     _scrollDirection = UICollectionViewScrollDirectionHorizontal;
-    _timeDuration = 2.5;
+    _timeDuration = 3.0+0.35;
     _pageControl_botton = 10.f;
     _pageControl_centerX = 0.f;
     _cellsOfLine = 1.0 ;
@@ -68,10 +66,16 @@ static NSString* JLCycScrollDefaultCellResign = @"JLCycScrollDefaultCellResign";
     _scrollEnabled = YES;
     _pageControlNeed = YES;
     _pagingEnabled = YES;
+    self.arrayData = [NSArray array];
     self.pageControl_BH = 10.f;
-    self.invalidPage = NO;
+    self.transformSize = NO;
+    self.ignorePage = NO;
     self.pageControl_X = PageControlModeCenterX;
     self.pageControl_Y = PageControlModeBottom;
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillResignActive)
+                                                 name:UIApplicationWillResignActiveNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidBecomeActive)
+                                                 name:UIApplicationDidBecomeActiveNotification object:nil];
 }
 #pragma mark  - reloadData
 -(void)reloadDataAtItem:(CGFloat)item
@@ -84,9 +88,9 @@ static NSString* JLCycScrollDefaultCellResign = @"JLCycScrollDefaultCellResign";
     dispatch_async(dispatch_get_main_queue(), ^{
         BOOL scrollToFirst = self.infiniteDragging&&![self dataIsUnavailable]?YES:NO;
         if (scrollToFirst && [self getCurryPageFloat]<1.0) {
-            [self setContentOffsetAtIndex:1.0 animated:NO];
+            [self setContentOffsetAtIndex:1.0];
         }else{
-            [self setContentOffsetAtIndex:item animated:NO];
+            [self setContentOffsetAtIndex:item];
         }
         [self.collectionView reloadData];
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -331,31 +335,27 @@ static NSString* JLCycScrollDefaultCellResign = @"JLCycScrollDefaultCellResign";
         self.collectionView.pagingEnabled = self.pagingEnabled;
     }
 }
--(NSInteger)curryIndex
+-(CGFloat)curryIndex
 {
-    return [self getCurryPageInteger];
+    return [self getCurryPageFloat];
 }
--(void)setCurryIndex:(NSInteger)curryIndex
+-(void)setCurryIndex:(CGFloat)curryIndex
 {
     if (self.arrayData.count==0) {
         _curryIndex = 0.0;
         return;
     }else{
-        NSInteger idex = curryIndex>0?curryIndex:0;
+        NSInteger idex = curryIndex>0.0?curryIndex:0.0;
         _curryIndex = idex>self.arrayData.count-1?self.arrayData.count-1:curryIndex;
     }
-    self.invalidPage = YES;
-    if (_curryIndex==0) {
-        BOOL scrollToFirst = self.infiniteDragging&&![self dataIsUnavailable]?YES:NO;
-        if (scrollToFirst) {
-            [self setContentOffsetAtIndex:1.0 animated:NO];
-        }else{
-            [self setContentOffsetAtIndex:0.0 animated:NO];
-        }
+    self.ignorePage = YES;
+    BOOL scrollToFirst = self.infiniteDragging&&![self dataIsUnavailable]?YES:NO;
+    if (scrollToFirst) {
+        [self setContentOffsetAtIndex:_curryIndex+1.0];
     }else{
-        [self setContentOffsetAtIndex:_curryIndex animated:NO];
+        [self setContentOffsetAtIndex:_curryIndex];
     }
-    self.invalidPage = NO;
+    self.ignorePage = NO;
 }
 #pragma mark - -----UICollectionView Delegate------
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
@@ -472,21 +472,27 @@ static NSString* JLCycScrollDefaultCellResign = @"JLCycScrollDefaultCellResign";
 -(CGFloat)getCellWidth
 {
     if (self.flowLayout.scrollDirection == UICollectionViewScrollDirectionVertical) {
-        if (self.minCellValue) {
-            return self.minCellValue.floatValue;
+        if (self.transformSize) {
+            return self.jl_width;
         }
         return self.collectionView.jl_width;
     }else{
+        if (self.transformSize) {
+            return ceilf(self.jl_width/self.cellsOfLine);
+        }
         return ceilf(self.collectionView.jl_width/self.cellsOfLine);
     }
 }
 -(CGFloat)getCellHeight
 {
     if (self.flowLayout.scrollDirection == UICollectionViewScrollDirectionVertical) {
+        if (self.transformSize) {
+            return ceilf(self.jl_height/self.cellsOfLine);
+        }
         return ceilf(self.collectionView.jl_height/self.cellsOfLine);
     }else{
-        if (self.minCellValue) {
-            return self.minCellValue.floatValue;
+        if (self.transformSize) {
+            return self.jl_height;
         }
         return self.collectionView.jl_height;
     }
@@ -586,15 +592,15 @@ static NSString* JLCycScrollDefaultCellResign = @"JLCycScrollDefaultCellResign";
         return UICollectionViewScrollPositionLeft;
     }
 }
--(void)setContentOffsetAtIndex:(CGFloat)item animated:(BOOL)animated
+-(void)setContentOffsetAtIndex:(CGFloat)item
 {
     if (item >=0 && item<[self getNumberOfItemsInSection]) {
         if (self.flowLayout.scrollDirection == UICollectionViewScrollDirectionVertical) {
             CGFloat offSet = [self getCellHeight]*item;
-            [self.collectionView setContentOffset:CGPointMake(0, offSet) animated:animated];
+            [self.collectionView setContentOffset:CGPointMake(0, offSet) animated:NO];
         }else{
             CGFloat offSet = [self getCellWidth]*item;
-            [self.collectionView setContentOffset:CGPointMake(offSet, 0) animated:animated];
+            [self.collectionView setContentOffset:CGPointMake(offSet, 0) animated:NO];
         }
     }
 }
@@ -612,16 +618,18 @@ static NSString* JLCycScrollDefaultCellResign = @"JLCycScrollDefaultCellResign";
 -(CGFloat)getCurryPageFloat
 {
     if (self.flowLayout.scrollDirection == UICollectionViewScrollDirectionVertical) {
-        CGFloat page = self.collectionView.contentOffset.y / self.collectionView.jl_height*self.cellsOfLine;
+        CGFloat H = self.transformSize?self.jl_height:self.collectionView.jl_height;
+        CGFloat page = self.collectionView.contentOffset.y /H*self.cellsOfLine;
         return page;
     }else{
-        CGFloat page = self.collectionView.contentOffset.x / self.collectionView.jl_width*self.cellsOfLine;
+        CGFloat W = self.transformSize?self.jl_width:self.collectionView.jl_width;
+        CGFloat page = self.collectionView.contentOffset.x / W*self.cellsOfLine;
         return page;
     }
 }
 -(void)automaticScrollPage
 {
-    if (self.invalidPage)return;
+    if (self.ignorePage)return;
     if ([self dataIsUnavailable])return;
     NSInteger page = [self getCurryPageInteger];
     if (self.infiniteDragging) {
@@ -660,7 +668,7 @@ static NSString* JLCycScrollDefaultCellResign = @"JLCycScrollDefaultCellResign";
 }
 -(void)setTimeDuration:(NSTimeInterval)timeDuration
 {
-    _timeDuration = timeDuration>=0?timeDuration:0;
+    _timeDuration = timeDuration>=0?timeDuration+0.35:0.35;//系统滚动动画时间大约0.3s
     if (self.superview&&self.timerNeed) {
         [self setupTimer];
     }
@@ -695,29 +703,21 @@ static NSString* JLCycScrollDefaultCellResign = @"JLCycScrollDefaultCellResign";
         self.pageControl.numberOfPages = self.arrayData.count;
     }
     if (!CGRectEqualToRect(self.bounds, self.collectionView.frame)) {
-        if (self.flowLayout.scrollDirection == UICollectionViewScrollDirectionVertical) {
-            if (self.jl_width<self.collectionView.jl_width) {//非滚动方向布局变小collectionView优化处理
-                self.minCellValue = [NSString stringWithFormat:@"%f",self.jl_width];
-            }
-        }else{
-            if (self.jl_height<self.collectionView.jl_height) {
-                self.minCellValue = [NSString stringWithFormat:@"%f",self.jl_height];
-            }
-        }
         CGFloat item = self.pagingEnabled?[self getCurryPageInteger]:[self getCurryPageFloat];
-        self.invalidPage = YES;
+        self.transformSize = YES;
+        self.ignorePage = YES;
         [self.collectionView reloadData];
         dispatch_async(dispatch_get_main_queue(), ^{
-            self.minCellValue = nil;
-            self.collectionView.frame = self.bounds;
             BOOL scrollToFirst = self.infiniteDragging&&![self dataIsUnavailable]?YES:NO;
             if (scrollToFirst && item<1.0) {
-                [self setContentOffsetAtIndex:1.0 animated:NO];
+                [self setContentOffsetAtIndex:1.0];
             }else{
-                [self setContentOffsetAtIndex:item animated:NO];
+                [self setContentOffsetAtIndex:item];
             }
-            self.invalidPage = NO;
+            self.transformSize = NO;
+            self.ignorePage = NO;
         });
+        self.collectionView.frame = self.bounds;
     }
 }
 - (void)willMoveToWindow:(UIWindow *)newWindow
@@ -738,9 +738,19 @@ static NSString* JLCycScrollDefaultCellResign = @"JLCycScrollDefaultCellResign";
         if (self.pagingEnabled) {
             if (self.arrayData.count>0) {
                 CGFloat item = [self getCurryPageInteger];
-                [self setContentOffsetAtIndex:item animated:NO];
+                [self setContentOffsetAtIndex:item];
             }
         }
+    }
+}
+-(void)applicationWillResignActive
+{
+    [self deallocTimerIfNeed];
+}
+-(void)applicationDidBecomeActive
+{
+    if (self.superview&&self.timerNeed) {
+        [self setupTimer];
     }
 }
 -(void)dealloc
@@ -749,13 +759,5 @@ static NSString* JLCycScrollDefaultCellResign = @"JLCycScrollDefaultCellResign";
     self.collectionView.delegate = nil;
     NSLog(@"%s",__FUNCTION__);
 }
-
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
-}
-*/
 
 @end

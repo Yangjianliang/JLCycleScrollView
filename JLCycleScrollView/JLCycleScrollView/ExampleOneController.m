@@ -51,10 +51,13 @@
 }
 -(void)clcikb1:(UIButton*)sender
 {
-    JLCycleScrollerView *jlview= [[JLCycleScrollerView alloc] initWithFrame:CGRectMake(40, 100, SCR_W-80, 200)];
-    jlview.delegate = self;
-    [self.view addSubview:jlview];
-    jlview.sourceArray = _arrayData;
+    UIViewController *vc = [[UIViewController alloc] init];
+    vc.view.backgroundColor = [UIColor redColor];
+    [self.navigationController pushViewController:vc animated:YES];
+//    JLCycleScrollerView *jlview= [[JLCycleScrollerView alloc] initWithFrame:CGRectMake(40, 100, SCR_W-80, 200)];
+//    jlview.delegate = self;
+//    [self.view addSubview:jlview];
+//    jlview.sourceArray = _arrayData;
 }
 -(void)clcikb2:(UIButton*)sender
 {

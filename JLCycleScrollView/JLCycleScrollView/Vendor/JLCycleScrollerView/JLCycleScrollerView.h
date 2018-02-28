@@ -5,7 +5,6 @@
 //  Created by yangjianliang on 2017/9/24.
 //  Copyright © 2017年 yangjianliang. All rights reserved.
 //
-//  Email : 947830614@qq.com
 //  GitHub：https://github.com/Yangjianliang/JLCycleScrollView
 
 #import <UIKit/UIKit.h>
@@ -42,7 +41,7 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 @interface JLCycleScrollerView : UIView
-/**支持storyboard/Xib初始化，或[alloc init］方式初始化*/
+/**支持storyboard/Xib初始化，或[alloc init.］方式初始化*/
 - (instancetype)initWithFrame:(CGRect)frame NS_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
 /**数据源
@@ -50,6 +49,7 @@ NS_ASSUME_NONNULL_BEGIN
  eg：
  ExampleModel *model = = sourceArray[integer];
  [cell.imageView sd_setImageWithURL:[NSURL URLWithString:model.url] placeholderImage:nil];
+ return nil;
  */
 @property (nonatomic, strong) NSArray *sourceArray;
 /**
@@ -81,9 +81,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) BOOL pagingEnabled;
 /**default is YES,是否需要无限拖拽*/
 @property (nonatomic) BOOL infiniteDragging;
-/**default is NO,eg:sourceArray.count=1、cellsOfLine<=1.0时不能被无限拖拽*/
+/**default is NO,eg:infiniteDragging=YES and sourceArray.count=1、cellsOfLine<=1.0时不能被无限拖拽*/
 @property (nonatomic) BOOL infiniteDraggingForSinglePage;
-@property (nonatomic) NSInteger curryIndex;
+/**default is 0.0,It can be used to setContentOffset*/
+@property (nonatomic) CGFloat curryIndex;
 
 // --------------pageControl设置------------
 /**if pageControlNeed=NO,pageControl is nil; eg:pageControl.currentPageIndicatorTintColor...*/
@@ -107,13 +108,13 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, assign) CGFloat pageControl_centerY;
 
 // --------------timer设置------------
+//note:当视图添加、移除、push-pop等时,定时器会自动重新创建激活或销毁定时器，
+//eg：当push时，你不必考虑暂停定时器，当pop回来时，你也不必激活定时器
 /**是否需要定时器,default is YES */
 @property(nonatomic, assign) BOOL timerNeed;
-/**定时器时间间隔(default is 2.5)*/
+/**定时器时间间隔(default is 3.0)*/
 @property(nonatomic, assign)NSTimeInterval timeDuration;
-/**note:当视图添加、移除、push-pop等时,定时器会自动重新创建激活、销毁定时器，
- eg：当push时，你不必考虑暂停定时器，当pop回来时，你也不必激活定时器
- 多少秒后启动*/
+/**多少秒后启动*/
 -(void)resumeTimerAfterDuration:(NSTimeInterval)duration;
 /**暂停*/
 -(void)pauseTimer;

@@ -26,7 +26,6 @@
 @property (nullable, nonatomic, strong) UIImage *jl_norImage; // default is nil
 @property (nullable, nonatomic, strong) UIImage *jl_selImage; // default is nil
 
--(void)layoutSubPages;
 @end
 
 @interface UIView (JLFrame)

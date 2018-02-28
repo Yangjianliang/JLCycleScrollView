@@ -49,7 +49,7 @@
     self.firstJLView.datasource = self;
      self.firstJLView.delegate = self;
 //    self.firstJLView.sourceArray = @[self.arrayData.lastObject];
-//    self.firstJLView.sourceArray = self.arrayData;
+    self.firstJLView.sourceArray = self.arrayData;
 
     self.firstJLView.pageControl.pageIndicatorTintColor = [UIColor purpleColor];
     self.firstJLView.pageControl.currentPageIndicatorTintColor = [UIColor redColor];
@@ -71,6 +71,8 @@
 //    [arr removeLastObject];
 //    self.firstJLView.sourceArray = arr;
 
+//    self.firstJLView.sourceArray = self.arrayData;
+
     //3.
 //    self.firstJLView.cellsOfLine = 1.7;
     
@@ -80,7 +82,8 @@
 //    self.firstJLView.infiniteDraggingForSinglePage = YES;
 //    self.firstJLView.sourceArray = @[self.arrayData.lastObject];
 
-        self.firstJLView.sourceArray = self.arrayData;
+    //5.
+    [self.firstJLView removeFromSuperview];
 
 }
 - (IBAction)secondClick:(id)sender {
