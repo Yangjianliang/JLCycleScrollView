@@ -111,7 +111,7 @@
         [self.jiCycScrollerView useCustomCell:[[JLCycScrCustomCell alloc]init] isXibBuild:YES];
     }else{
         self.jiCycScrollerView.sourceArray = self.arrayData;
-        [self.jiCycScrollerView useCustomCell:[[JLCycScrollDefaultCell alloc]init] isXibBuild:YES];
+        [self.jiCycScrollerView useCustomCell:[[JLCycScrollDefaultCell alloc]init] isXibBuild:NO];
     }
    
 }

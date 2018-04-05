@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="fT5-jw-6dR">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="fT5-jw-6dR">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -616,6 +616,24 @@
             </objects>
             <point key="canvasLocation" x="962" y="556"/>
         </scene>
+        <!--Example Controller-->
+        <scene sceneID="tmH-FI-sR6">
+            <objects>
+                <viewController id="f2J-3o-gi0" customClass="JLExampleController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="IKs-pm-fW0"/>
+                        <viewControllerLayoutGuide type="bottom" id="a0B-44-Nj5"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Fb5-Mh-3ZK">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cqm-fE-DSG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3292" y="-531"/>
+        </scene>
         <!--ExampleTwoController-->
         <scene sceneID="kfY-AM-jKo">
             <objects>
@@ -719,11 +737,24 @@
                                     <segue destination="aMa-jp-UQf" kind="show" id="yQI-uV-41U"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ibw-h8-0Zb">
+                                <rect key="frame" x="253" y="122" width="50" height="50"/>
+                                <color key="backgroundColor" red="0.5" green="0.0" blue="0.5" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="qCL-Kr-QDq"/>
+                                    <constraint firstAttribute="width" constant="50" id="sKA-ff-gRu"/>
+                                </constraints>
+                                <connections>
+                                    <segue destination="f2J-3o-gi0" kind="show" id="NvQ-bK-A5e"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="Ibw-h8-0Zb" firstAttribute="top" secondItem="EwC-yh-NRm" secondAttribute="bottom" constant="58" id="25B-n0-dY4"/>
                             <constraint firstItem="AtA-lg-sR2" firstAttribute="leading" secondItem="71K-Uj-wCf" secondAttribute="leading" id="CBm-kY-fwt"/>
                             <constraint firstItem="MiS-7d-dzb" firstAttribute="top" secondItem="AtA-lg-sR2" secondAttribute="bottom" id="Xub-st-fw7"/>
+                            <constraint firstAttribute="trailing" secondItem="Ibw-h8-0Zb" secondAttribute="trailing" constant="72" id="ssx-fR-xS4"/>
                             <constraint firstAttribute="trailing" secondItem="AtA-lg-sR2" secondAttribute="trailing" id="uMp-Ru-AcZ"/>
                         </constraints>
                     </view>

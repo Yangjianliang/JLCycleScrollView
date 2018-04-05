@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		2B1C96261F95B70600B040F6 /* ExampleOneController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B1C96251F95B70600B040F6 /* ExampleOneController.m */; };
 		2B488CC0202580F90004BACA /* placeholderImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B488CBF202580F90004BACA /* placeholderImage.png */; };
+		2B617DB920550A12005E9E90 /* JLExampleController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B617DB820550A12005E9E90 /* JLExampleController.m */; };
 		2B92751B1FD8E3F900D177E1 /* JLCycScrCustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B9275191FD8E3F900D177E1 /* JLCycScrCustomCell.m */; };
 		2B92751C1FD8E3F900D177E1 /* JLCycScrCustomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B92751A1FD8E3F900D177E1 /* JLCycScrCustomCell.xib */; };
 		2B9275291FD90CB000D177E1 /* ExampleModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B9275281FD90CB000D177E1 /* ExampleModel.m */; };
@@ -30,6 +31,8 @@
 		2B1C96241F95B70600B040F6 /* ExampleOneController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExampleOneController.h; sourceTree = "<group>"; };
 		2B1C96251F95B70600B040F6 /* ExampleOneController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExampleOneController.m; sourceTree = "<group>"; };
 		2B488CBF202580F90004BACA /* placeholderImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = placeholderImage.png; sourceTree = "<group>"; };
+		2B617DB720550A12005E9E90 /* JLExampleController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JLExampleController.h; sourceTree = "<group>"; };
+		2B617DB820550A12005E9E90 /* JLExampleController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JLExampleController.m; sourceTree = "<group>"; };
 		2B9275181FD8E3F900D177E1 /* JLCycScrCustomCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JLCycScrCustomCell.h; sourceTree = "<group>"; };
 		2B9275191FD8E3F900D177E1 /* JLCycScrCustomCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JLCycScrCustomCell.m; sourceTree = "<group>"; };
 		2B92751A1FD8E3F900D177E1 /* JLCycScrCustomCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JLCycScrCustomCell.xib; sourceTree = "<group>"; };
@@ -94,6 +97,8 @@
 				2BBCB6251FF1581700A5CE10 /* ExampleTwoController.m */,
 				2B1C96241F95B70600B040F6 /* ExampleOneController.h */,
 				2B1C96251F95B70600B040F6 /* ExampleOneController.m */,
+				2B617DB720550A12005E9E90 /* JLExampleController.h */,
+				2B617DB820550A12005E9E90 /* JLExampleController.m */,
 			);
 			name = ExampleController;
 			sourceTree = "<group>";
@@ -330,6 +335,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2B617DB920550A12005E9E90 /* JLExampleController.m in Sources */,
 				2BBCB61E1FEF5BF100A5CE10 /* JLMainViewController.m in Sources */,
 				2B9927DF1F77FE7F00FBC958 /* AppDelegate.m in Sources */,
 				2BF34B1F1FD5452E00F30ECD /* JLPageControl.m in Sources */,

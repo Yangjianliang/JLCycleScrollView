@@ -22,6 +22,10 @@
 
 
 @property(nonatomic,strong)NSMutableArray *arrayData;
+
+
+@property (strong, nonatomic) JLCycleScrollerView *testJLCYCView;
+
 @end
 
 @implementation ExampleTwoController
@@ -48,8 +52,8 @@
    
     self.firstJLView.datasource = self;
      self.firstJLView.delegate = self;
-//    self.firstJLView.sourceArray = @[self.arrayData.lastObject];
-    self.firstJLView.sourceArray = self.arrayData;
+    self.firstJLView.sourceArray = @[self.arrayData.lastObject];
+//    self.firstJLView.sourceArray = self.arrayData;
 
     self.firstJLView.pageControl.pageIndicatorTintColor = [UIColor purpleColor];
     self.firstJLView.pageControl.currentPageIndicatorTintColor = [UIColor redColor];
@@ -59,6 +63,10 @@
 //    self.firstJLView.pageControl.allowChangeFrame = YES;
     
 
+    self.testJLCYCView = [[JLCycleScrollerView alloc] initWithFrame:CGRectMake(40, 300, 250, 180)];
+    self.testJLCYCView.datasource = self;
+    self.testJLCYCView.delegate = self;
+    [self.view addSubview:self.testJLCYCView];
 }
 - (IBAction)firstClcik:(UIButton *)sender {
 
@@ -71,7 +79,7 @@
 //    [arr removeLastObject];
 //    self.firstJLView.sourceArray = arr;
 
-//    self.firstJLView.sourceArray = self.arrayData;
+    self.firstJLView.sourceArray = self.arrayData;
 
     //3.
 //    self.firstJLView.cellsOfLine = 1.7;
@@ -83,7 +91,9 @@
 //    self.firstJLView.sourceArray = @[self.arrayData.lastObject];
 
     //5.
-    [self.firstJLView removeFromSuperview];
+//    [self.firstJLView removeFromSuperview];
+
+//    self.testJLCYCView.sourceArray = self.arrayData;
 
 }
 - (IBAction)secondClick:(id)sender {
@@ -123,15 +133,29 @@
 }
 
 //使用系统cell才需要
--(id)jl_cycleScrollerView:(JLCycleScrollerView *)view defaultCell:(JLCycScrollDefaultCell *)cell cellForItemAtInteger:(NSInteger)integer sourceArray:(NSArray *)sourceArray
+-(id)jl_cycleScrollerView:(JLCycleScrollerView *)view defaultCell:(JLCycScrollDefaultCell *)cell cellForItemAtIndex:(NSInteger)index sourceArray:(nonnull NSArray *)sourceArray
 {
 //    id 类型支持NSString、NSURL、UIImage
-    ExampleModel *model = sourceArray[integer];
+    ExampleModel *model = sourceArray[index];
     return model.url;
 }
--(void)jl_cycleScrollerView:(JLCycleScrollerView *)view didSelectItemAtInteger:(NSInteger)integer sourceArray:(NSArray *)sourceArray
+- (CGSize)jl_cycleScrollerView:(JLCycleScrollerView*)view sizeForItemAtIndex:(NSInteger)index
 {
-    NSLog(@"%ld",integer);
+    if (index==0) {
+        return CGSizeMake(100, 0);
+    }
+    if (index==1) {
+        return CGSizeMake(50, 0);
+    }
+    if (index==2) {
+        return CGSizeMake(200, 0);
+    }
+    return CGSizeMake(350, 0);
+
+}
+- (void)jl_cycleScrollerView:(JLCycleScrollerView *)view didSelectItemAtIndex:(NSInteger)index sourceArray:(nonnull NSArray *)sourceArray
+{
+    NSLog(@"点击%ld",index);
 }
 
 

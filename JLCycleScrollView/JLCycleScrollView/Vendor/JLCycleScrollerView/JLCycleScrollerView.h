@@ -20,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  使用默认轮播图cell设置Datasource会执行该方法
  @param cell 可以直接进行cell设置
- @param integer 当前cell的integer<0.1.2...>
+ @param index 当前cell的index<0.1.2...>
  @param sourceArray 传入进来的原始数据
  @return 默认支持数据类型(NSString,NSURL,UIImage)会自动设置展示,其他类型可以在DataSource直接根据代理方法cel进行设置或者return 默认支持数据类型(NSString,NSURL,UIImage)
  1.eg: ExampleModel *model = = sourceArray[integer];
@@ -28,16 +28,18 @@ NS_ASSUME_NONNULL_BEGIN
  2.eg: ExampleModel *model = = sourceArray[integer];
  return model.url;
  */
--(nullable id)jl_cycleScrollerView:(JLCycleScrollerView*)view  defaultCell:(JLCycScrollDefaultCell*)cell cellForItemAtInteger:(NSInteger) integer sourceArray:(NSArray*)sourceArray;
+-(nullable id)jl_cycleScrollerView:(JLCycleScrollerView*)view defaultCell:(JLCycScrollDefaultCell*)cell cellForItemAtIndex:(NSInteger)index sourceArray:(NSArray*)sourceArray;
+
 @end
 @protocol JLCycleScrollerViewDelegate <NSObject>
 @optional
-/**
- 点击轮播Cell代理
- @param integer 点击的<0.1.2...>
- @param sourceArray 传入进来的原始数据
- */
--(void)jl_cycleScrollerView:(JLCycleScrollerView*)view didSelectItemAtInteger:(NSInteger)integer sourceArray:(NSArray*)sourceArray;
+- (CGSize)jl_cycleScrollerView:(JLCycleScrollerView *)view sizeForItemAtIndex:(NSInteger)index;
+- (void)jl_cycleScrollerView:(JLCycleScrollerView *)view willDisplayCell:(UICollectionViewCell *)cell forItemAtIndex:(NSInteger)index;
+- (void)jl_cycleScrollerView:(JLCycleScrollerView *)view didEndDisplayingCell:(UICollectionViewCell *)cell forItemAtIndex:(NSInteger)index;
+- (void)jl_cycleScrollerView:(JLCycleScrollerView *)view didChangeCurryCell:(UICollectionViewCell *)cell curryPage:(NSInteger)curryPage;
+//- (void)jl_cycleScrollerView:(JLCycleScrollerView *)view willBeginAutomaticScrollPageCurryCell:(UICollectionViewCell *)cell curryIndex:(NSInteger)curryIndex;
+//- (void)jl_cycleScrollerView:(JLCycleScrollerView *)view didEndAutomaticScrollPageCurryCell:(UICollectionViewCell *)cell curryIndex:(NSInteger)curryIndex;
+- (void)jl_cycleScrollerView:(JLCycleScrollerView *)view didSelectItemAtIndex:(NSInteger)index sourceArray:(NSArray *)sourceArray;
 @end
 
 @interface JLCycleScrollerView : UIView
@@ -81,9 +83,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) BOOL pagingEnabled;
 /**default is YES,是否需要无限拖拽*/
 @property (nonatomic) BOOL infiniteDragging;
-/**default is NO,eg:infiniteDragging=YES and sourceArray.count=1、cellsOfLine<=1.0时不能被无限拖拽*/
+/**default is NO,eg:infiniteDragging=YES and sourceArray.count=1、cellsOfLine==1.0时不能被无限拖拽*/
 @property (nonatomic) BOOL infiniteDraggingForSinglePage;
-/**default is 0.0,It can be used to setContentOffset*/
+/**default is 0.0,It can be used to set default contentOffset*/
 @property (nonatomic) CGFloat curryIndex;
 
 // --------------pageControl设置------------

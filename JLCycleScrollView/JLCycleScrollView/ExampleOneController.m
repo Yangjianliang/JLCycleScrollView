@@ -87,9 +87,9 @@
     jlview.sourceArray = self.arrayData;
 
 }
--(void)jl_cycleScrollerView:(JLCycleScrollerView *)view didSelectItemAtInteger:(NSInteger)integer sourceArray:(NSArray *)sourceArray
+- (void)jl_cycleScrollerView:(JLCycleScrollerView *)view didSelectItemAtIndex:(NSInteger)index sourceArray:(nonnull NSArray *)sourceArray
 {
-    NSLog(@"%ld",integer);
+    NSLog(@"点击%ld",index);
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
