@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "JLCycleScrollView/Vendor/JLCycleScrollerView/JLCycleScrollerView.m"
-            timestampString = "544639265.377435"
+            timestampString = "544641553.041276"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "66"
-            endingLineNumber = "66"
+            startingLineNumber = "65"
+            endingLineNumber = "65"
             landmarkName = "-initDefaultData"
             landmarkType = "7">
          </BreakpointContent>
@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "JLCycleScrollView/Vendor/JLCycleScrollerView/JLCycleScrollerView.m"
-            timestampString = "544639265.377589"
+            timestampString = "544641553.04169"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "743"
-            endingLineNumber = "743"
+            startingLineNumber = "763"
+            endingLineNumber = "763"
             landmarkName = "-jl_setContentOffsetAtIndex:animated:"
             landmarkType = "7">
          </BreakpointContent>
@@ -42,13 +42,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "JLCycleScrollView/Vendor/JLCycleScrollerView/JLCycleScrollerView.h"
-            timestampString = "544639265.377653"
+            timestampString = "544641553.041996"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "88"
-            endingLineNumber = "88"
-            landmarkName = "infiniteDraggingForSinglePage"
-            landmarkType = "24">
+            startingLineNumber = "87"
+            endingLineNumber = "87"
+            landmarkName = "JLCycleScrollerView"
+            landmarkType = "2">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
