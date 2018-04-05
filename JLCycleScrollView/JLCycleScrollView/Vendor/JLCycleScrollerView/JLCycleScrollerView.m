@@ -35,7 +35,7 @@ static NSTimeInterval const animatedTime = 0.35;
 static NSString * const JLCycScrollDefaultCellResign = @"JLCycScrollDefaultCellResign";
 @implementation JLCycleScrollerView
 @synthesize pageControl = _pageControl;
-#pragma mark ----初始化JLCycleScrollerView
+#pragma mark - ---InitJLCycleScrollerView
 -(instancetype)initWithCoder:(NSCoder *)aDecoder
 {
     if (self = [super initWithCoder:aDecoder]) {
@@ -75,7 +75,41 @@ static NSString * const JLCycScrollDefaultCellResign = @"JLCycScrollDefaultCellR
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidBecomeActive)
                                                  name:UIApplicationDidBecomeActiveNotification object:nil];
 }
+-(void)initUI
+{
+    UICollectionViewFlowLayout* flowLayout = [[UICollectionViewFlowLayout alloc] init];
+    flowLayout.minimumLineSpacing = 0;
+    flowLayout.minimumInteritemSpacing = 0;
+    flowLayout.sectionInset = UIEdgeInsetsZero;
+    flowLayout.scrollDirection = self.scrollDirection;
+    _flowLayout = flowLayout;
+    
+    UICollectionView*collectionView = [[UICollectionView alloc] initWithFrame:self.bounds collectionViewLayout:flowLayout];
+    collectionView.pagingEnabled = self.pagingEnabled;
+    collectionView.showsHorizontalScrollIndicator = NO;
+    collectionView.showsVerticalScrollIndicator = NO;
+    collectionView.scrollsToTop = NO;
+    collectionView.backgroundColor = [UIColor whiteColor];
+    collectionView.delegate = self;
+    collectionView.dataSource = self;
+    self.collectionView = collectionView;
+    [self.collectionView registerClass:[JLCycScrollDefaultCell class] forCellWithReuseIdentifier:JLCycScrollDefaultCellResign];
+    [self addSubview:self.collectionView];
+}
 #pragma mark  - reloadData
+-(void)setSourceArray:(NSArray *)sourceArray
+{
+    [self deallocTimerIfNeed];
+    BOOL sameMemory = [sourceArray isEqualToArray:self.arrayData];
+    CGFloat item = self.pagingEnabled?[self getCurryPageInteger]:[self getCurryPageFloat];
+    CGFloat scrollAtItem = sameMemory?item:0.0;
+    self.arrayData = [NSArray arrayWithArray:sourceArray];
+    [self reloadDataAtItem:scrollAtItem];
+}
+-(NSArray *)sourceArray
+{
+    return [NSArray arrayWithArray:self.arrayData];
+}
 -(void)reloadDataAtItem:(CGFloat)item
 {
     [self deallocTimerIfNeed];
@@ -99,74 +133,7 @@ static NSString * const JLCycScrollDefaultCellResign = @"JLCycScrollDefaultCellR
         });
     });
 }
--(void)initializeArrayAttributes
-{
-    self.arrayAttributes = [NSMutableArray array];
-    for ( int i=0; i<[self getNumberOfItemsInSection]; ++i) {
-        UICollectionViewLayoutAttributes *att = [self.flowLayout layoutAttributesForItemAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
-        [self.arrayAttributes addObject:att];
-    }
-    NSLog(@"\n%@\n%@",self.arrayAttributes,self.arrayPlaceholderAttributes);
-    self.arrayPlaceholderAttributes = nil;
-}
--(NSArray *)sourceArray
-{
-    return [NSArray arrayWithArray:self.arrayData];
-}
--(void)setSourceArray:(NSArray *)sourceArray
-{
-    [self deallocTimerIfNeed];
-    BOOL sameMemory = [sourceArray isEqualToArray:self.arrayData];
-    CGFloat item = self.pagingEnabled?[self getCurryPageInteger]:[self getCurryPageFloat];
-    CGFloat scrollAtItem = sameMemory?item:0.0;
-    self.arrayData = [NSArray arrayWithArray:sourceArray];
-    [self reloadDataAtItem:scrollAtItem];
-}
-#pragma mark - ------UI-------
--(void)initUI
-{
-    [self addSubview:self.collectionView];
-}
--(UICollectionView *)collectionView
-{
-    if (!_collectionView) {
-        UICollectionViewFlowLayout* flowLayout = [[UICollectionViewFlowLayout alloc] init];
-        flowLayout.minimumLineSpacing = 0;
-        flowLayout.minimumInteritemSpacing = 0;
-        flowLayout.sectionInset = UIEdgeInsetsZero;
-        flowLayout.scrollDirection = self.scrollDirection;
-        _flowLayout = flowLayout;
-        
-        UICollectionView*collectionView = [[UICollectionView alloc] initWithFrame:self.bounds collectionViewLayout:flowLayout];
-        collectionView.pagingEnabled = self.pagingEnabled;
-        collectionView.showsHorizontalScrollIndicator = NO;
-        collectionView.showsVerticalScrollIndicator = NO;
-        collectionView.scrollsToTop = NO;
-        collectionView.backgroundColor = [UIColor whiteColor];
-        collectionView.delegate = self;
-        collectionView.dataSource = self;
-        _collectionView = collectionView;
-        [self.collectionView registerClass:[JLCycScrollDefaultCell class] forCellWithReuseIdentifier:JLCycScrollDefaultCellResign];
-    }
-    return _collectionView;
-}
--(void)useCustomCell:(UICollectionViewCell<JLCycSrollCellDataProtocol> *)cell isXibBuild:(BOOL)isxib
-{
-    if (![cell isKindOfClass:[UICollectionViewCell class]]) {
-        NSLog(@"\n---------方法:%sCell参数传入错误----------",__FUNCTION__);
-        return;
-    }
-    NSString* ClassCell =  NSStringFromClass([cell class]);
-    self.reuseIdentifier = [NSString stringWithFormat:@"%@Resign",ClassCell];
-    if (isxib) {
-        [self.collectionView registerNib:[UINib nibWithNibName:ClassCell bundle: [NSBundle mainBundle]] forCellWithReuseIdentifier:self.reuseIdentifier];
-    }else{
-        [self.collectionView registerClass:[NSClassFromString(ClassCell) class] forCellWithReuseIdentifier:self.reuseIdentifier];
-    }
-    if (self.arrayData.count>0) {
-        [self reloadDataAtItem:0];
-    }
-}
+#pragma mark - -----PageControl------
 -(void)setPageControl:(JLPageControl *)pageControl
 {
     if (!pageControl) {
@@ -218,7 +185,6 @@ static NSString * const JLCycScrollDefaultCellResign = @"JLCycScrollDefaultCellR
             break;
     }
 }
-#pragma mark - -----pageControl设置------
 -(void)setPageControlNeed:(BOOL)pageControlNeed
 {
     _pageControlNeed = pageControlNeed;
@@ -267,7 +233,24 @@ static NSString * const JLCycScrollDefaultCellResign = @"JLCycScrollDefaultCellR
     _pageControl_Y = PageControlModeCenterY;
     self.pageControl.jl_centerY = self.jl_height/2.f+pageControl_centerY;
 }
-#pragma park mark - ----CollectionView设置----
+#pragma park mark - ----CollectionView----
+-(void)useCustomCell:(UICollectionViewCell<JLCycSrollCellDataProtocol> *)cell isXibBuild:(BOOL)isxib
+{
+    if (![cell isKindOfClass:[UICollectionViewCell class]]) {
+        NSLog(@"\n---------方法:%sCell参数传入错误----------",__FUNCTION__);
+        return;
+    }
+    NSString* ClassCell =  NSStringFromClass([cell class]);
+    self.reuseIdentifier = [NSString stringWithFormat:@"%@Resign",ClassCell];
+    if (isxib) {
+        [self.collectionView registerNib:[UINib nibWithNibName:ClassCell bundle: [NSBundle mainBundle]] forCellWithReuseIdentifier:self.reuseIdentifier];
+    }else{
+        [self.collectionView registerClass:[NSClassFromString(ClassCell) class] forCellWithReuseIdentifier:self.reuseIdentifier];
+    }
+    if (self.arrayData.count>0) {
+        [self reloadDataAtItem:0];
+    }
+}
 -(void)setPlaceholderImage:(UIImage *)placeholderImage
 {
     if (placeholderImage) {
@@ -465,11 +448,6 @@ static NSString * const JLCycScrollDefaultCellResign = @"JLCycScrollDefaultCellR
         }
     }
 }
-
--(BOOL)canInfiniteDrag
-{
-    return self.infiniteDragging&&![self dataIsUnavailable]?YES:NO;
-}
 -(BOOL)dataIsUnavailable
 {
     NSInteger lineCells = ceilf(self.cellsOfLine);
@@ -483,13 +461,26 @@ static NSString * const JLCycScrollDefaultCellResign = @"JLCycScrollDefaultCellR
     }
     return NO;
 }
+
+-(BOOL)canInfiniteDrag
+{
+    return self.infiniteDragging&&![self dataIsUnavailable]?YES:NO;
+}
 -(NSInteger)getNumberOfItemsInSection
 {
-    if (self.canInfiniteDrag) {
+    if ([self canInfiniteDrag]) {
         return self.arrayData.count+ceilf(self.cellsOfLine)+1;
     }else{
         return self.arrayData.count;
     }
+}
+-(BOOL)isDVertical
+{
+    return self.flowLayout.scrollDirection == UICollectionViewScrollDirectionVertical;
+}
+-(BOOL)isItemSizeCustom
+{
+    return self.delegate&&[self.delegate respondsToSelector:@selector(jl_cycleScrollerView:sizeForItemAtIndex:)] ;
 }
 -(CGFloat)getCellWidth
 {
@@ -523,14 +514,16 @@ static NSString * const JLCycScrollDefaultCellResign = @"JLCycScrollDefaultCellR
         return self.collectionView.jl_height-sectionInset_top_bottom;
     }
 }
--(BOOL)isItemSizeCustom
+-(CGSize)getDelegateCellSize:(NSInteger)integer
 {
-    return self.delegate&&[self.delegate respondsToSelector:@selector(jl_cycleScrollerView:sizeForItemAtIndex:)] ;
+    CGSize size = [self.delegate jl_cycleScrollerView:self sizeForItemAtIndex:integer];
+    if ([self isDVertical]) {
+        return CGSizeMake([self getCellWidth],size.height);
+    }else{
+        return CGSizeMake(size.width,[self getCellHeight]);
+    }
 }
--(BOOL)isDVertical
-{
-    return self.flowLayout.scrollDirection == UICollectionViewScrollDirectionVertical;
-}
+
 -(void)prepareCalculateCellsOfLineIfInfiniteDrag
 {
     if ([self isItemSizeCustom]) {
@@ -617,14 +610,15 @@ static NSString * const JLCycScrollDefaultCellResign = @"JLCycScrollDefaultCellR
         }
     }
 }
--(CGSize)getDelegateCellSize:(NSInteger)integer
+-(void)initializeArrayAttributes
 {
-    CGSize size = [self.delegate jl_cycleScrollerView:self sizeForItemAtIndex:integer];
-    if ([self isDVertical]) {
-        return CGSizeMake([self getCellWidth],size.height);
-    }else{
-        return CGSizeMake(size.width,[self getCellHeight]);
+    self.arrayAttributes = [NSMutableArray array];
+    for ( int i=0; i<[self getNumberOfItemsInSection]; ++i) {
+        UICollectionViewLayoutAttributes *att = [self.flowLayout layoutAttributesForItemAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
+        [self.arrayAttributes addObject:att];
     }
+    NSLog(@"\n%@\n%@",self.arrayAttributes,self.arrayPlaceholderAttributes);
+    self.arrayPlaceholderAttributes = nil;
 }
 #pragma mark - -----UIScrollView Delegate------
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
@@ -873,7 +867,7 @@ static NSString * const JLCycScrollDefaultCellResign = @"JLCycScrollDefaultCellR
         _timer=nil;
     }
 }
-#pragma mark - layoutSubviews
+#pragma mark - -----super methods------
 -(void)layoutSubviews
 {
     [super layoutSubviews];
