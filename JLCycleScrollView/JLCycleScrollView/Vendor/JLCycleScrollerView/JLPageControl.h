@@ -28,13 +28,3 @@
 
 @end
 
-@interface UIView (JLFrame)
-/**新增x，y，w，h,cX,cY属性,可快速set／get的Frame属性值*/
-@property (nonatomic, assign) CGFloat jl_height;
-@property (nonatomic, assign) CGFloat jl_width;
-@property (nonatomic, assign) CGFloat jl_y;
-@property (nonatomic, assign) CGFloat jl_x;
-
-@property (nonatomic, assign) CGFloat jl_centerX;
-@property (nonatomic, assign) CGFloat jl_centerY;
-@end

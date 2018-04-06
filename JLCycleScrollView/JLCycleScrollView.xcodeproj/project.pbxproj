@@ -21,6 +21,8 @@
 		2BBCB61E1FEF5BF100A5CE10 /* JLMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BBCB61D1FEF5BF100A5CE10 /* JLMainViewController.m */; };
 		2BBCB6271FF1581700A5CE10 /* ExampleTwoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BBCB6251FF1581700A5CE10 /* ExampleTwoController.m */; };
 		2BC1CC472076A1D7003169DD /* MyFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BC1CC462076A1D7003169DD /* MyFlowLayout.m */; };
+		2BC1CC502077757B003169DD /* JLCycScrollFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BC1CC4F2077757B003169DD /* JLCycScrollFlowLayout.m */; };
+		2BC1CC53207775DD003169DD /* NSObject+JLExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BC1CC52207775DD003169DD /* NSObject+JLExtension.m */; };
 		2BF34B1C1FD5452E00F30ECD /* JLCycleScrollerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BF34B141FD5452E00F30ECD /* JLCycleScrollerView.m */; };
 		2BF34B1D1FD5452E00F30ECD /* JLCycScrollDefaultCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BF34B161FD5452E00F30ECD /* JLCycScrollDefaultCell.m */; };
 		2BF34B1F1FD5452E00F30ECD /* JLPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BF34B191FD5452E00F30ECD /* JLPageControl.m */; };
@@ -53,6 +55,10 @@
 		2BBCB6261FF1581700A5CE10 /* ExampleTwoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExampleTwoController.h; sourceTree = "<group>"; };
 		2BC1CC452076A1D7003169DD /* MyFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyFlowLayout.h; sourceTree = "<group>"; };
 		2BC1CC462076A1D7003169DD /* MyFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyFlowLayout.m; sourceTree = "<group>"; };
+		2BC1CC4E2077757B003169DD /* JLCycScrollFlowLayout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JLCycScrollFlowLayout.h; sourceTree = "<group>"; };
+		2BC1CC4F2077757B003169DD /* JLCycScrollFlowLayout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JLCycScrollFlowLayout.m; sourceTree = "<group>"; };
+		2BC1CC51207775DD003169DD /* NSObject+JLExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSObject+JLExtension.h"; sourceTree = "<group>"; };
+		2BC1CC52207775DD003169DD /* NSObject+JLExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSObject+JLExtension.m"; sourceTree = "<group>"; };
 		2BF34B131FD5452E00F30ECD /* JLCycleScrollerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JLCycleScrollerView.h; sourceTree = "<group>"; };
 		2BF34B141FD5452E00F30ECD /* JLCycleScrollerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JLCycleScrollerView.m; sourceTree = "<group>"; };
 		2BF34B151FD5452E00F30ECD /* JLCycScrollDefaultCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JLCycScrollDefaultCell.h; sourceTree = "<group>"; };
@@ -189,6 +195,10 @@
 				2BF34B161FD5452E00F30ECD /* JLCycScrollDefaultCell.m */,
 				2BF34B181FD5452E00F30ECD /* JLPageControl.h */,
 				2BF34B191FD5452E00F30ECD /* JLPageControl.m */,
+				2BC1CC4E2077757B003169DD /* JLCycScrollFlowLayout.h */,
+				2BC1CC4F2077757B003169DD /* JLCycScrollFlowLayout.m */,
+				2BC1CC51207775DD003169DD /* NSObject+JLExtension.h */,
+				2BC1CC52207775DD003169DD /* NSObject+JLExtension.m */,
 				2BC1CC452076A1D7003169DD /* MyFlowLayout.h */,
 				2BC1CC462076A1D7003169DD /* MyFlowLayout.m */,
 			);
@@ -340,6 +350,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2BC1CC502077757B003169DD /* JLCycScrollFlowLayout.m in Sources */,
+				2BC1CC53207775DD003169DD /* NSObject+JLExtension.m in Sources */,
 				2B617DB920550A12005E9E90 /* JLExampleController.m in Sources */,
 				2BBCB61E1FEF5BF100A5CE10 /* JLMainViewController.m in Sources */,
 				2B9927DF1F77FE7F00FBC958 /* AppDelegate.m in Sources */,

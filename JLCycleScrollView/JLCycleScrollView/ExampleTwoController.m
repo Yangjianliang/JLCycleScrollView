@@ -49,11 +49,12 @@
         model.title = array[i];
         [self.arrayData addObject:model];
     }
-   
     self.firstJLView.datasource = self;
      self.firstJLView.delegate = self;
-    self.firstJLView.sourceArray = @[self.arrayData.lastObject];
-//    self.firstJLView.sourceArray = self.arrayData;
+//    self.firstJLView.cellFooterHeight = 20;
+
+//    self.firstJLView.sourceArray = @[self.arrayData.lastObject];
+    self.firstJLView.sourceArray = self.arrayData;
 
     self.firstJLView.pageControl.pageIndicatorTintColor = [UIColor purpleColor];
     self.firstJLView.pageControl.currentPageIndicatorTintColor = [UIColor redColor];
@@ -79,7 +80,7 @@
 //    [arr removeLastObject];
 //    self.firstJLView.sourceArray = arr;
 
-    self.firstJLView.sourceArray = self.arrayData;
+//    self.firstJLView.sourceArray = self.arrayData;
 
     //3.
 //    self.firstJLView.cellsOfLine = 1.7;
@@ -94,36 +95,44 @@
 //    [self.firstJLView removeFromSuperview];
 
 //    self.testJLCYCView.sourceArray = self.arrayData;
+        self.firstJLView.sectionInset = UIEdgeInsetsMake(10, 20, 10, 20);
 
 }
 - (IBAction)secondClick:(id)sender {
-    self.firstJLView.scrollDirection = UICollectionViewScrollDirectionVertical;
-    self.firstJLView.scrollEnabled = NO;
     
-    self.firstJLView.pageControl.jl_selDotSize = CGSizeMake(14, 14);
-    self.firstJLView.pageControl.jl_norDotSize = CGSizeMake(14, 14);
-    self.firstJLView.pageControl.jl_norMagrin = 6;
-    self.firstJLView.pageControl.jl_selMagrin = 6;
-    self.firstJLView.pageControl.jl_selDotCornerRadius = 0;
-    self.firstJLView.pageControl.jl_norDotCornerRadius = 0;
-    self.firstJLView.pageControl.allowChangeFrame = YES;
-
-    self.firstJLView.pageControl_botton = 25;
-    self.firstJLView.pageControl_right = 25;
-//    self.firstJLView.pageControl_centerX = -10;
-
-    self.firstJLView.sourceArray = self.arrayData;
+    self.firstJLView.cellFooterHeight = 20;
+//    self.firstJLView.sectionInset = UIEdgeInsetsMake(10, 20, 10, 20);
+//    self.firstJLView.scrollDirection = UICollectionViewScrollDirectionVertical;
     
-    self.firstJLView.pageControlNeed = YES;
+    
+//    self.firstJLView.scrollEnabled = NO;
+//
+//    self.firstJLView.pageControl.jl_selDotSize = CGSizeMake(14, 14);
+//    self.firstJLView.pageControl.jl_norDotSize = CGSizeMake(14, 14);
+//    self.firstJLView.pageControl.jl_norMagrin = 6;
+//    self.firstJLView.pageControl.jl_selMagrin = 6;
+//    self.firstJLView.pageControl.jl_selDotCornerRadius = 0;
+//    self.firstJLView.pageControl.jl_norDotCornerRadius = 0;
+//    self.firstJLView.pageControl.allowChangeFrame = YES;
+//
+//    self.firstJLView.pageControl_botton = 25;
+//    self.firstJLView.pageControl_right = 25;
+////    self.firstJLView.pageControl_centerX = -10;
+//
+//    self.firstJLView.sourceArray = self.arrayData;
+//
+//    self.firstJLView.pageControlNeed = YES;
     
 }
 
 - (IBAction)threeClcik:(id)sender {
-    
-    self.firstheight.constant = 50;
-    self.firstLeft.constant = 65;
-    self.firstright.constant = 35;
+        self.firstJLView.scrollDirection = UICollectionViewScrollDirectionVertical;
+
+//    self.firstheight.constant = 50;
+//    self.firstLeft.constant = 65;
+//    self.firstright.constant = 35;
 //    self.firstJLView.sourceArray = self.arrayData;
+//    self.firstJLView.sectionInset = UIEdgeInsetsMake(10, 20, 10, 20);
 
 //    self.firstJLView.cellsOfLine = 5;
 //    [self.firstJLView useCustomCell:[JLCycScrCustomCell new] isXibBuild:YES];//cell协议赋值;使用自定义cell的话self.firstJLView.datasource = self; 这个不再需要设置，设置了也没什么用

@@ -11,9 +11,9 @@
 #import "JLCycSrollCellDataProtocol.h"
 #import "JLCycScrollDefaultCell.h"
 #import "JLPageControl.h"
+#import "NSObject+JLExtension.h"
 
 NS_ASSUME_NONNULL_BEGIN
-
 @class JLCycleScrollerView;
 @protocol JLCycleScrollerViewDatasource <NSObject>
 @optional
@@ -34,8 +34,6 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol JLCycleScrollerViewDelegate <NSObject>
 @optional
 - (CGSize)jl_cycleScrollerView:(JLCycleScrollerView *)view sizeForItemAtIndex:(NSInteger)index;
-- (CGFloat)jl_cycleScrollerView:(JLCycleScrollerView *)view lineForItemAtIndex:(NSInteger)index;
-
 - (void)jl_cycleScrollerView:(JLCycleScrollerView *)view willDisplayCell:(UICollectionViewCell *)cell forItemAtIndex:(NSInteger)index;
 - (void)jl_cycleScrollerView:(JLCycleScrollerView *)view didEndDisplayingCell:(UICollectionViewCell *)cell forItemAtIndex:(NSInteger)index;
 - (void)jl_cycleScrollerView:(JLCycleScrollerView *)view willChangeCurryCell:(UICollectionViewCell *)cell curryPage:(NSInteger)curryPage;
@@ -90,7 +88,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**default is 1.0,每行、列cell个数,*/
 @property (nonatomic) CGFloat cellsOfLine;
 /**default is 0.0 */
-@property (nonatomic) CGFloat itemLineSpacing;
+@property (nonatomic) CGFloat cellFooterHeight;
 /**default is UIEdgeInsetsZero */
 @property (nonatomic) UIEdgeInsets sectionInset;
 
