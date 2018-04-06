@@ -8,6 +8,8 @@
 
 
 #import "JLCycleScrollerView.h"
+#import "MyFlowLayout.h"
+
 typedef NS_ENUM(NSInteger, PageControlMode) {
     PageControlModeCenterX = 0,
     PageControlModeLeft    = 1,
@@ -58,7 +60,7 @@ static NSString * const JLCycScrollDefaultCellResign = @"JLCycScrollDefaultCellR
     _timeDuration = 3.0;
     _pageControl_botton = 10.f;
     _pageControl_centerX = 0.f;
-    _cellsOfLine = 1.0 ;
+    _cellsOfLine = 1.2 ;
     _timerNeed = YES;
     _infiniteDragging = YES;
     _infiniteDraggingForSinglePage = NO;
@@ -77,10 +79,10 @@ static NSString * const JLCycScrollDefaultCellResign = @"JLCycScrollDefaultCellR
 }
 -(void)initUI
 {
-    UICollectionViewFlowLayout* flowLayout = [[UICollectionViewFlowLayout alloc] init];
+    MyFlowLayout* flowLayout = [[UICollectionViewFlowLayout alloc] init];
     flowLayout.minimumLineSpacing = 0;
     flowLayout.minimumInteritemSpacing = 0;
-    flowLayout.sectionInset = UIEdgeInsetsZero;
+//    flowLayout.sectionInset = UIEdgeInsetsZero;
     flowLayout.scrollDirection = self.scrollDirection;
     _flowLayout = flowLayout;
     
@@ -617,7 +619,7 @@ static NSString * const JLCycScrollDefaultCellResign = @"JLCycScrollDefaultCellR
         UICollectionViewLayoutAttributes *att = [self.flowLayout layoutAttributesForItemAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
         [self.arrayAttributes addObject:att];
     }
-    NSLog(@"\n%@\n%@",self.arrayAttributes,self.arrayPlaceholderAttributes);
+    NSLog(@"arrayAttributes:\n%@\narrayPlaceholderAttributes:\n%@",self.arrayAttributes,self.arrayPlaceholderAttributes);
     self.arrayPlaceholderAttributes = nil;
 }
 #pragma mark - -----UIScrollView Delegate------
@@ -740,7 +742,9 @@ static NSString * const JLCycScrollDefaultCellResign = @"JLCycScrollDefaultCellR
                 CGFloat offSet = att.frame.origin.y-self.flowLayout.sectionInset.top;
                 [self.collectionView setContentOffset:CGPointMake(0, offSet) animated:animated];
             }else{
-                CGFloat offSet = att.frame.origin.x-self.flowLayout.sectionInset.left;
+//                CGFloat offSet = att.frame.origin.x-self.flowLayout.sectionInset.left;
+                CGFloat f = CGRectGetMidX(att.frame);
+                CGFloat offSet = f -self.flowLayout.sectionInset.left;
                 [self.collectionView setContentOffset:CGPointMake(offSet, 0) animated:animated];
             }
         }

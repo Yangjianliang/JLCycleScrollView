@@ -34,11 +34,14 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol JLCycleScrollerViewDelegate <NSObject>
 @optional
 - (CGSize)jl_cycleScrollerView:(JLCycleScrollerView *)view sizeForItemAtIndex:(NSInteger)index;
+- (CGFloat)jl_cycleScrollerView:(JLCycleScrollerView *)view lineForItemAtIndex:(NSInteger)index;
+
 - (void)jl_cycleScrollerView:(JLCycleScrollerView *)view willDisplayCell:(UICollectionViewCell *)cell forItemAtIndex:(NSInteger)index;
 - (void)jl_cycleScrollerView:(JLCycleScrollerView *)view didEndDisplayingCell:(UICollectionViewCell *)cell forItemAtIndex:(NSInteger)index;
+- (void)jl_cycleScrollerView:(JLCycleScrollerView *)view willChangeCurryCell:(UICollectionViewCell *)cell curryPage:(NSInteger)curryPage;
 - (void)jl_cycleScrollerView:(JLCycleScrollerView *)view didChangeCurryCell:(UICollectionViewCell *)cell curryPage:(NSInteger)curryPage;
-//- (void)jl_cycleScrollerView:(JLCycleScrollerView *)view willBeginAutomaticScrollPageCurryCell:(UICollectionViewCell *)cell curryIndex:(NSInteger)curryIndex;
-//- (void)jl_cycleScrollerView:(JLCycleScrollerView *)view didEndAutomaticScrollPageCurryCell:(UICollectionViewCell *)cell curryIndex:(NSInteger)curryIndex;
+- (void)jl_cycleScrollerView:(JLCycleScrollerView *)view willBeginAutomaticScrollPageCurryCell:(UICollectionViewCell *)cell curryIndex:(NSInteger)curryIndex;
+- (void)jl_cycleScrollerView:(JLCycleScrollerView *)view didEndAutomaticScrollPageCurryCell:(UICollectionViewCell *)cell curryIndex:(NSInteger)curryIndex;
 - (void)jl_cycleScrollerView:(JLCycleScrollerView *)view didSelectItemAtIndex:(NSInteger)index sourceArray:(NSArray *)sourceArray;
 @end
 
@@ -73,18 +76,24 @@ NS_ASSUME_NONNULL_BEGIN
 -(void)useCustomCell:(UICollectionViewCell<JLCycSrollCellDataProtocol>*)cell isXibBuild:(BOOL)isxib ;
 /** default is nil */
 @property (nonatomic, strong) UIImage *placeholderImage;
-/** default is UICollectionViewScrollDirectionHorizontal */
-@property (nonatomic) UICollectionViewScrollDirection scrollDirection;
 /** default is YES */
 @property (nonatomic) BOOL scrollEnabled;
-/**default is 1.0,每行、列cell个数,*/
-@property (nonatomic) CGFloat cellsOfLine;
 /**default is YES */
 @property (nonatomic) BOOL pagingEnabled;
 /**default is YES,是否需要无限拖拽*/
 @property (nonatomic) BOOL infiniteDragging;
 /**default is NO,eg:infiniteDragging=YES and sourceArray.count=1、cellsOfLine==1.0时不能被无限拖拽*/
 @property (nonatomic) BOOL infiniteDraggingForSinglePage;
+
+/**default is UICollectionViewScrollDirectionHorizontal */
+@property (nonatomic) UICollectionViewScrollDirection scrollDirection;
+/**default is 1.0,每行、列cell个数,*/
+@property (nonatomic) CGFloat cellsOfLine;
+/**default is 0.0 */
+@property (nonatomic) CGFloat itemLineSpacing;
+/**default is UIEdgeInsetsZero */
+@property (nonatomic) UIEdgeInsets sectionInset;
+
 /**default is 0.0,It can be used to set default contentOffset*/
 @property (nonatomic) CGFloat curryIndex;
 

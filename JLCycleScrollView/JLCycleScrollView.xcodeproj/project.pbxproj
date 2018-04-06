@@ -20,6 +20,7 @@
 		2B9927EA1F77FE8000FBC958 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B9927E81F77FE8000FBC958 /* LaunchScreen.storyboard */; };
 		2BBCB61E1FEF5BF100A5CE10 /* JLMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BBCB61D1FEF5BF100A5CE10 /* JLMainViewController.m */; };
 		2BBCB6271FF1581700A5CE10 /* ExampleTwoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BBCB6251FF1581700A5CE10 /* ExampleTwoController.m */; };
+		2BC1CC472076A1D7003169DD /* MyFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BC1CC462076A1D7003169DD /* MyFlowLayout.m */; };
 		2BF34B1C1FD5452E00F30ECD /* JLCycleScrollerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BF34B141FD5452E00F30ECD /* JLCycleScrollerView.m */; };
 		2BF34B1D1FD5452E00F30ECD /* JLCycScrollDefaultCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BF34B161FD5452E00F30ECD /* JLCycScrollDefaultCell.m */; };
 		2BF34B1F1FD5452E00F30ECD /* JLPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BF34B191FD5452E00F30ECD /* JLPageControl.m */; };
@@ -50,6 +51,8 @@
 		2BBCB61D1FEF5BF100A5CE10 /* JLMainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JLMainViewController.m; sourceTree = "<group>"; };
 		2BBCB6251FF1581700A5CE10 /* ExampleTwoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExampleTwoController.m; sourceTree = "<group>"; };
 		2BBCB6261FF1581700A5CE10 /* ExampleTwoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExampleTwoController.h; sourceTree = "<group>"; };
+		2BC1CC452076A1D7003169DD /* MyFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyFlowLayout.h; sourceTree = "<group>"; };
+		2BC1CC462076A1D7003169DD /* MyFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyFlowLayout.m; sourceTree = "<group>"; };
 		2BF34B131FD5452E00F30ECD /* JLCycleScrollerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JLCycleScrollerView.h; sourceTree = "<group>"; };
 		2BF34B141FD5452E00F30ECD /* JLCycleScrollerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JLCycleScrollerView.m; sourceTree = "<group>"; };
 		2BF34B151FD5452E00F30ECD /* JLCycScrollDefaultCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JLCycScrollDefaultCell.h; sourceTree = "<group>"; };
@@ -186,6 +189,8 @@
 				2BF34B161FD5452E00F30ECD /* JLCycScrollDefaultCell.m */,
 				2BF34B181FD5452E00F30ECD /* JLPageControl.h */,
 				2BF34B191FD5452E00F30ECD /* JLPageControl.m */,
+				2BC1CC452076A1D7003169DD /* MyFlowLayout.h */,
+				2BC1CC462076A1D7003169DD /* MyFlowLayout.m */,
 			);
 			path = JLCycleScrollerView;
 			sourceTree = "<group>";
@@ -344,6 +349,7 @@
 				2B1C96261F95B70600B040F6 /* ExampleOneController.m in Sources */,
 				2BF34B1C1FD5452E00F30ECD /* JLCycleScrollerView.m in Sources */,
 				2B9927DC1F77FE7F00FBC958 /* main.m in Sources */,
+				2BC1CC472076A1D7003169DD /* MyFlowLayout.m in Sources */,
 				2BBCB6271FF1581700A5CE10 /* ExampleTwoController.m in Sources */,
 				2B92751B1FD8E3F900D177E1 /* JLCycScrCustomCell.m in Sources */,
 			);
