@@ -7,9 +7,11 @@
 //
 
 #import "JLCycScrollFlowLayout.h"
-#import "NSObject+JLExtension.h"
+
+NSNotificationName const JLCycScrollFlowLayoutPrepareLayout = @"JLCycScrollFlowLayoutPrepareLayout";
 @implementation JLCycScrollFlowLayout
 - (void)prepareLayout{
+
     [super prepareLayout];
     NSLog(@"初始化好了prepareLayout");
     [[NSNotificationCenter defaultCenter] postNotificationName:JLCycScrollFlowLayoutPrepareLayout object:nil];

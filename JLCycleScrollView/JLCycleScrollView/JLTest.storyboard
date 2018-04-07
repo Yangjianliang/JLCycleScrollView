@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Ah8-7m-Z2b">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="sSh-HS-Wu9">
+            <objects>
+                <navigationController id="Ah8-7m-Z2b" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="th3-4i-o2I">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="4P8-zt-kuj" kind="relationship" relationship="rootViewController" id="uBd-iI-YT7"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3KC-Pf-7BD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-775" y="-83"/>
+        </scene>
+        <!--test-->
+        <scene sceneID="klK-mO-mMh">
+            <objects>
+                <viewController title="test" id="4P8-zt-kuj" customClass="JLTestViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="v18-Rg-jCY">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Eyq-qU-a7h">
+                                <rect key="frame" x="0.0" y="617" width="94" height="50"/>
+                                <color key="backgroundColor" red="0.60632250151551204" green="1" blue="0.35541157831541215" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="j0D-oz-sdH"/>
+                                </constraints>
+                                <state key="normal" title="1"/>
+                                <connections>
+                                    <action selector="testOne:" destination="4P8-zt-kuj" eventType="touchUpInside" id="aWp-xD-57E"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RQU-ME-2CO">
+                                <rect key="frame" x="94" y="617" width="93.5" height="50"/>
+                                <color key="backgroundColor" red="1" green="0.43436510498162162" blue="0.2210871187979343" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <state key="normal" title="2"/>
+                                <connections>
+                                    <action selector="testTwo:" destination="4P8-zt-kuj" eventType="touchUpInside" id="qyB-Qc-0iT"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wfq-Tu-1IK">
+                                <rect key="frame" x="187.5" y="617" width="94" height="50"/>
+                                <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="3"/>
+                                <connections>
+                                    <action selector="testThree:" destination="4P8-zt-kuj" eventType="touchUpInside" id="dfg-PS-eKa"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w6S-Aq-Zv3">
+                                <rect key="frame" x="281.5" y="617" width="93.5" height="50"/>
+                                <color key="backgroundColor" red="0.63569560503646616" green="0.92556780230158286" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <state key="normal" title="4"/>
+                                <connections>
+                                    <action selector="testFour:" destination="4P8-zt-kuj" eventType="touchUpInside" id="lze-DY-GIi"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.95294117647058818" green="0.95294117647058818" blue="0.95294117647058818" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="RQU-ME-2CO" firstAttribute="width" secondItem="Eyq-qU-a7h" secondAttribute="width" id="0OX-jC-4N8"/>
+                            <constraint firstItem="Eyq-qU-a7h" firstAttribute="leading" secondItem="v18-Rg-jCY" secondAttribute="leading" id="47w-QA-dXo"/>
+                            <constraint firstItem="w6S-Aq-Zv3" firstAttribute="height" secondItem="Wfq-Tu-1IK" secondAttribute="height" id="6lF-oi-tiD"/>
+                            <constraint firstItem="Wfq-Tu-1IK" firstAttribute="height" secondItem="RQU-ME-2CO" secondAttribute="height" id="JUe-bc-n9V"/>
+                            <constraint firstItem="Wfq-Tu-1IK" firstAttribute="bottom" secondItem="RQU-ME-2CO" secondAttribute="bottom" id="NlM-e1-OGn"/>
+                            <constraint firstItem="RQU-ME-2CO" firstAttribute="leading" secondItem="Eyq-qU-a7h" secondAttribute="trailing" id="RU0-is-NaD"/>
+                            <constraint firstAttribute="trailing" secondItem="w6S-Aq-Zv3" secondAttribute="trailing" id="V0a-yd-1ps"/>
+                            <constraint firstItem="w6S-Aq-Zv3" firstAttribute="leading" secondItem="Wfq-Tu-1IK" secondAttribute="trailing" id="Wmq-oH-DIw"/>
+                            <constraint firstItem="Wfq-Tu-1IK" firstAttribute="width" secondItem="RQU-ME-2CO" secondAttribute="width" id="Xln-kk-xwQ"/>
+                            <constraint firstAttribute="bottom" secondItem="Eyq-qU-a7h" secondAttribute="bottom" id="YMv-GM-fCy"/>
+                            <constraint firstItem="Wfq-Tu-1IK" firstAttribute="leading" secondItem="RQU-ME-2CO" secondAttribute="trailing" id="Znm-Md-Hm5"/>
+                            <constraint firstItem="RQU-ME-2CO" firstAttribute="height" secondItem="Eyq-qU-a7h" secondAttribute="height" id="d4m-iN-n4h"/>
+                            <constraint firstItem="w6S-Aq-Zv3" firstAttribute="bottom" secondItem="Wfq-Tu-1IK" secondAttribute="bottom" id="hH7-6l-sUD"/>
+                            <constraint firstItem="RQU-ME-2CO" firstAttribute="bottom" secondItem="Eyq-qU-a7h" secondAttribute="bottom" id="qPE-6Q-iba"/>
+                            <constraint firstItem="w6S-Aq-Zv3" firstAttribute="width" secondItem="Wfq-Tu-1IK" secondAttribute="width" id="xfU-1q-Cgu"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="40l-4m-eW8"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5yq-QX-hOR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="324" y="-83"/>
+        </scene>
+    </scenes>
+</document>

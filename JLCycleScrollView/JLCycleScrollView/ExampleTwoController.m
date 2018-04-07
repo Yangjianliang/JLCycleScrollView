@@ -22,10 +22,6 @@
 
 
 @property(nonatomic,strong)NSMutableArray *arrayData;
-
-
-@property (strong, nonatomic) JLCycleScrollerView *testJLCYCView;
-
 @end
 
 @implementation ExampleTwoController
@@ -64,10 +60,6 @@
 //    self.firstJLView.pageControl.allowChangeFrame = YES;
     
 
-    self.testJLCYCView = [[JLCycleScrollerView alloc] initWithFrame:CGRectMake(40, 300, 250, 180)];
-    self.testJLCYCView.datasource = self;
-    self.testJLCYCView.delegate = self;
-    [self.view addSubview:self.testJLCYCView];
 }
 - (IBAction)firstClcik:(UIButton *)sender {
 
@@ -126,11 +118,11 @@
 }
 
 - (IBAction)threeClcik:(id)sender {
-        self.firstJLView.scrollDirection = UICollectionViewScrollDirectionVertical;
+//        self.firstJLView.scrollDirection = UICollectionViewScrollDirectionVertical;
 
-//    self.firstheight.constant = 50;
-//    self.firstLeft.constant = 65;
-//    self.firstright.constant = 35;
+    self.firstheight.constant = 450;
+    self.firstLeft.constant = 65;
+    self.firstright.constant = 35;
 //    self.firstJLView.sourceArray = self.arrayData;
 //    self.firstJLView.sectionInset = UIEdgeInsetsMake(10, 20, 10, 20);
 

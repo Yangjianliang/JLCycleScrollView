@@ -62,7 +62,7 @@
 -(void)clcikb2:(UIButton*)sender
 {
     JLCycleScrollerView *jlview = [[JLCycleScrollerView alloc] initWithFrame:CGRectMake(40, 350,  SCR_W-80, 60)];
-    [jlview useCustomCell:[JLCycScrCustomCell new] isXibBuild:YES];
+    [jlview setCustomCell:[JLCycScrCustomCell new] isXibBuild:YES];
     jlview.delegate = self;
     
     jlview.scrollDirection =  UICollectionViewScrollDirectionVertical;

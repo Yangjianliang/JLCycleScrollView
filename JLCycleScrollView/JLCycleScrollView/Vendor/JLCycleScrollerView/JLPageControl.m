@@ -7,7 +7,7 @@
 //
 
 #import "JLPageControl.h"
-#import "NSObject+JLExtension.h"
+#import "UIView+JLExtension.h"
 @implementation JLPageControl
 
 -(instancetype)initWithFrame:(CGRect)frame

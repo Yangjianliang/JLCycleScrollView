@@ -108,10 +108,10 @@
             [arrayNewSorece addObject:model];
         }
         self.jiCycScrollerView.sourceArray = arrayNewSorece;
-        [self.jiCycScrollerView useCustomCell:[[JLCycScrCustomCell alloc]init] isXibBuild:YES];
+        [self.jiCycScrollerView setCustomCell:[[JLCycScrCustomCell alloc]init] isXibBuild:YES];
     }else{
         self.jiCycScrollerView.sourceArray = self.arrayData;
-        [self.jiCycScrollerView useCustomCell:[[JLCycScrollDefaultCell alloc]init] isXibBuild:NO];
+        [self.jiCycScrollerView setCustomCell:[[JLCycScrollDefaultCell alloc]init] isXibBuild:NO];
     }
    
 }

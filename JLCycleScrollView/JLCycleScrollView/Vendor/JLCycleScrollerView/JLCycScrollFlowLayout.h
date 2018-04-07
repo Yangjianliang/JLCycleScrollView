@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+UIKIT_EXTERN NSNotificationName const JLCycScrollFlowLayoutPrepareLayout;
 @interface JLCycScrollFlowLayout : UICollectionViewFlowLayout
 
 @end

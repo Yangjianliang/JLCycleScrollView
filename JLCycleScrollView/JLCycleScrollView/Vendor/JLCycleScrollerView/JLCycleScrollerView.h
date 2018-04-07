@@ -11,10 +11,23 @@
 #import "JLCycSrollCellDataProtocol.h"
 #import "JLCycScrollDefaultCell.h"
 #import "JLPageControl.h"
-#import "NSObject+JLExtension.h"
+#import "UIView+JLExtension.h"
 
-NS_ASSUME_NONNULL_BEGIN
 @class JLCycleScrollerView;
+NS_ASSUME_NONNULL_BEGIN
+
+typedef struct _JLIndexPath{
+    NSInteger index;
+    NSInteger section;
+    NSInteger row;
+}JLIndexPath;
+NS_INLINE JLIndexPath JLMakeIndexPath(NSInteger index, NSInteger section,NSInteger row) {
+    JLIndexPath indexPath;
+    indexPath.index = index;
+    indexPath.section = section;
+    indexPath.row = row;
+    return indexPath;
+}
 @protocol JLCycleScrollerViewDatasource <NSObject>
 @optional
 /**
@@ -36,10 +49,15 @@ NS_ASSUME_NONNULL_BEGIN
 - (CGSize)jl_cycleScrollerView:(JLCycleScrollerView *)view sizeForItemAtIndex:(NSInteger)index;
 - (void)jl_cycleScrollerView:(JLCycleScrollerView *)view willDisplayCell:(UICollectionViewCell *)cell forItemAtIndex:(NSInteger)index;
 - (void)jl_cycleScrollerView:(JLCycleScrollerView *)view didEndDisplayingCell:(UICollectionViewCell *)cell forItemAtIndex:(NSInteger)index;
+
+// willBeginAutomaticPageingCell
+// willChangeCurryCell
+// didChangeCurryCell
+// didEndAutomaticPageingCell
 - (void)jl_cycleScrollerView:(JLCycleScrollerView *)view willChangeCurryCell:(UICollectionViewCell *)cell curryPage:(NSInteger)curryPage;
 - (void)jl_cycleScrollerView:(JLCycleScrollerView *)view didChangeCurryCell:(UICollectionViewCell *)cell curryPage:(NSInteger)curryPage;
-- (void)jl_cycleScrollerView:(JLCycleScrollerView *)view willBeginAutomaticScrollPageCurryCell:(UICollectionViewCell *)cell curryIndex:(NSInteger)curryIndex;
-- (void)jl_cycleScrollerView:(JLCycleScrollerView *)view didEndAutomaticScrollPageCurryCell:(UICollectionViewCell *)cell curryIndex:(NSInteger)curryIndex;
+- (void)jl_cycleScrollerView:(JLCycleScrollerView *)view willBeginAutomaticPageingCell:(UICollectionViewCell *)cell curryIndex:(NSInteger)curryIndex;
+- (void)jl_cycleScrollerView:(JLCycleScrollerView *)view didEndAutomaticPageingCell:(UICollectionViewCell *)cell curryIndex:(NSInteger)curryIndex;
 - (void)jl_cycleScrollerView:(JLCycleScrollerView *)view didSelectItemAtIndex:(NSInteger)index sourceArray:(NSArray *)sourceArray;
 @end
 
@@ -71,7 +89,8 @@ NS_ASSUME_NONNULL_BEGIN
  @param isxib 自定义cell是否以xib方式创建
  eg:[self.jLCycleScrollerView useCustomCell:[[JLLunBoCollectionViewCell alloc] init] isXibBuild:YES];
  */
--(void)useCustomCell:(UICollectionViewCell<JLCycSrollCellDataProtocol>*)cell isXibBuild:(BOOL)isxib ;
+- (void)setCustomCell:(UICollectionViewCell<JLCycSrollCellDataProtocol>*)cell isXibBuild:(BOOL)isxib ;
+- (nullable UICollectionViewCell *)cellForItemAtIndex:(NSInteger )index;
 /** default is nil */
 @property (nonatomic, strong) UIImage *placeholderImage;
 /** default is YES */

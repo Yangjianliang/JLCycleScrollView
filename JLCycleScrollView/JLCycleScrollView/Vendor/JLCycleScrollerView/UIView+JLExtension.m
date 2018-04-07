@@ -1,20 +1,14 @@
 //
-//  NSObject+JLExtension.m
+//  UIView+JLExtension.m
 //  JLCycleScrollView
 //
-//  Created by 杨建亮 on 2018/4/6.
+//  Created by 杨建亮 on 2018/4/7.
 //  Copyright © 2018年 yangjianliang. All rights reserved.
 //
 
-#import "NSObject+JLExtension.h"
+#import "UIView+JLExtension.h"
 
-NSNotificationName const JLCycScrollFlowLayoutPrepareLayout = @"JLCycScrollFlowLayoutPrepareLayout";
-@implementation NSObject (JLExtension)
-
-@end
-
-
-@implementation UIView (JLFrame)
+@implementation UIView (JLExtension)
 -(CGFloat)jl_centerY
 {
     return self.center.y;
@@ -78,4 +72,5 @@ NSNotificationName const JLCycScrollFlowLayoutPrepareLayout = @"JLCycScrollFlowL
     self.frame = temp;
 }
 @end
+
 
