@@ -22,13 +22,14 @@
     [super viewDidLoad];
     [self initArrayData];
 //    [self buildUI];
+    [self buildUI];
 
    
 }
 - (IBAction)testOne:(id)sender {
 //    self.testView.sourceArray = self.arrayData;
     
-    [self buildUI];
+//    [self buildUI];
 
 }
 - (IBAction)testTwo:(id)sender {
@@ -88,20 +89,20 @@
     ExampleModel *model = sourceArray[index];
     return model.url;
 }
-//- (CGSize)jl_cycleScrollerView:(JLCycleScrollerView*)view sizeForItemAtIndex:(NSInteger)index
-//{
-//    if (index==0) {
-//        return CGSizeMake(100, 0);
-//    }
-//    if (index==1) {
-//        return CGSizeMake(50, 0);
-//    }
-//    if (index==2) {
-//        return CGSizeMake(200, 0);
-//    }
-//    return CGSizeMake(350, 0);
-//
-//}
+- (CGSize)jl_cycleScrollerView:(JLCycleScrollerView*)view sizeForItemAtIndex:(NSInteger)index
+{
+    if (index==0) {
+        return CGSizeMake(100, 0);
+    }
+    if (index==1) {
+        return CGSizeMake(50, 0);
+    }
+    if (index==2) {
+        return CGSizeMake(200, 0);
+    }
+    return CGSizeMake(350, 0);
+
+}
 - (void)jl_cycleScrollerView:(JLCycleScrollerView *)view didSelectItemAtIndex:(NSInteger)index sourceArray:(nonnull NSArray *)sourceArray
 {
     NSLog(@"点击%ld",index);
@@ -123,7 +124,7 @@
 }
 - (void)jl_cycleScrollerView:(JLCycleScrollerView *)view didEndAutomaticPageingCell:(UICollectionViewCell *)cell curryIndex:(NSInteger)curryIndex
 {
-    NSLog(@"didEndAutomaticPageingCell:%ld \n",curryIndex);
+    NSLog(@"didEndAutomaticPageingCell:%ld \n==",curryIndex);
 
 }
 /*

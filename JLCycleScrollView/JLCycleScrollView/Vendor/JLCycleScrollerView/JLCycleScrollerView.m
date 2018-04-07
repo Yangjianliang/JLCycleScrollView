@@ -61,7 +61,7 @@ static NSString * const JLCycScrollDefaultCellResign = @"JLCycScrollDefaultCellR
     _cellsOfLine = 1 ;
     _cellsLineSpacing = 0.0;
     _timeDuration = 3.0;
-    _timerNeed = YES;
+    _timerNeed = NO;
     _infiniteDragging = YES;
     _infiniteDraggingForSinglePage = NO;
     _scrollEnabled = NO;
@@ -74,6 +74,7 @@ static NSString * const JLCycScrollDefaultCellResign = @"JLCycScrollDefaultCellR
     self.transformSize = NO;
     self.pageControl_X = PageControlModeCenterX;
     self.pageControl_Y = PageControlModeBottom;
+    self.arrayAttributes = [NSMutableArray array];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillResignActive)
                                                  name:UIApplicationWillResignActiveNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidBecomeActive)
@@ -125,6 +126,9 @@ static NSString * const JLCycScrollDefaultCellResign = @"JLCycScrollDefaultCellR
     }
     dispatch_async(dispatch_get_main_queue(), ^{
         [self prepareCalculateCellsOfLine];
+        if (item ==0) {
+            self.lastIndexPath = JLMakeIndexPath(0, 0, 0);
+        }
         if ([self canInfiniteDrag] && [self getCurryPageFloat]<1.0) {
             [self jl_setContentOffsetAtIndex:1.0 animated:NO];
         }else{
@@ -518,65 +522,38 @@ static NSString * const JLCycScrollDefaultCellResign = @"JLCycScrollDefaultCellR
 }
 -(void)prepareCalculateCellsOfLine
 {
-    if ([self isItemSizeCustom]) {
-        if ([self isDVertical]) {
-            CGFloat item_Y = self.flowLayout.sectionInset.top;
+    [self.arrayAttributes removeAllObjects];
+    if ([self isItemSizeCustom])
+    {
+        if (self.infiniteDragging)
+        {
             self.arrayPlaceholderAttributes = [NSMutableArray array];
-            if (self.infiniteDragging) {//此时cellsOfLine尚未计算出来
-                CGSize size = [self.delegate jl_cycleScrollerView:self sizeForItemAtIndex:self.arrayData.count-1];
-                UICollectionViewLayoutAttributes *att  = [[UICollectionViewLayoutAttributes alloc] init];
-                att.frame = CGRectMake(0, item_Y, 0, size.height);
-                [self.arrayPlaceholderAttributes addObject:att];
-                item_Y = item_Y+size.height+self.cellsLineSpacing;
-            }
+            
+            CGFloat item_XY = [self isDVertical]?self.flowLayout.sectionInset.top:self.flowLayout.sectionInset.left;
+            CGSize size = [self.delegate jl_cycleScrollerView:self sizeForItemAtIndex:self.arrayData.count-1];
+            UICollectionViewLayoutAttributes *att  = [[UICollectionViewLayoutAttributes alloc] init];
+            att.frame = CGRectMake(item_XY, item_XY,size.width, size.height);
+            [self.arrayPlaceholderAttributes addObject:att];
+            CGFloat LWH = [self isDVertical]?size.height:size.width;
+            item_XY = item_XY+ LWH +self.cellsLineSpacing;
+            
             for (int i=0; i<self.arrayData.count; ++i) {
                 CGSize size = [self.delegate jl_cycleScrollerView:self sizeForItemAtIndex:i];
                 UICollectionViewLayoutAttributes *att  = [[UICollectionViewLayoutAttributes alloc] init];
-                att.frame = CGRectMake(0, item_Y, 0, size.height);
+                att.frame = CGRectMake(item_XY, item_XY,size.width, size.height);
                 [self.arrayPlaceholderAttributes addObject:att];
-                item_Y = item_Y+size.height+self.cellsLineSpacing;
-
-                CGFloat max_Y = CGRectGetMaxY(att.frame);
-                if (self.infiniteDragging) {
-                    UICollectionViewLayoutAttributes *attrFirst = self.arrayPlaceholderAttributes.firstObject;
-                    max_Y = max_Y-attrFirst.frame.size.height-self.cellsLineSpacing;
-                }
-                if (max_Y>=self.collectionView.jl_height) {
+                CGFloat IWH = [self isDVertical]?size.height:size.width;
+                item_XY = item_XY+ IWH +self.cellsLineSpacing;
+                
+                CGFloat max_XY = [self isDVertical]?CGRectGetMaxY(att.frame):CGRectGetMaxX(att.frame);
+                UICollectionViewLayoutAttributes *attrFirst = self.arrayPlaceholderAttributes.firstObject;
+                CGFloat FWH = [self isDVertical]?attrFirst.frame.size.height:attrFirst.frame.size.width;
+                max_XY = max_XY-FWH-self.cellsLineSpacing;
+                CGFloat collectWH = [self isDVertical]?self.collectionView.jl_height:self.collectionView.jl_width;
+                
+                if (max_XY>=collectWH) {
                     _cellsOfLine = i+1.0;
-                    self.collectionView.pagingEnabled = NO;//这种不管是否分页均关系统分页，关闭系统分页效果,采用自定义实现分页
-                    break;
-                }else{
-                    if (i==self.arrayData.count-1) {
-                        _cellsOfLine = self.arrayData.count+1;
-                        self.collectionView.pagingEnabled = NO;
-                    }
-                }
-            }
-        }else{
-            CGFloat item_X = self.flowLayout.sectionInset.left;
-            self.arrayPlaceholderAttributes = [NSMutableArray array];
-            if (self.infiniteDragging) {
-                CGSize size = [self.delegate jl_cycleScrollerView:self sizeForItemAtIndex:self.arrayData.count-1];
-                UICollectionViewLayoutAttributes *att  = [[UICollectionViewLayoutAttributes alloc] init];
-                att.frame = CGRectMake(item_X, 0, size.width, 0);
-                [self.arrayPlaceholderAttributes addObject:att];
-                item_X = item_X+size.width+self.cellsLineSpacing;
-            }
-            for (int i=0; i<self.arrayData.count; ++i) {
-                CGSize size = [self.delegate jl_cycleScrollerView:self sizeForItemAtIndex:i];
-                UICollectionViewLayoutAttributes *att  = [[UICollectionViewLayoutAttributes alloc] init];
-                att.frame = CGRectMake(item_X, 0, size.width, 0);
-                [self.arrayPlaceholderAttributes addObject:att];
-                item_X = item_X+size.width+self.cellsLineSpacing;
-
-                CGFloat max_X = CGRectGetMaxX(att.frame);
-                if (self.infiniteDragging) {
-                    UICollectionViewLayoutAttributes *attrFirst = self.arrayPlaceholderAttributes.firstObject;
-                    max_X = max_X-attrFirst.frame.size.width-self.cellsLineSpacing;
-                }
-                if (max_X>=self.collectionView.jl_width) {
-                    _cellsOfLine = i+1;
-                    self.collectionView.pagingEnabled = NO;
+                    self.collectionView.pagingEnabled = NO;//这种不管是否分页均关闭系统分页效果,采用自定义实现分页
                     break;
                 }else{
                     if (i==self.arrayData.count-1) {
@@ -586,11 +563,13 @@ static NSString * const JLCycScrollDefaultCellResign = @"JLCycScrollDefaultCellR
                 }
             }
         }
-    }else{
+    }
+    else
+    {
         if ([self canInfiniteDrag]) {
             self.arrayPlaceholderAttributes = [NSMutableArray array];
             CGFloat item_XY = [self isDVertical]?self.flowLayout.sectionInset.top:self.flowLayout.sectionInset.left;
-            for (int i=0; i<2; ++i) {//只需要两个
+            for (int i=0; i<2; ++i) {//只需两个
                 UICollectionViewLayoutAttributes *att  = [[UICollectionViewLayoutAttributes alloc] init];
                 if ([self isDVertical]) {
                     att.frame = CGRectMake(0, item_XY+([self getCellHeight]+self.cellsLineSpacing)*i, 0, [self getCellHeight]);
@@ -604,7 +583,7 @@ static NSString * const JLCycScrollDefaultCellResign = @"JLCycScrollDefaultCellR
 }
 -(void)initializeArrayAttributes
 {
-    self.arrayAttributes = [NSMutableArray array];
+    [self.arrayAttributes removeAllObjects];
     for ( int i=0; i<[self getNumberOfItemsInSection]; ++i) {
         UICollectionViewLayoutAttributes *att = [self.flowLayout layoutAttributesForItemAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
         [self.arrayAttributes addObject:att];
@@ -736,47 +715,82 @@ static NSString * const JLCycScrollDefaultCellResign = @"JLCycScrollDefaultCellR
 }
 -(CGFloat)getCurryPageFloat
 {
-    if ([self isDVertical]) {
-        if ([self isItemSizeCustom]) {
-            CGFloat contentOffset_Y = self.collectionView.contentOffset.y;
-            NSArray *array = [NSArray array];
-            if (self.arrayAttributes.count>0) {
-                array = [NSArray arrayWithArray:self.arrayAttributes];
-            }else {
-                array = [NSArray arrayWithArray:self.arrayPlaceholderAttributes];
-            }
-            for (int i=0;i<array.count; ++i) {
-                UICollectionViewLayoutAttributes *att = array[i];
-                CGRect frame = att.frame; CGFloat sectionInset_top = self.flowLayout.sectionInset.top;
-                if (contentOffset_Y>=CGRectGetMinY(frame)-sectionInset_top && contentOffset_Y<=CGRectGetMaxY(frame)-sectionInset_top) {
-                    CGFloat pageFloat = i+(contentOffset_Y-CGRectGetMinY(frame)+sectionInset_top)/frame.size.height;
-                    return pageFloat;
+    if ([self isItemSizeCustom])
+    {
+        CGFloat contentOffset_XY = [self isDVertical]?self.collectionView.contentOffset.y :self.collectionView.contentOffset.x ;
+        CGFloat sectionInset_LeftTop = [self isDVertical]?self.flowLayout.sectionInset.top :self.flowLayout.sectionInset.left;
+        NSMutableArray *arr = self.arrayPlaceholderAttributes?self.arrayPlaceholderAttributes:self.arrayAttributes;
+        if (arr.count==0) {
+            NSLog(@"not initialized");
+            return 0;
+        }
+        BOOL bigger = arr.count-self.lastIndexPath.row>self.lastIndexPath.row?YES:NO;
+        NSLog(@"%ld------%ld",arr.count,self.lastIndexPath.row);
+        if (bigger) {
+            int j = (int)self.lastIndexPath.row;//[getCurryPageFloat]作为核心及调用最为频繁的一个方法，优化查找效率
+            for (int i= (int)self.lastIndexPath.row;i<arr.count; ++i) {
+                UICollectionViewLayoutAttributes *biggerAttr = arr[i];
+                CGFloat biggerMinXY = [self isDVertical]?CGRectGetMinY(biggerAttr.frame):CGRectGetMinX(biggerAttr.frame);
+                CGFloat biggerMaxXY = [self isDVertical]?CGRectGetMaxY(biggerAttr.frame):CGRectGetMaxX(biggerAttr.frame);
+                CGFloat biggerSizeWH = [self isDVertical]?biggerAttr.frame.size.height:biggerAttr.frame.size.width;
+                BOOL isInRange = contentOffset_XY>=biggerMinXY-sectionInset_LeftTop && contentOffset_XY<=biggerMaxXY-sectionInset_LeftTop;
+                if (isInRange) {
+                    CGFloat biggerPageFloat = i+(contentOffset_XY-biggerMinXY+sectionInset_LeftTop)/biggerSizeWH;
+                    NSLog(@"bigger大%f",biggerPageFloat);
+                    return biggerPageFloat;
+                }else{
+                    j--;
+                    if (j>=0) {
+                        UICollectionViewLayoutAttributes *smallerAttr = arr[j];
+                        CGFloat smallerMinXY = [self isDVertical]?CGRectGetMinY(smallerAttr.frame):CGRectGetMinX(smallerAttr.frame);
+                        CGFloat smallerMaxXY = [self isDVertical]?CGRectGetMaxY(smallerAttr.frame):CGRectGetMaxX(smallerAttr.frame);
+                        CGFloat smallerSizeWH = [self isDVertical]?smallerAttr.frame.size.height:smallerAttr.frame.size.width;
+                        BOOL isInRange_smaller = contentOffset_XY>=smallerMinXY-sectionInset_LeftTop && contentOffset_XY<=smallerMaxXY-sectionInset_LeftTop;
+                        if (isInRange_smaller) {
+                            CGFloat smallerPageFloat = j+(contentOffset_XY-smallerMinXY+sectionInset_LeftTop)/smallerSizeWH;
+                            NSLog(@"bigger小%f",smallerPageFloat);
+                            return smallerPageFloat;
+                        }
+                    }
                 }
             }
-            return 0.f;
         }else{
+            int j = arr.count-self.lastIndexPath.row<=0?(int)arr.count-1:(int)self.lastIndexPath.row;
+            for (int i= (int)self.lastIndexPath.row;i>=0; --i) {
+                UICollectionViewLayoutAttributes *smallerAttr = arr[i];
+                CGFloat smallerMinXY = [self isDVertical]?CGRectGetMinY(smallerAttr.frame):CGRectGetMinX(smallerAttr.frame);
+                CGFloat smallerMaxXY = [self isDVertical]?CGRectGetMaxY(smallerAttr.frame):CGRectGetMaxX(smallerAttr.frame);
+                CGFloat smallerSizeWH = [self isDVertical]?smallerAttr.frame.size.height:smallerAttr.frame.size.width;
+                BOOL isInRange_smaller = contentOffset_XY>=smallerMinXY-sectionInset_LeftTop && contentOffset_XY<=smallerMaxXY-sectionInset_LeftTop;
+                if (isInRange_smaller) {
+                    CGFloat smallerPageFloat = i+(contentOffset_XY-smallerMinXY+sectionInset_LeftTop)/smallerSizeWH;
+                    NSLog(@"smaller小%f",smallerPageFloat);
+                    return smallerPageFloat;
+                }else{
+                    j++;
+                    if (j<arr.count) {
+                        UICollectionViewLayoutAttributes *biggerAttr = arr[j];
+                        CGFloat biggerMinXY = [self isDVertical]?CGRectGetMinY(biggerAttr.frame):CGRectGetMinX(biggerAttr.frame);
+                        CGFloat biggerMaxXY = [self isDVertical]?CGRectGetMaxY(biggerAttr.frame):CGRectGetMaxX(biggerAttr.frame);
+                        CGFloat biggerSizeWH = [self isDVertical]?biggerAttr.frame.size.height:biggerAttr.frame.size.width;
+                        BOOL isInRange = contentOffset_XY>=biggerMinXY-sectionInset_LeftTop && contentOffset_XY<=biggerMaxXY-sectionInset_LeftTop;
+                        if (isInRange) {
+                            CGFloat biggerPageFloat = j+(contentOffset_XY-biggerMinXY+sectionInset_LeftTop)/biggerSizeWH;
+                            NSLog(@"smaller大%f",biggerPageFloat);
+                            return biggerPageFloat;
+                        }
+                    }
+                }
+            }
+        }
+        return 0.0;
+    }
+    else
+    {
+        if ([self isDVertical]) {
             CGFloat H = self.transformSize?self.jl_height:self.collectionView.jl_height;
             CGFloat page = self.collectionView.contentOffset.y/(H-self.flowLayout.sectionInset.top)*self.cellsOfLine;
             return page;
-        }
-    }else{
-        if ([self isItemSizeCustom]) {
-            CGFloat contentOffset_X = self.collectionView.contentOffset.x;
-            NSArray *array = [NSArray array];
-            if (self.arrayAttributes.count>0) {
-                array = [NSArray arrayWithArray:self.arrayAttributes];
-            }else {
-                array = [NSArray arrayWithArray:self.arrayPlaceholderAttributes];
-            }
-            for (int i=0;i<array.count; ++i) {
-                UICollectionViewLayoutAttributes *att = array[i];
-                CGRect frame = att.frame; CGFloat sectionInset_left = self.flowLayout.sectionInset.left;
-                if (contentOffset_X>=CGRectGetMinX(frame)-sectionInset_left && contentOffset_X<=CGRectGetMaxX(frame)-sectionInset_left) {
-                    CGFloat pageFloat = i+(contentOffset_X-CGRectGetMinX(frame)+sectionInset_left)/frame.size.width;
-                    return pageFloat;
-                }
-            }
-            return 0.f;
         }else{
             CGFloat W = self.transformSize?self.jl_width:self.collectionView.jl_width;
             CGFloat page = self.collectionView.contentOffset.x /(W-self.flowLayout.sectionInset.left)*self.cellsOfLine;
@@ -880,7 +894,7 @@ static NSString * const JLCycScrollDefaultCellResign = @"JLCycScrollDefaultCellR
     if (!CGRectEqualToRect(self.bounds, self.collectionView.frame)) {
         CGFloat item = self.pagingEnabled?[self getCurryPageInteger]:[self getCurryPageFloat];//不分页是否有问题
         self.transformSize = YES;
-        [self.collectionView reloadData];
+        [self.collectionView reloadData];//优化是否可以解决
         dispatch_async(dispatch_get_main_queue(), ^{
             NSLog(@"===========");
             if ([self canInfiniteDrag] && item<1.0) {
