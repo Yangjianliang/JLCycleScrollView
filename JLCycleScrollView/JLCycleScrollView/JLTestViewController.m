@@ -109,21 +109,21 @@
 
 - (void)jl_cycleScrollerView:(JLCycleScrollerView *)view willChangeCurryCell:(UICollectionViewCell *)cell curryPage:(NSInteger)curryPage
 {
-    NSLog(@"willChangeCurryCell%ld",curryPage);
+    NSLog(@"willChangeCurryCell:%ld",curryPage);
 }
 - (void)jl_cycleScrollerView:(JLCycleScrollerView *)view didChangeCurryCell:(UICollectionViewCell *)cell curryPage:(NSInteger)curryPage
 {
-    NSLog(@"didChangeCurryCell%ld",curryPage);
+    NSLog(@"didChangeCurryCell:%ld",curryPage);
 
 }
 - (void)jl_cycleScrollerView:(JLCycleScrollerView *)view willBeginAutomaticPageingCell:(UICollectionViewCell *)cell curryIndex:(NSInteger)curryIndex
 {
-    NSLog(@"willBeginAutomaticPageingCell%ld",curryIndex);
+    NSLog(@"willBeginAutomaticPageingCell:%ld",curryIndex);
 
 }
 - (void)jl_cycleScrollerView:(JLCycleScrollerView *)view didEndAutomaticPageingCell:(UICollectionViewCell *)cell curryIndex:(NSInteger)curryIndex
 {
-    NSLog(@"didEndAutomaticPageingCell%ld",curryIndex);
+    NSLog(@"didEndAutomaticPageingCell:%ld \n",curryIndex);
 
 }
 /*

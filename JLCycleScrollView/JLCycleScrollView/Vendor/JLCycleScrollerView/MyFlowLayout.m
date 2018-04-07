@@ -7,7 +7,7 @@
 //
 
 #import "MyFlowLayout.h"
-
+#import "JLCycScrollFlowLayout.h"
 @implementation MyFlowLayout
 
 #pragma mark 布局初始化的时候会调用这个方法
@@ -15,9 +15,12 @@
    // 1. 调用父类的方法初始化父类
     [super prepareLayout];
    // 2. 初始化自己的
-    self.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-    CGFloat leftInset = (self.collectionView.frame.size.width) / 2;
-    self.sectionInset = UIEdgeInsetsMake(0, leftInset, 0, leftInset);
+//    self.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+//    CGFloat leftInset = (self.collectionView.frame.size.width) / 2;
+//    self.sectionInset = UIEdgeInsetsMake(0, leftInset, 0, leftInset);
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:JLCycScrollFlowLayoutPrepareLayout object:nil];
+
 }
 
 #pragma mark 返回一个数组，数组中存放着可视范围item的布局

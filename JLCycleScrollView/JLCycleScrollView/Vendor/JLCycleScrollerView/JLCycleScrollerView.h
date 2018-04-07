@@ -107,7 +107,7 @@ NS_INLINE JLIndexPath JLMakeIndexPath(NSInteger index, NSInteger section,NSInteg
 /**default is 1.0,每行、列cell个数,*/
 @property (nonatomic) CGFloat cellsOfLine;
 /**default is 0.0 */
-@property (nonatomic) CGFloat cellFooterHeight;
+@property (nonatomic) CGFloat cellsLineSpacing;
 /**default is UIEdgeInsetsZero */
 @property (nonatomic) UIEdgeInsets sectionInset;
 
