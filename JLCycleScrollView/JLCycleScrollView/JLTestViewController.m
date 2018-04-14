@@ -21,8 +21,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initArrayData];
-//    [self buildUI];
-    [self buildUI];
+
+        [self buildUI];
 
    
 }
@@ -31,16 +31,46 @@
     
 //    [self buildUI];
 
-}
-- (IBAction)testTwo:(id)sender {
-    self.testView.frame = CGRectMake(40, 300, 250, 160);
-}
-- (IBAction)testThree:(id)sender {
-    self.testView.frame = CGRectMake(40, 300, 250, 180);
+//    NSArray *array =  @[
+//                        @"http://public-read-bkt.microants.cn/app/market/face/f_m1.png",
+//                        @"http://public-read-bkt.microants.cn/app/market/face/f_m2.png",
+//                        @"http://public-read-bkt.microants.cn/app/market/face/f_m3.png",
+//                        @"http://public-read-bkt.microants.cn/app/market/face/f_m4.png",
+//                        @"http://public-read-bkt.microants.cn/app/market/face/f_m5.png",
+//
+//
+//                        ];
+//    self.arrayData = [NSMutableArray array];//NSArray<ExampleModel *>
+//    for (int i=0; i<array.count; ++i) {
+//        ExampleModel *model = [[ExampleModel alloc] init];
+//        model.url = array[i];
+//        model.title = array[i];
+//        [self.arrayData addObject:model];
+//    }
+    
+    
+//    [self.view addSubview:self.testView];
+    self.testView.sourceArray = self.arrayData;
 
 }
+- (IBAction)testTwo:(id)sender {
+    self.testView.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+
+//    self.testView.cellsSpacing = 40;
+//    self.testView.frame = CGRectMake(40, 300, 250, 120);
+}
+- (IBAction)testThree:(id)sender {
+//    self.testView.frame = CGRectMake(40, 300, 250, 180);
+    self.testView.scrollDirection = UICollectionViewScrollDirectionVertical;
+}
 - (IBAction)testFour:(id)sender {
-    self.testView.frame = CGRectMake(40, 100, 150, 100);
+//    self.testView.frame = CGRectMake(40, 100, 150, 100);
+
+//    self.testView.cellsSpacing = 20;
+
+    [self.arrayData removeLastObject];;
+    
+    self.testView.sourceArray = self.arrayData;
 
 }
 
@@ -55,6 +85,9 @@
                         @"http://public-read-bkt.microants.cn/app/market/face/f_m4.png",
                         @"http://public-read-bkt.microants.cn/app/market/face/f_m5.png",
                         
+                        @"https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3556326025,2943004307&fm=27&gp=0.jpg",
+                        @"https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1337856628,2826638814&fm=27&gp=0.jpg",
+                        @"https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=759399609,3656639612&fm=27&gp=0.jpg",
                         ];
     self.arrayData = [NSMutableArray array];//NSArray<ExampleModel *>
     for (int i=0; i<array.count; ++i) {
@@ -66,7 +99,7 @@
 }
 -(void)buildUI
 {
-    self.testView = [[JLCycleScrollerView alloc] initWithFrame:CGRectMake(40, 300, 250, 180)];
+    self.testView = [[JLCycleScrollerView alloc] initWithFrame:CGRectMake(40, 100, 250, 480)];
     self.testView.datasource = self;
     self.testView.delegate = self;
     [self.view addSubview:self.testView];
@@ -92,15 +125,15 @@
 - (CGSize)jl_cycleScrollerView:(JLCycleScrollerView*)view sizeForItemAtIndex:(NSInteger)index
 {
     if (index==0) {
-        return CGSizeMake(100, 0);
+        return CGSizeMake(100, 50);
     }
     if (index==1) {
-        return CGSizeMake(50, 0);
+        return CGSizeMake(50, 50);
     }
     if (index==2) {
-        return CGSizeMake(200, 0);
+        return CGSizeMake(200, 200);
     }
-    return CGSizeMake(350, 0);
+    return CGSizeMake(350, 350);
 
 }
 - (void)jl_cycleScrollerView:(JLCycleScrollerView *)view didSelectItemAtIndex:(NSInteger)index sourceArray:(nonnull NSArray *)sourceArray
@@ -110,21 +143,21 @@
 
 - (void)jl_cycleScrollerView:(JLCycleScrollerView *)view willChangeCurryCell:(UICollectionViewCell *)cell curryPage:(NSInteger)curryPage
 {
-    NSLog(@"willChangeCurryCell:%ld",curryPage);
+//    NSLog(@"willChangeCurryCell:%ld",curryPage);
 }
 - (void)jl_cycleScrollerView:(JLCycleScrollerView *)view didChangeCurryCell:(UICollectionViewCell *)cell curryPage:(NSInteger)curryPage
 {
-    NSLog(@"didChangeCurryCell:%ld",curryPage);
+//    NSLog(@"didChangeCurryCell:%ld",curryPage);
 
 }
 - (void)jl_cycleScrollerView:(JLCycleScrollerView *)view willBeginAutomaticPageingCell:(UICollectionViewCell *)cell curryIndex:(NSInteger)curryIndex
 {
-    NSLog(@"willBeginAutomaticPageingCell:%ld",curryIndex);
+//    NSLog(@"willBeginAutomaticPageingCell:%ld",curryIndex);
 
 }
 - (void)jl_cycleScrollerView:(JLCycleScrollerView *)view didEndAutomaticPageingCell:(UICollectionViewCell *)cell curryIndex:(NSInteger)curryIndex
 {
-    NSLog(@"didEndAutomaticPageingCell:%ld \n==",curryIndex);
+//    NSLog(@"didEndAutomaticPageingCell:%ld \n==",curryIndex);
 
 }
 /*

@@ -14,7 +14,7 @@ NSNotificationName const JLCycScrollFlowLayoutPrepareLayout = @"JLCycScrollFlowL
 
     [super prepareLayout];
     NSLog(@"初始化好了prepareLayout");
-    [[NSNotificationCenter defaultCenter] postNotificationName:JLCycScrollFlowLayoutPrepareLayout object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:JLCycScrollFlowLayoutPrepareLayout object:self];
 
 }
 @end

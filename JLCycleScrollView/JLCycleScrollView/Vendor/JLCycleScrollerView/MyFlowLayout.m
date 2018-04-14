@@ -19,7 +19,7 @@
 //    CGFloat leftInset = (self.collectionView.frame.size.width) / 2;
 //    self.sectionInset = UIEdgeInsetsMake(0, leftInset, 0, leftInset);
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:JLCycScrollFlowLayoutPrepareLayout object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:JLCycScrollFlowLayoutPrepareLayout object:self];
 
 }
 

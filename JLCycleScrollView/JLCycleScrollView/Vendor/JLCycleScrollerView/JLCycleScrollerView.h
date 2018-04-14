@@ -28,6 +28,11 @@ NS_INLINE JLIndexPath JLMakeIndexPath(NSInteger index, NSInteger section,NSInteg
     indexPath.row = row;
     return indexPath;
 }
+
+typedef NS_ENUM(NSInteger, JLCycScrollPosition) {
+    JLCycScrollPositionLeftTop    = 0, //滚动点，默认以sectionInset为边界为参照
+    JLCycScrollPositionCenterHV    = 1,//以自身frame中心点作为参照
+};
 @protocol JLCycleScrollerViewDatasource <NSObject>
 @optional
 /**
@@ -90,7 +95,6 @@ NS_INLINE JLIndexPath JLMakeIndexPath(NSInteger index, NSInteger section,NSInteg
  eg:[self.jLCycleScrollerView useCustomCell:[[JLLunBoCollectionViewCell alloc] init] isXibBuild:YES];
  */
 - (void)setCustomCell:(UICollectionViewCell<JLCycSrollCellDataProtocol>*)cell isXibBuild:(BOOL)isxib ;
-- (nullable UICollectionViewCell *)cellForItemAtIndex:(NSInteger )index;
 /** default is nil */
 @property (nonatomic, strong) UIImage *placeholderImage;
 /** default is YES */
@@ -107,12 +111,12 @@ NS_INLINE JLIndexPath JLMakeIndexPath(NSInteger index, NSInteger section,NSInteg
 /**default is 1.0,每行、列cell个数,*/
 @property (nonatomic) CGFloat cellsOfLine;
 /**default is 0.0 */
-@property (nonatomic) CGFloat cellsLineSpacing;
+@property (nonatomic) CGFloat cellsSpacing;
 /**default is UIEdgeInsetsZero */
 @property (nonatomic) UIEdgeInsets sectionInset;
 
-/**default is 0.0,It can be used to set default contentOffset*/
-@property (nonatomic) CGFloat curryIndex;
+@property (nonatomic) JLCycScrollPosition cellScrollPosition;
+
 
 // --------------pageControl设置------------
 /**if pageControlNeed=NO,pageControl is nil; eg:pageControl.currentPageIndicatorTintColor...*/
@@ -148,4 +152,11 @@ NS_INLINE JLIndexPath JLMakeIndexPath(NSInteger index, NSInteger section,NSInteg
 -(void)pauseTimer;
 
 @end
+
+@interface JLPageObject  : NSObject
+@property(nonatomic) BOOL isInRange;
+@property(nonatomic) CGFloat page;
+@end
+
+
 NS_ASSUME_NONNULL_END
