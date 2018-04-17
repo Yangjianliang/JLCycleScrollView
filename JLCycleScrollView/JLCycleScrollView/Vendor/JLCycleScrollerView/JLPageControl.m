@@ -13,48 +13,50 @@
 -(instancetype)initWithFrame:(CGRect)frame
 {
     if (self = [super initWithFrame:frame]) {
-        [self initData];
+        [self initDefaultData];
     }
     return self;
 }
 -(instancetype)initWithCoder:(NSCoder *)aDecoder
 {
     if (self = [super initWithCoder:aDecoder]) {
-        [self initData];
+        [self initDefaultData];
     }
     return self;
 }
--(void)initData
+
+-(void)initDefaultData
 {
-    _jl_MinimumSize = CGSizeZero;
-    _jl_norDotSize = CGSizeMake(7, 7);
-    _jl_selDotSize = CGSizeMake(7, 7);
-    _jl_norMagrin = 9.f;
-    _jl_selMagrin = 9.f;
-    _jl_norDotCornerRadius = 3.5;
-    _jl_selDotCornerRadius = 3.5;
-    _jl_norImage = nil;
-    _jl_selImage= nil;
+    _minimumSize = CGSizeZero;
+    _pageIndicatorSize = CGSizeMake(7, 7);
+    _currentPageIndicatorSize = CGSizeMake(7, 7);
+    _pageIndicatorSpacing = 9.f;
+    _currentPageIndicatorSpacing = 9.f;
+    _pageIndicatorRadius = 3.5f;
+    _currentPageIndicatorRadius = 3.5f;
+    _pageIndicatorImage = nil;
+    _currentPageIndicatorImage= nil;
+    _pageIndicatorAnimated = NO;
 }
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    if (self.allowChangeFrame) {
+    if (self.allowUpdatePageIndicator) {
         [self layoutSubPages];
     }
 }
 -(void)setCurrentPage:(NSInteger)currentPage
 {
     [super setCurrentPage:currentPage];
-    if (self.allowChangeFrame) {
+    if (self.allowUpdatePageIndicator) {
         [self layoutSubPages];
     }
 }
--(void)setAllowChangeFrame:(BOOL)allowChangeFrame
+-(void)setAllowUpdatePageIndicator:(BOOL)allowUpdatePageIndicator
 {
-    _allowChangeFrame = allowChangeFrame;
-    if (!_allowChangeFrame) {
-        [self initData];
+    _allowUpdatePageIndicator = allowUpdatePageIndicator;
+    if (!_allowUpdatePageIndicator) {
+        [self initDefaultData];
     }
     [self layoutSubPages];
 }
@@ -62,70 +64,75 @@
 -(void)layoutSubPages
 {
     CGFloat X = 0.f;
-    CGFloat H = _jl_selDotSize.height>_jl_norDotSize.height?_jl_selDotSize.height:_jl_norDotSize.height;
-    CGFloat min_Y = ABS(_jl_selDotSize.height-_jl_norDotSize.height)/2.f;
+    CGFloat H = _currentPageIndicatorSize.height>_pageIndicatorSize.height?_currentPageIndicatorSize.height:_pageIndicatorSize.height;
+    CGFloat min_Y = ABS(_currentPageIndicatorSize.height-_pageIndicatorSize.height)/2.f;
     if (self.numberOfPages != [self.subviews count]) {
-        self.allowChangeFrame = NO;
+        self.allowUpdatePageIndicator = NO;
         return;
     }
     for (int i=0; i<[self.subviews count]; i++) {
         UIView* dot = [self.subviews objectAtIndex:i];
         dot.layer.masksToBounds = YES;
         if (i == self.currentPage-1) {
-            CGFloat Y = _jl_selDotSize.height>_jl_norDotSize.height?min_Y:0;
-            [dot setFrame:CGRectMake(X , Y, _jl_norDotSize.width, _jl_norDotSize.height)];
-            X+=_jl_norDotSize.width+_jl_selMagrin;
-            if (self.jl_norImage) {
-                dot.layer.contents = (id)self.jl_norImage.CGImage;
+            CGFloat Y = _currentPageIndicatorSize.height>_pageIndicatorSize.height?min_Y:0;
+            [dot setFrame:CGRectMake(X , Y, _pageIndicatorSize.width, _pageIndicatorSize.height)];
+            X+=_pageIndicatorSize.width+_currentPageIndicatorSpacing;
+            if (self.pageIndicatorImage) {
+                dot.layer.contents = (id)self.pageIndicatorImage.CGImage;
                 dot.backgroundColor = [UIColor clearColor];
             }else{
                 dot.layer.contents = nil;
                 dot.backgroundColor = self.pageIndicatorTintColor;
             }
-            dot.layer.cornerRadius = self.jl_norDotCornerRadius;
+            dot.layer.cornerRadius = self.pageIndicatorRadius;
         }else if (i == self.currentPage) {
-            CGFloat Y = _jl_selDotSize.height>_jl_norDotSize.height?0:min_Y;
-            [dot setFrame:CGRectMake(X , Y, _jl_selDotSize.width,_jl_selDotSize.height)];
+            CGFloat Y = _currentPageIndicatorSize.height>_pageIndicatorSize.height?0:min_Y;
+            [dot setFrame:CGRectMake(X , Y, _currentPageIndicatorSize.width,_currentPageIndicatorSize.height)];
             if (i==[self.subviews count]-1) {
-                X+=_jl_selDotSize.width;
+                X+=_currentPageIndicatorSize.width;
             }else{
-                X+=_jl_selDotSize.width+_jl_selMagrin;
+                X+=_currentPageIndicatorSize.width+_currentPageIndicatorSpacing;
             }
-            if (self.jl_selImage) {
-                dot.layer.contents = (id)self.jl_selImage.CGImage;
+            if (self.currentPageIndicatorImage) {
+                dot.layer.contents = (id)self.currentPageIndicatorImage.CGImage;
                 dot.backgroundColor = [UIColor clearColor];
             }else{
                 dot.layer.contents = nil;
                 dot.backgroundColor = self.currentPageIndicatorTintColor;
             }
-            dot.layer.cornerRadius = self.jl_selDotCornerRadius;
+            dot.layer.cornerRadius = self.currentPageIndicatorRadius;
         }else {
-            CGFloat Y = _jl_selDotSize.height>_jl_norDotSize.height?min_Y:0;
-            [dot setFrame:CGRectMake(X , Y, _jl_norDotSize.width, _jl_norDotSize.height)];
+            CGFloat Y = _currentPageIndicatorSize.height>_pageIndicatorSize.height?min_Y:0;
+            [dot setFrame:CGRectMake(X , Y, _pageIndicatorSize.width, _pageIndicatorSize.height)];
             if (i==[self.subviews count]-1) {
-                X+=_jl_norDotSize.width;
+                X+=_pageIndicatorSize.width;
             }else{
-                X+=_jl_norDotSize.width+_jl_norMagrin;
+                X+=_pageIndicatorSize.width+_pageIndicatorSpacing;
             }
-            if (self.jl_norImage) {
-                dot.layer.contents = (id)self.jl_norImage.CGImage;
+            if (self.pageIndicatorImage) {
+                dot.layer.contents = (id)self.pageIndicatorImage.CGImage;
                 dot.backgroundColor = [UIColor clearColor];
             }else{
                 dot.layer.contents = nil;
                 dot.backgroundColor = self.pageIndicatorTintColor;
             }
-            dot.layer.cornerRadius = self.jl_norDotCornerRadius;
+            dot.layer.cornerRadius = self.pageIndicatorRadius;
         }
     }
     self.frame = CGRectMake(self.jl_x, self.jl_y, X, H);
-    _jl_MinimumSize = CGSizeMake(X, H);
+    _minimumSize = CGSizeMake(X, H);
+}
+-(void)animatedWithDot:(UIView *)dot
+{
+    
 }
 -(CGSize)sizeForNumberOfPages:(NSInteger)pageCount
 {
-    if (self.allowChangeFrame) {
-        return _jl_MinimumSize;
+    if (self.allowUpdatePageIndicator) {
+        return _minimumSize;
     }
     return [super sizeForNumberOfPages:pageCount];
 }
+
 @end
 

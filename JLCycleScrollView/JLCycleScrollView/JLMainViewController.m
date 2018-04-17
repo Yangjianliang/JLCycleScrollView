@@ -194,7 +194,7 @@
 #pragma mark - setContentView
 - (IBAction)norsegmentC:(UISegmentedControl *)sender {
     JLPageControl * pageC = self.jiCycScrollerView.pageControl;
-    CGSize size = pageC.jl_norDotSize;
+    CGSize size = pageC.pageIndicatorSize;
     switch (self.norSegmentC.selectedSegmentIndex) {
         case 0:
            self.norSlider.value = size.width;
@@ -203,10 +203,10 @@
             self.norSlider.value = size.height;
             break;
         case 2:
-            self.norSlider.value = pageC.jl_norDotCornerRadius;
+            self.norSlider.value = pageC.pageIndicatorRadius;
             break;
         case 3:
-            self.norSlider.value = pageC.jl_norMagrin;
+            self.norSlider.value = pageC.pageIndicatorSpacing;
             break;
         default:
             break;
@@ -215,7 +215,7 @@
 }
 - (IBAction)selsegmentc:(UISegmentedControl *)sender {
     JLPageControl * pageC = self.jiCycScrollerView.pageControl;
-    CGSize size = pageC.jl_selDotSize;
+    CGSize size = pageC.currentPageIndicatorSize;
     switch (self.selSegmentC.selectedSegmentIndex) {
         case 0:
             self.selSlider.value = size.width;
@@ -224,10 +224,10 @@
             self.selSlider.value = size.height;
             break;
         case 2:
-            self.selSlider.value = pageC.jl_selDotCornerRadius;
+            self.selSlider.value = pageC.pageIndicatorRadius;
             break;
         case 3:
-            self.selSlider.value = pageC.jl_selMagrin;
+            self.selSlider.value = pageC.currentPageIndicatorSpacing;
             break;
         default:
             break;
@@ -236,21 +236,21 @@
 }
 - (IBAction)norSlider:(UISlider *)sender {
     JLPageControl * pageC = self.jiCycScrollerView.pageControl;
-    CGSize size = pageC.jl_norDotSize;
+    CGSize size = pageC.pageIndicatorSize;
     switch (self.norSegmentC.selectedSegmentIndex) {
         case 0:
             size.width = sender.value;
-            pageC.jl_norDotSize = size;
+            pageC.pageIndicatorSize = size;
             break;
         case 1:
             size.height = sender.value;
-            pageC.jl_norDotSize = size;
+            pageC.pageIndicatorSize = size;
             break;
         case 2:
-            pageC.jl_norDotCornerRadius = sender.value;
+            pageC.pageIndicatorRadius = sender.value;
             break;
         case 3:
-            pageC.jl_norMagrin = sender.value;
+            pageC.pageIndicatorSpacing = sender.value;
             break;
         default:
             break;
@@ -259,21 +259,21 @@
 }
 - (IBAction)selSlider:(UISlider *)sender {
     JLPageControl * pageC = self.jiCycScrollerView.pageControl;
-    CGSize size = pageC.jl_selDotSize;
+    CGSize size = pageC.currentPageIndicatorSize;
     switch (self.selSegmentC.selectedSegmentIndex) {
         case 0:
             size.width = sender.value;
-            pageC.jl_selDotSize = size;
+            pageC.currentPageIndicatorSize = size;
             break;
         case 1:
             size.height = sender.value;
-            pageC.jl_selDotSize = size;
+            pageC.currentPageIndicatorSize = size;
             break;
         case 2:
-            pageC.jl_selDotCornerRadius = sender.value;
+            pageC.currentPageIndicatorRadius = sender.value;
             break;
         case 3:
-            pageC.jl_selMagrin = sender.value;
+            pageC.currentPageIndicatorSpacing = sender.value;
             break;
         default:
             break;
@@ -283,15 +283,15 @@
 - (IBAction)userImageSwitch:(UISwitch *)sender {
     sender.selected = !sender.selected;
     if (sender.selected) {
-        self.jiCycScrollerView.pageControl.jl_norImage = [UIImage imageNamed:@"nor"];
-        self.jiCycScrollerView.pageControl.jl_selImage = [UIImage imageNamed:@"sel"];
+        self.jiCycScrollerView.pageControl.pageIndicatorImage = [UIImage imageNamed:@"nor"];
+        self.jiCycScrollerView.pageControl.currentPageIndicatorImage = [UIImage imageNamed:@"sel"];
     }else{
-        self.jiCycScrollerView.pageControl.jl_selImage = nil;
-        self.jiCycScrollerView.pageControl.jl_norImage = nil;
+        self.jiCycScrollerView.pageControl.currentPageIndicatorImage = nil;
+        self.jiCycScrollerView.pageControl.pageIndicatorImage = nil;
 
     }
     
-    self.jiCycScrollerView.pageControl.allowChangeFrame = YES;
+    self.jiCycScrollerView.pageControl.allowUpdatePageIndicator = YES;
 
 }
 - (IBAction)allowchangeFrameSwitch:(UISwitch *)sender {
@@ -302,20 +302,20 @@
 //        self.jiCycScrollerView.pageControl.jl_selMagrin = 3;
 //        self.jiCycScrollerView.pageControl.jl_selDotCornerRadius = 3;
 //        self.jiCycScrollerView.pageControl.jl_norDotCornerRadius = 3;
-        self.jiCycScrollerView.pageControl.allowChangeFrame = YES;
+        self.jiCycScrollerView.pageControl.allowUpdatePageIndicator = YES;
 
         [self norSlider:self.norSlider];
         [self selSlider:self.selSlider];
     }else{
-        self.jiCycScrollerView.pageControl.allowChangeFrame = NO;
+        self.jiCycScrollerView.pageControl.allowUpdatePageIndicator = NO;
     }
     [self updataData];
 }
 -(void)updataData
 {
     JLPageControl * pageC = self.jiCycScrollerView.pageControl;
-    self.norLabel.text = [NSString stringWithFormat:@"Nor:   Size_W=%.2f      Size_H=%.2f \n          Radius=%.2f      Magrin=%.2f",pageC.jl_norDotSize.width,pageC.jl_norDotSize.height,pageC.jl_norDotCornerRadius,pageC.jl_norMagrin];
-    self.selLabel.text = [NSString stringWithFormat:@"Sel:  Size_W=%.2f      Size_H=%.2f \n        Radius=%.2f      Magrin=%.2f",pageC.jl_selDotSize.width,pageC.jl_selDotSize.height,pageC.jl_selDotCornerRadius,pageC.jl_selMagrin];
+    self.norLabel.text = [NSString stringWithFormat:@"Nor:   Size_W=%.2f      Size_H=%.2f \n          Radius=%.2f      Magrin=%.2f",pageC.pageIndicatorSize.width,pageC.pageIndicatorSize.height,pageC.pageIndicatorRadius,pageC.pageIndicatorSpacing];
+    self.selLabel.text = [NSString stringWithFormat:@"Sel:  Size_W=%.2f      Size_H=%.2f \n        Radius=%.2f      Magrin=%.2f",pageC.currentPageIndicatorSize.width,pageC.currentPageIndicatorSize.height,pageC.currentPageIndicatorRadius,pageC.currentPageIndicatorSpacing];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

@@ -10,7 +10,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "JLCycleScrollView/Vendor/JLCycleScrollerView/MyFlowLayout.m"
-            timestampString = "545421345.9926701"
+            timestampString = "545422867.763572"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "35"
@@ -22,11 +22,11 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "JLCycleScrollView/ExampleTwoController.m"
-            timestampString = "545421345.992801"
+            timestampString = "545496095.193023"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "140"
@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "JLCycleScrollView/Vendor/JLCycleScrollerView/JLCycleScrollerView.m"
-            timestampString = "545421345.992854"
+            timestampString = "545675384.989356"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "116"
-            endingLineNumber = "116"
+            startingLineNumber = "114"
+            endingLineNumber = "114"
             landmarkName = "-setSourceArray:"
             landmarkType = "7">
          </BreakpointContent>
@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "JLCycleScrollView/Vendor/JLCycleScrollerView/JLCycleScrollerView.m"
-            timestampString = "545421345.993403"
+            timestampString = "545675384.989416"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "107"
-            endingLineNumber = "107"
+            startingLineNumber = "105"
+            endingLineNumber = "105"
             landmarkName = "-setSourceArray:"
             landmarkType = "7">
          </BreakpointContent>
@@ -74,12 +74,28 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "JLCycleScrollView/Vendor/JLCycleScrollerView/JLCycleScrollerView.m"
-            timestampString = "545421345.99391"
+            timestampString = "545675384.989463"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "583"
-            endingLineNumber = "583"
+            startingLineNumber = "581"
+            endingLineNumber = "581"
             landmarkName = "-initializeArrayAttributes:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "JLCycleScrollView/Vendor/JLCycleScrollerView/JLCycleScrollerView.m"
+            timestampString = "545675384.98954"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "676"
+            endingLineNumber = "676"
+            landmarkName = "-automaticSwitchTheForeAndAft:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

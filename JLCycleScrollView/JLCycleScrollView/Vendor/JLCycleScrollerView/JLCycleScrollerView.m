@@ -8,8 +8,6 @@
 
 
 #import "JLCycleScrollerView.h"
-#import "MyFlowLayout.h"
-#import "JLCycScrollFlowLayout.h"
 
 @interface JLCycleScrollerView ()<UICollectionViewDelegateFlowLayout,UICollectionViewDataSource>
 @property (nonatomic, strong) UICollectionView *collectionView;
@@ -52,9 +50,9 @@ static CGFloat const outCellDefaultSpace = -1.0;
 -(void)initDefaultData
 {
     _scrollDirection = UICollectionViewScrollDirectionHorizontal;
-    _cellScrollPosition = JLCycScrollPositionCenterHV;
+    _cellScrollPosition = JLCycScrollPositionLeftTop;
     _sectionInset =  UIEdgeInsetsZero; //UIEdgeInsetsMake(40, 40, 40, 40);//
-    _cellsOfLine = 3.0 ;
+    _cellsOfLine = 1.0 ;
     _cellsSpacing = 0.0;
     _timeDuration = 3.0;
     _timerNeed = NO;
@@ -675,7 +673,7 @@ static CGFloat const outCellDefaultSpace = -1.0;
     }
 }
 -(void)automaticSwitchTheForeAndAft:(BOOL)delegate
-{
+{//Dele
     NSInteger page = [self getCurryPageInteger];
     if (page == self.arrayData.count+1 && ![self dataIsUnavailable]) {
         [self delegateWillBeginAutomaticPageingCell:[self getCurryIndexPath]];

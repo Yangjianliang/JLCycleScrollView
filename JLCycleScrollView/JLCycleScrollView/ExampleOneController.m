@@ -68,13 +68,13 @@
     jlview.scrollDirection =  UICollectionViewScrollDirectionVertical;
     jlview.scrollEnabled = NO;
     
-    jlview.pageControl.jl_selDotSize = CGSizeMake(15, 5);
-    jlview.pageControl.jl_norDotSize = CGSizeMake(15, 5);
-    jlview.pageControl.jl_norMagrin = 4;
-    jlview.pageControl.jl_selMagrin = 4;
-    jlview.pageControl.jl_selDotCornerRadius = 0;
-    jlview.pageControl.jl_norDotCornerRadius = 0;
-    jlview.pageControl.allowChangeFrame = YES;
+    jlview.pageControl.currentPageIndicatorSize = CGSizeMake(15, 5);
+    jlview.pageControl.pageIndicatorSize = CGSizeMake(15, 5);
+    jlview.pageControl.currentPageIndicatorSpacing = 4;
+    jlview.pageControl.pageIndicatorSpacing = 4;
+    jlview.pageControl.currentPageIndicatorRadius = 0;
+    jlview.pageControl.pageIndicatorRadius = 0;
+    jlview.pageControl.allowUpdatePageIndicator = YES;
 
 //    jlview.pageControlNeed = NO;
 

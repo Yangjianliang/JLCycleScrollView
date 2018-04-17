@@ -10,6 +10,7 @@
 #import <UIKit/UIKit.h>
 #import "JLCycSrollCellDataProtocol.h"
 #import "JLCycScrollDefaultCell.h"
+#import "JLCycScrollFlowLayout.h"
 #import "JLPageControl.h"
 #import "UIView+JLExtension.h"
 
@@ -55,10 +56,10 @@ typedef NS_ENUM(NSInteger, JLCycScrollPosition) {
 - (void)jl_cycleScrollerView:(JLCycleScrollerView *)view willDisplayCell:(UICollectionViewCell *)cell forItemAtIndex:(NSInteger)index;
 - (void)jl_cycleScrollerView:(JLCycleScrollerView *)view didEndDisplayingCell:(UICollectionViewCell *)cell forItemAtIndex:(NSInteger)index;
 
-// willBeginAutomaticPageingCell
-// willChangeCurryCell
-// didChangeCurryCell
-// didEndAutomaticPageingCell
+//1. willBeginAutomaticPageingCell
+//2. willChangeCurryCell
+//3. didChangeCurryCell
+//4. didEndAutomaticPageingCell
 - (void)jl_cycleScrollerView:(JLCycleScrollerView *)view willChangeCurryCell:(UICollectionViewCell *)cell curryPage:(NSInteger)curryPage;
 - (void)jl_cycleScrollerView:(JLCycleScrollerView *)view didChangeCurryCell:(UICollectionViewCell *)cell curryPage:(NSInteger)curryPage;
 - (void)jl_cycleScrollerView:(JLCycleScrollerView *)view willBeginAutomaticPageingCell:(UICollectionViewCell *)cell curryIndex:(NSInteger)curryIndex;

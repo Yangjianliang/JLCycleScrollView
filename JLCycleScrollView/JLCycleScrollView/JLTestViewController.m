@@ -49,19 +49,20 @@
 //    }
     
     
-//    [self.view addSubview:self.testView];
-    self.testView.sourceArray = self.arrayData;
+    [self.view addSubview:self.testView];
+//    self.testView.sourceArray = self.arrayData;
 
 }
 - (IBAction)testTwo:(id)sender {
-    self.testView.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+    self.testView.sectionInset = UIEdgeInsetsMake(10, 60, 10, 60);
+//    self.testView.scrollDirection = UICollectionViewScrollDirectionHorizontal;
 
 //    self.testView.cellsSpacing = 40;
 //    self.testView.frame = CGRectMake(40, 300, 250, 120);
 }
 - (IBAction)testThree:(id)sender {
 //    self.testView.frame = CGRectMake(40, 300, 250, 180);
-    self.testView.scrollDirection = UICollectionViewScrollDirectionVertical;
+//    self.testView.scrollDirection = UICollectionViewScrollDirectionVertical;
 }
 - (IBAction)testFour:(id)sender {
 //    self.testView.frame = CGRectMake(40, 100, 150, 100);
@@ -99,10 +100,10 @@
 }
 -(void)buildUI
 {
-    self.testView = [[JLCycleScrollerView alloc] initWithFrame:CGRectMake(40, 100, 250, 480)];
+    self.testView = [[JLCycleScrollerView alloc] initWithFrame:CGRectMake(40, 100, 250, 180)];
     self.testView.datasource = self;
     self.testView.delegate = self;
-    [self.view addSubview:self.testView];
+//    [self.view addSubview:self.testView];
 
     self.testView.pageControl.pageIndicatorTintColor = [UIColor purpleColor];
     self.testView.pageControl.currentPageIndicatorTintColor = [UIColor redColor];
@@ -124,16 +125,16 @@
 }
 - (CGSize)jl_cycleScrollerView:(JLCycleScrollerView*)view sizeForItemAtIndex:(NSInteger)index
 {
-    if (index==0) {
-        return CGSizeMake(100, 50);
-    }
-    if (index==1) {
-        return CGSizeMake(50, 50);
-    }
-    if (index==2) {
-        return CGSizeMake(200, 200);
-    }
-    return CGSizeMake(350, 350);
+//    if (index==0) {
+//        return CGSizeMake(100, 50);
+//    }
+//    if (index==1) {
+//        return CGSizeMake(50, 50);
+//    }
+//    if (index==2) {
+//        return CGSizeMake(200, 200);
+//    }
+    return CGSizeMake(130, 200);
 
 }
 - (void)jl_cycleScrollerView:(JLCycleScrollerView *)view didSelectItemAtIndex:(NSInteger)index sourceArray:(nonnull NSArray *)sourceArray
