@@ -10,5 +10,4 @@
 #import "JLCycSrollCellDataProtocol.h"
 @interface JLCycScrollDefaultCell : UICollectionViewCell<JLCycSrollCellDataProtocol>
 @property (nonatomic, strong) UIImageView *imageView;
-
 @end

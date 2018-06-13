@@ -87,12 +87,12 @@
 //    [self.firstJLView removeFromSuperview];
 
 //    self.testJLCYCView.sourceArray = self.arrayData;
-        self.firstJLView.sectionInset = UIEdgeInsetsMake(10, 20, 10, 20);
+//        self.firstJLView.sectionInset = UIEdgeInsetsMake(10, 20, 10, 20);
 
 }
 - (IBAction)secondClick:(id)sender {
     
-    self.firstJLView.cellsSpacing = 20;
+//    self.firstJLView.cellsSpacing = 20;
 //    self.firstJLView.sectionInset = UIEdgeInsetsMake(10, 20, 10, 20);
 //    self.firstJLView.scrollDirection = UICollectionViewScrollDirectionVertical;
     

@@ -65,7 +65,7 @@
     [jlview setCustomCell:[JLCycScrCustomCell new] isXibBuild:YES];
     jlview.delegate = self;
     
-    jlview.scrollDirection =  UICollectionViewScrollDirectionVertical;
+//    jlview.scrollDirection =  UICollectionViewScrollDirectionVertical;
     jlview.scrollEnabled = NO;
     
     jlview.pageControl.currentPageIndicatorSize = CGSizeMake(15, 5);

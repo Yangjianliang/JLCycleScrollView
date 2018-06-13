@@ -89,7 +89,7 @@
     }
 }
 - (IBAction)scrollDirectionSwitch:(UISwitch *)sender {
-    self.jiCycScrollerView.scrollDirection = sender.on;
+//    self.jiCycScrollerView.scrollDirection = sender.on;
     if (sender.on) {
         self.scrollDirectionLabel.text = @"scrollDirection-H";
         self.scrollDirectionLabel.textColor = [UIColor purpleColor];
@@ -116,7 +116,7 @@
    
 }
 - (IBAction)cellsOfLineStepper:(UIStepper *)sender {
-    self.jiCycScrollerView.cellsOfLine = sender.value;
+//    self.jiCycScrollerView.cellsOfLine = sender.value;
     self.cellsOfLineLabel.text = [NSString stringWithFormat:@"cellsOfLine=%.0f",sender.value];
 }
 #pragma mark - btns

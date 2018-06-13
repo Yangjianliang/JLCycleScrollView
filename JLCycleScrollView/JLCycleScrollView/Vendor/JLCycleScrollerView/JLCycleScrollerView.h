@@ -88,12 +88,19 @@ typedef NS_ENUM(NSInteger, JLCycScrollPosition) {
 @property (nonatomic, weak, nullable) id<JLCycleScrollerViewDatasource>datasource;
 @property (nonatomic, weak, nullable) id<JLCycleScrollerViewDelegate>delegate;
 
+// -------------JLCycScrollFlowLayout设置------------
+@property (nonatomic, strong, readonly) JLCycScrollFlowLayout *flowLayout;
+/**default is NO*/
+@property (nonatomic) BOOL keepContentOffsetWhenUpdateLayout;
+/**default is 1.0,每行、列cell个数,*/
+@property (nonatomic) CGFloat cellsOfLine;
+
 // -------------UICollectionView设置------------
 /**
  轮播图使用自定义的cell创建,cell上子控件可高度自定义
  @param cell  自定义cell必须遵循JLCycleScrollDataProtocol协议，cell执行协议方法给cell赋值,使用自定义cell不再需要datasource
  @param isxib 自定义cell是否以xib方式创建
- eg:[self.jLCycleScrollerView useCustomCell:[[JLLunBoCollectionViewCell alloc] init] isXibBuild:YES];
+ eg:[self.jLCycleScrollerView useCustomCell:[[JLCycScrollDefaultCell alloc] init] isXibBuild:YES];
  */
 - (void)setCustomCell:(UICollectionViewCell<JLCycSrollCellDataProtocol>*)cell isXibBuild:(BOOL)isxib ;
 /** default is nil */
@@ -104,20 +111,10 @@ typedef NS_ENUM(NSInteger, JLCycScrollPosition) {
 @property (nonatomic) BOOL pagingEnabled;
 /**default is YES,是否需要无限拖拽*/
 @property (nonatomic) BOOL infiniteDragging;
-/**default is NO,eg:infiniteDragging=YES and sourceArray.count=1、cellsOfLine==1.0时不能被无限拖拽*/
+/**default is NO,eg:infiniteDragging=YES and sourceArray.count=1、cellsOfLine==1.0(<=1.0)时不能被无限拖拽*/
 @property (nonatomic) BOOL infiniteDraggingForSinglePage;
 
-/**default is UICollectionViewScrollDirectionHorizontal */
-@property (nonatomic) UICollectionViewScrollDirection scrollDirection;
-/**default is 1.0,每行、列cell个数,*/
-@property (nonatomic) CGFloat cellsOfLine;
-/**default is 0.0 */
-@property (nonatomic) CGFloat cellsSpacing;
-/**default is UIEdgeInsetsZero */
-@property (nonatomic) UIEdgeInsets sectionInset;
-
 @property (nonatomic) JLCycScrollPosition cellScrollPosition;
-
 
 // --------------pageControl设置------------
 /**if pageControlNeed=NO,pageControl is nil; eg:pageControl.currentPageIndicatorTintColor...*/

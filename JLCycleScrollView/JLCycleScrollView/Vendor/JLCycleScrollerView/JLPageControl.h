@@ -39,7 +39,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic ,assign) BOOL pageIndicatorAnimated; // default is NO
 
 // It is necessary to set the property yes or above to be valid. After setting the above properties, it is recommended to set this property yes to update the effect.
-//必须设置该属性yes以上新增属性才会有效，建议设置好以上属性后再设置此属性YES来更新生效。
+//必须设置该属性YES以上新增属性才会有效，建议设置好以上属性后再设置此属性YES来更新生效。
 @property(nonatomic ,assign) BOOL allowUpdatePageIndicator; // default is NO
 
 @end

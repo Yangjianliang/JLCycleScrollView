@@ -22,7 +22,7 @@
     if (!_imageView) {
         UIImageView *imageView = [[UIImageView alloc] init];
 //        imageView.contentMode = UIViewContentModeScaleAspectFill;
-        imageView.clipsToBounds = YES;
+//        imageView.clipsToBounds = YES;
         _imageView = imageView;
     }
     return _imageView;
@@ -40,7 +40,7 @@
 /**
  协议方法
  
- @param data 传入的sourceArray[integer]
+ @param data 传入的sourceArray[index]
  */
 -(void)setJLCycSrollCellData:(id)data
 {

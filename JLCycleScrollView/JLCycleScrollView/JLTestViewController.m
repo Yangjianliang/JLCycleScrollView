@@ -9,6 +9,8 @@
 #import "JLTestViewController.h"
 #import "JLCycleScrollerView.h"
 #import "ExampleModel.h"
+#define SCR_W [UIScreen mainScreen].bounds.size.width
+#define SCR_H [UIScreen mainScreen].bounds.size.height
 
 @interface JLTestViewController ()<JLCycleScrollerViewDelegate,JLCycleScrollerViewDatasource>
 @property (strong, nonatomic) JLCycleScrollerView *testView;
@@ -49,29 +51,37 @@
 //    }
     
     
-    [self.view addSubview:self.testView];
+//    [self.view addSubview:self.testView];
 //    self.testView.sourceArray = self.arrayData;
+
+    self.testView.flowLayout.itemSize = CGSizeMake(140, 140);
+    CGFloat celll = self.testView.cellsOfLine;
+    NSLog(@"%f",celll);
+//        self.testView.flowLayout.sectionInset = UIEdgeInsetsMake(10, 30, 10, 30);
 
 }
 - (IBAction)testTwo:(id)sender {
-    self.testView.sectionInset = UIEdgeInsetsMake(10, 60, 10, 60);
+//    self.testView.sectionInset = UIEdgeInsetsMake(10, 60, 10, 60);
 //    self.testView.scrollDirection = UICollectionViewScrollDirectionHorizontal;
 
-//    self.testView.cellsSpacing = 40;
-//    self.testView.frame = CGRectMake(40, 300, 250, 120);
+    self.testView.keepContentOffsetWhenUpdateLayout = NO;
+    self.testView.flowLayout.minimumLineSpacing = 40;
+//    self.testView.frame = CGRectMake(40, 300, 150, 120);
+    
+
 }
 - (IBAction)testThree:(id)sender {
 //    self.testView.frame = CGRectMake(40, 300, 250, 180);
-//    self.testView.scrollDirection = UICollectionViewScrollDirectionVertical;
+    self.testView.flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
 }
 - (IBAction)testFour:(id)sender {
 //    self.testView.frame = CGRectMake(40, 100, 150, 100);
 
-//    self.testView.cellsSpacing = 20;
+    self.testView.flowLayout.minimumLineSpacing = 20;
 
-    [self.arrayData removeLastObject];;
+//    [self.arrayData removeLastObject];;
     
-    self.testView.sourceArray = self.arrayData;
+//    self.testView.sourceArray = self.arrayData;
 
 }
 
@@ -103,7 +113,7 @@
     self.testView = [[JLCycleScrollerView alloc] initWithFrame:CGRectMake(40, 100, 250, 180)];
     self.testView.datasource = self;
     self.testView.delegate = self;
-//    [self.view addSubview:self.testView];
+    [self.view addSubview:self.testView];
 
     self.testView.pageControl.pageIndicatorTintColor = [UIColor purpleColor];
     self.testView.pageControl.currentPageIndicatorTintColor = [UIColor redColor];
@@ -123,20 +133,20 @@
     ExampleModel *model = sourceArray[index];
     return model.url;
 }
-- (CGSize)jl_cycleScrollerView:(JLCycleScrollerView*)view sizeForItemAtIndex:(NSInteger)index
-{
-//    if (index==0) {
+//- (CGSize)jl_cycleScrollerView:(JLCycleScrollerView*)view sizeForItemAtIndex:(NSInteger)index
+//{
+////    if (index==0) {
 //        return CGSizeMake(100, 50);
-//    }
-//    if (index==1) {
-//        return CGSizeMake(50, 50);
-//    }
-//    if (index==2) {
-//        return CGSizeMake(200, 200);
-//    }
-    return CGSizeMake(130, 200);
-
-}
+////    }
+////    if (index==1) {
+////        return CGSizeMake(50, 50);
+////    }
+////    if (index==2) {
+////        return CGSizeMake(200, 200);
+////    }
+////    return CGSizeMake(130, 200);
+//
+//}
 - (void)jl_cycleScrollerView:(JLCycleScrollerView *)view didSelectItemAtIndex:(NSInteger)index sourceArray:(nonnull NSArray *)sourceArray
 {
     NSLog(@"点击%ld",index);
@@ -158,7 +168,7 @@
 }
 - (void)jl_cycleScrollerView:(JLCycleScrollerView *)view didEndAutomaticPageingCell:(UICollectionViewCell *)cell curryIndex:(NSInteger)curryIndex
 {
-//    NSLog(@"didEndAutomaticPageingCell:%ld \n==",curryIndex);
+    NSLog(@"didEndAutomaticPageingCell:%ld \n==",curryIndex);
 
 }
 /*
