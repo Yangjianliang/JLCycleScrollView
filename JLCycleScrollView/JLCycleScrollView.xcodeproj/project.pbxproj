@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		2B1C96261F95B70600B040F6 /* ExampleOneController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B1C96251F95B70600B040F6 /* ExampleOneController.m */; };
+		2B3E570D219D046C0093A9F1 /* JLCycScrollFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B3E5701219D046C0093A9F1 /* JLCycScrollFlowLayout.m */; };
+		2B3E570E219D046C0093A9F1 /* JLCycScrollDefaultCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B3E5702219D046C0093A9F1 /* JLCycScrollDefaultCell.m */; };
+		2B3E570F219D046C0093A9F1 /* JLCycleScrollerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B3E5704219D046C0093A9F1 /* JLCycleScrollerView.m */; };
+		2B3E5710219D046C0093A9F1 /* JLPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B3E570A219D046C0093A9F1 /* JLPageControl.m */; };
+		2B3E5711219D046C0093A9F1 /* JLPageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B3E570B219D046C0093A9F1 /* JLPageManager.m */; };
+		2B3E5712219D046C0093A9F1 /* UIView+JLExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B3E570C219D046C0093A9F1 /* UIView+JLExtension.m */; };
 		2B488CC0202580F90004BACA /* placeholderImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B488CBF202580F90004BACA /* placeholderImage.png */; };
 		2B92751B1FD8E3F900D177E1 /* JLCycScrCustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B9275191FD8E3F900D177E1 /* JLCycScrCustomCell.m */; };
 		2B92751C1FD8E3F900D177E1 /* JLCycScrCustomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B92751A1FD8E3F900D177E1 /* JLCycScrCustomCell.xib */; };
@@ -19,20 +25,27 @@
 		2B9927EA1F77FE8000FBC958 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B9927E81F77FE8000FBC958 /* LaunchScreen.storyboard */; };
 		2BBCB61E1FEF5BF100A5CE10 /* JLMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BBCB61D1FEF5BF100A5CE10 /* JLMainViewController.m */; };
 		2BBCB6271FF1581700A5CE10 /* ExampleTwoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BBCB6251FF1581700A5CE10 /* ExampleTwoController.m */; };
-		2BC1CC502077757B003169DD /* JLCycScrollFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BC1CC4F2077757B003169DD /* JLCycScrollFlowLayout.m */; };
 		2BC1CC56207882AF003169DD /* JLTest.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2BC1CC55207882AF003169DD /* JLTest.storyboard */; };
 		2BC1CC59207882C0003169DD /* JLTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BC1CC58207882C0003169DD /* JLTestViewController.m */; };
-		2BC1CC5C2078957B003169DD /* UIView+JLExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BC1CC5B2078957B003169DD /* UIView+JLExtension.m */; };
-		2BF34B1C1FD5452E00F30ECD /* JLCycleScrollerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BF34B141FD5452E00F30ECD /* JLCycleScrollerView.m */; };
-		2BF34B1D1FD5452E00F30ECD /* JLCycScrollDefaultCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BF34B161FD5452E00F30ECD /* JLCycScrollDefaultCell.m */; };
-		2BF34B1F1FD5452E00F30ECD /* JLPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BF34B191FD5452E00F30ECD /* JLPageControl.m */; };
 		8E561FAD63EA633EF405E9D6 /* libPods-JLCycleScrollView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8231E785ADE7AAE4ACB602F1 /* libPods-JLCycleScrollView.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		2B18CAA11FDDA5B60089E353 /* JLCycSrollCellDataProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JLCycSrollCellDataProtocol.h; sourceTree = "<group>"; };
 		2B1C96241F95B70600B040F6 /* ExampleOneController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExampleOneController.h; sourceTree = "<group>"; };
 		2B1C96251F95B70600B040F6 /* ExampleOneController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExampleOneController.m; sourceTree = "<group>"; };
+		2B3E5700219D046C0093A9F1 /* JLCycSrollCellDataProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JLCycSrollCellDataProtocol.h; sourceTree = "<group>"; };
+		2B3E5701219D046C0093A9F1 /* JLCycScrollFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JLCycScrollFlowLayout.m; sourceTree = "<group>"; };
+		2B3E5702219D046C0093A9F1 /* JLCycScrollDefaultCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JLCycScrollDefaultCell.m; sourceTree = "<group>"; };
+		2B3E5703219D046C0093A9F1 /* JLPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JLPageControl.h; sourceTree = "<group>"; };
+		2B3E5704219D046C0093A9F1 /* JLCycleScrollerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JLCycleScrollerView.m; sourceTree = "<group>"; };
+		2B3E5705219D046C0093A9F1 /* UIView+JLExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+JLExtension.h"; sourceTree = "<group>"; };
+		2B3E5706219D046C0093A9F1 /* JLPageManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JLPageManager.h; sourceTree = "<group>"; };
+		2B3E5707219D046C0093A9F1 /* JLCycScrollDefaultCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JLCycScrollDefaultCell.h; sourceTree = "<group>"; };
+		2B3E5708219D046C0093A9F1 /* JLCycScrollFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JLCycScrollFlowLayout.h; sourceTree = "<group>"; };
+		2B3E5709219D046C0093A9F1 /* JLCycleScrollerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JLCycleScrollerView.h; sourceTree = "<group>"; };
+		2B3E570A219D046C0093A9F1 /* JLPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JLPageControl.m; sourceTree = "<group>"; };
+		2B3E570B219D046C0093A9F1 /* JLPageManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JLPageManager.m; sourceTree = "<group>"; };
+		2B3E570C219D046C0093A9F1 /* UIView+JLExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+JLExtension.m"; sourceTree = "<group>"; };
 		2B488CBF202580F90004BACA /* placeholderImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = placeholderImage.png; sourceTree = "<group>"; };
 		2B9275181FD8E3F900D177E1 /* JLCycScrCustomCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JLCycScrCustomCell.h; sourceTree = "<group>"; };
 		2B9275191FD8E3F900D177E1 /* JLCycScrCustomCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JLCycScrCustomCell.m; sourceTree = "<group>"; };
@@ -51,19 +64,9 @@
 		2BBCB61D1FEF5BF100A5CE10 /* JLMainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JLMainViewController.m; sourceTree = "<group>"; };
 		2BBCB6251FF1581700A5CE10 /* ExampleTwoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExampleTwoController.m; sourceTree = "<group>"; };
 		2BBCB6261FF1581700A5CE10 /* ExampleTwoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExampleTwoController.h; sourceTree = "<group>"; };
-		2BC1CC4E2077757B003169DD /* JLCycScrollFlowLayout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JLCycScrollFlowLayout.h; sourceTree = "<group>"; };
-		2BC1CC4F2077757B003169DD /* JLCycScrollFlowLayout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JLCycScrollFlowLayout.m; sourceTree = "<group>"; };
 		2BC1CC55207882AF003169DD /* JLTest.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = JLTest.storyboard; sourceTree = "<group>"; };
 		2BC1CC57207882C0003169DD /* JLTestViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JLTestViewController.h; sourceTree = "<group>"; };
 		2BC1CC58207882C0003169DD /* JLTestViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JLTestViewController.m; sourceTree = "<group>"; };
-		2BC1CC5A2078957B003169DD /* UIView+JLExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+JLExtension.h"; sourceTree = "<group>"; };
-		2BC1CC5B2078957B003169DD /* UIView+JLExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+JLExtension.m"; sourceTree = "<group>"; };
-		2BF34B131FD5452E00F30ECD /* JLCycleScrollerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JLCycleScrollerView.h; sourceTree = "<group>"; };
-		2BF34B141FD5452E00F30ECD /* JLCycleScrollerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JLCycleScrollerView.m; sourceTree = "<group>"; };
-		2BF34B151FD5452E00F30ECD /* JLCycScrollDefaultCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JLCycScrollDefaultCell.h; sourceTree = "<group>"; };
-		2BF34B161FD5452E00F30ECD /* JLCycScrollDefaultCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JLCycScrollDefaultCell.m; sourceTree = "<group>"; };
-		2BF34B181FD5452E00F30ECD /* JLPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JLPageControl.h; sourceTree = "<group>"; };
-		2BF34B191FD5452E00F30ECD /* JLPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JLPageControl.m; sourceTree = "<group>"; };
 		5E0D799F586CD931AD93A2BF /* Pods-JLCycleScrollView.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JLCycleScrollView.release.xcconfig"; path = "Pods/Target Support Files/Pods-JLCycleScrollView/Pods-JLCycleScrollView.release.xcconfig"; sourceTree = "<group>"; };
 		8231E785ADE7AAE4ACB602F1 /* libPods-JLCycleScrollView.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-JLCycleScrollView.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0E2AC9D31DEA54856BD4321 /* Pods-JLCycleScrollView.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JLCycleScrollView.debug.xcconfig"; path = "Pods/Target Support Files/Pods-JLCycleScrollView/Pods-JLCycleScrollView.debug.xcconfig"; sourceTree = "<group>"; };
@@ -94,9 +97,29 @@
 		2B1C95FB1F95B6C700B040F6 /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
-				2BF34B111FD5452E00F30ECD /* JLCycleScrollerView */,
+				2B3E56FF219D046C0093A9F1 /* JLCycleScrollerView */,
 			);
 			path = Vendor;
+			sourceTree = "<group>";
+		};
+		2B3E56FF219D046C0093A9F1 /* JLCycleScrollerView */ = {
+			isa = PBXGroup;
+			children = (
+				2B3E5709219D046C0093A9F1 /* JLCycleScrollerView.h */,
+				2B3E5704219D046C0093A9F1 /* JLCycleScrollerView.m */,
+				2B3E5707219D046C0093A9F1 /* JLCycScrollDefaultCell.h */,
+				2B3E5702219D046C0093A9F1 /* JLCycScrollDefaultCell.m */,
+				2B3E5708219D046C0093A9F1 /* JLCycScrollFlowLayout.h */,
+				2B3E5701219D046C0093A9F1 /* JLCycScrollFlowLayout.m */,
+				2B3E5700219D046C0093A9F1 /* JLCycSrollCellDataProtocol.h */,
+				2B3E5703219D046C0093A9F1 /* JLPageControl.h */,
+				2B3E570A219D046C0093A9F1 /* JLPageControl.m */,
+				2B3E5706219D046C0093A9F1 /* JLPageManager.h */,
+				2B3E570B219D046C0093A9F1 /* JLPageManager.m */,
+				2B3E5705219D046C0093A9F1 /* UIView+JLExtension.h */,
+				2B3E570C219D046C0093A9F1 /* UIView+JLExtension.m */,
+			);
+			path = JLCycleScrollerView;
 			sourceTree = "<group>";
 		};
 		2B92751D1FD8E6AB00D177E1 /* ExampleController */ = {
@@ -191,24 +214,6 @@
 				2BC1CC58207882C0003169DD /* JLTestViewController.m */,
 			);
 			name = JLTestController;
-			sourceTree = "<group>";
-		};
-		2BF34B111FD5452E00F30ECD /* JLCycleScrollerView */ = {
-			isa = PBXGroup;
-			children = (
-				2B18CAA11FDDA5B60089E353 /* JLCycSrollCellDataProtocol.h */,
-				2BF34B131FD5452E00F30ECD /* JLCycleScrollerView.h */,
-				2BF34B141FD5452E00F30ECD /* JLCycleScrollerView.m */,
-				2BF34B151FD5452E00F30ECD /* JLCycScrollDefaultCell.h */,
-				2BF34B161FD5452E00F30ECD /* JLCycScrollDefaultCell.m */,
-				2BF34B181FD5452E00F30ECD /* JLPageControl.h */,
-				2BF34B191FD5452E00F30ECD /* JLPageControl.m */,
-				2BC1CC4E2077757B003169DD /* JLCycScrollFlowLayout.h */,
-				2BC1CC4F2077757B003169DD /* JLCycScrollFlowLayout.m */,
-				2BC1CC5A2078957B003169DD /* UIView+JLExtension.h */,
-				2BC1CC5B2078957B003169DD /* UIView+JLExtension.m */,
-			);
-			path = JLCycleScrollerView;
 			sourceTree = "<group>";
 		};
 		7A7B0CFB2158AA0F6D09930D /* Pods */ = {
@@ -357,16 +362,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2BC1CC502077757B003169DD /* JLCycScrollFlowLayout.m in Sources */,
+				2B3E570D219D046C0093A9F1 /* JLCycScrollFlowLayout.m in Sources */,
 				2BBCB61E1FEF5BF100A5CE10 /* JLMainViewController.m in Sources */,
 				2B9927DF1F77FE7F00FBC958 /* AppDelegate.m in Sources */,
 				2BC1CC59207882C0003169DD /* JLTestViewController.m in Sources */,
-				2BC1CC5C2078957B003169DD /* UIView+JLExtension.m in Sources */,
-				2BF34B1F1FD5452E00F30ECD /* JLPageControl.m in Sources */,
+				2B3E570F219D046C0093A9F1 /* JLCycleScrollerView.m in Sources */,
 				2B9275291FD90CB000D177E1 /* ExampleModel.m in Sources */,
-				2BF34B1D1FD5452E00F30ECD /* JLCycScrollDefaultCell.m in Sources */,
+				2B3E5712219D046C0093A9F1 /* UIView+JLExtension.m in Sources */,
+				2B3E570E219D046C0093A9F1 /* JLCycScrollDefaultCell.m in Sources */,
+				2B3E5710219D046C0093A9F1 /* JLPageControl.m in Sources */,
 				2B1C96261F95B70600B040F6 /* ExampleOneController.m in Sources */,
-				2BF34B1C1FD5452E00F30ECD /* JLCycleScrollerView.m in Sources */,
+				2B3E5711219D046C0093A9F1 /* JLPageManager.m in Sources */,
 				2B9927DC1F77FE7F00FBC958 /* main.m in Sources */,
 				2BBCB6271FF1581700A5CE10 /* ExampleTwoController.m in Sources */,
 				2B92751B1FD8E3F900D177E1 /* JLCycScrCustomCell.m in Sources */,

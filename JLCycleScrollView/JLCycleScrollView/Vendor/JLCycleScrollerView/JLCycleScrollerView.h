@@ -13,6 +13,7 @@
 #import "JLCycScrollFlowLayout.h"
 #import "JLPageControl.h"
 #import "UIView+JLExtension.h"
+#import "JLPageManager.h"
 
 @class JLCycleScrollerView;
 NS_ASSUME_NONNULL_BEGIN
@@ -32,7 +33,7 @@ NS_INLINE JLIndexPath JLMakeIndexPath(NSInteger index, NSInteger section,NSInteg
 
 typedef NS_ENUM(NSInteger, JLCycScrollPosition) {
     JLCycScrollPositionLeftTop    = 0, //滚动点，默认以sectionInset为边界为参照
-    JLCycScrollPositionCenterHV    = 1,//以自身frame中心点作为参照
+    JLCycScrollPositionCenterHV   = 1, //以自身frame中心点作为参照
 };
 @protocol JLCycleScrollerViewDatasource <NSObject>
 @optional
@@ -52,7 +53,7 @@ typedef NS_ENUM(NSInteger, JLCycScrollPosition) {
 @end
 @protocol JLCycleScrollerViewDelegate <NSObject>
 @optional
-- (CGSize)jl_cycleScrollerView:(JLCycleScrollerView *)view sizeForItemAtIndex:(NSInteger)index;
+- (CGSize)jl_cycleScrollerView:(JLCycleScrollerView *)view sizeForItemAtIndex:(NSInteger)index preLayout:(BOOL)preLayout;
 - (void)jl_cycleScrollerView:(JLCycleScrollerView *)view willDisplayCell:(UICollectionViewCell *)cell forItemAtIndex:(NSInteger)index;
 - (void)jl_cycleScrollerView:(JLCycleScrollerView *)view didEndDisplayingCell:(UICollectionViewCell *)cell forItemAtIndex:(NSInteger)index;
 
@@ -68,7 +69,7 @@ typedef NS_ENUM(NSInteger, JLCycScrollPosition) {
 @end
 
 @interface JLCycleScrollerView : UIView
-/**支持storyboard/Xib初始化，或[alloc init.］方式初始化*/
+/**支持在storyboard/Xib初始化，或[alloc init.］方式初始化*/
 - (instancetype)initWithFrame:(CGRect)frame NS_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
 /**数据源
@@ -79,6 +80,7 @@ typedef NS_ENUM(NSInteger, JLCycScrollPosition) {
  return nil;
  */
 @property (nonatomic, strong) NSArray *sourceArray;
+
 /**
  使用默认的cell创建轮播图设置datasource,默认cell只添加了imageview子视图
  datasource只用于系统自带默认cell数据的设置，如果使用自定义的cell,即
@@ -88,14 +90,24 @@ typedef NS_ENUM(NSInteger, JLCycScrollPosition) {
 @property (nonatomic, weak, nullable) id<JLCycleScrollerViewDatasource>datasource;
 @property (nonatomic, weak, nullable) id<JLCycleScrollerViewDelegate>delegate;
 
-// -------------JLCycScrollFlowLayout设置------------
+// --------------UICollectionView、JLCycScrollFlowLayout设置------------
 @property (nonatomic, strong, readonly) JLCycScrollFlowLayout *flowLayout;
 /**default is NO*/
 @property (nonatomic) BOOL keepContentOffsetWhenUpdateLayout;
-/**default is 1.0,每行、列cell个数,*/
-@property (nonatomic) CGFloat cellsOfLine;
 
-// -------------UICollectionView设置------------
+/** default is 1.0,每行、列cell个数, 通过该参数间接设置itemSize， 设置cellsOfLine会AutoLayout适配。
+eg：水平方向时，改变JLCycleScrollerView.frame时，对应的itemSize的宽度会自适应使恰好展示cellsOfLine个 */
+@property (nonatomic) CGFloat cellsOfLine;
+/** 直接设置itemSize，水平滚动时高度设置无效(JLCycleScrollerView高度-sectionInset.top、bottom)、垂直同理。
+eg：水平方向时，改变JLCycleScrollerView.frame时，对应的itemSize的宽度不变*/
+@property (nonatomic) CGSize itemSize;
+//item之间间距
+@property (nonatomic) CGFloat itemSpacing;
+//获取或设置当前index,animated=NO
+@property (nonatomic) CGFloat curryIndex;
+//设置滚动到指定item
+-(void)jl_setContentOffsetAtIndex:(CGFloat)item animated:(BOOL)animated;
+
 /**
  轮播图使用自定义的cell创建,cell上子控件可高度自定义
  @param cell  自定义cell必须遵循JLCycleScrollDataProtocol协议，cell执行协议方法给cell赋值,使用自定义cell不再需要datasource
@@ -107,19 +119,23 @@ typedef NS_ENUM(NSInteger, JLCycScrollPosition) {
 @property (nonatomic, strong) UIImage *placeholderImage;
 /** default is YES */
 @property (nonatomic) BOOL scrollEnabled;
-/**default is YES */
+/** default is YES */
 @property (nonatomic) BOOL pagingEnabled;
-/**default is YES,是否需要无限拖拽*/
+/** default is YES,是否需要无限拖拽*/
 @property (nonatomic) BOOL infiniteDragging;
-/**default is NO,eg:infiniteDragging=YES and sourceArray.count=1、cellsOfLine==1.0(<=1.0)时不能被无限拖拽*/
+/** default is NO,eg: eg:当数据只有一个时、是否需要无限拖拽(infiniteDragging=YES and sourceArray.count=1、cellsOfLine==1.0(<=1.0))*/
 @property (nonatomic) BOOL infiniteDraggingForSinglePage;
+/** 是否可以支持无限拖拽(eg:数据源数量影响) */
+- (BOOL)canInfiniteDrag;
+//获取当前item实际个数
+- (NSInteger)getNumberOfItemsInSection;
 
 @property (nonatomic) JLCycScrollPosition cellScrollPosition;
 
 // --------------pageControl设置------------
-/**if pageControlNeed=NO,pageControl is nil; eg:pageControl.currentPageIndicatorTintColor...*/
+/**if pageControlNeed=NO,pageControl is nil;  eg:pageControl.currentPageIndicatorTintColor...*/
 @property (nonatomic, strong, nullable) JLPageControl* pageControl;
-/**Whether or not need pageControl，default is YES;设置NO后pageControl=nil,如果再次设置为YES,将重新创建默认pageControl*/
+/**Whether or not need pageControl，default is YES; 设置NO后pageControl=nil,如果再次设置为YES,将重新创建默认pageControl*/
 @property(nonatomic, assign) BOOL pageControlNeed;
 
 /**距离父视图边距,同一方向(水平/垂直)属性设置互斥，即同一方向上多个设置只有最后一次设置生效
@@ -140,6 +156,7 @@ typedef NS_ENUM(NSInteger, JLCycScrollPosition) {
 // --------------timer设置------------
 //note:当视图添加、移除、push-pop等时,定时器会自动重新创建激活或销毁定时器，
 //eg：当push时，你不必考虑暂停定时器，当pop回来时，你也不必激活定时器
+
 /**是否需要定时器,default is YES */
 @property(nonatomic, assign) BOOL timerNeed;
 /**定时器时间间隔(default is 3.0)*/
@@ -151,10 +168,7 @@ typedef NS_ENUM(NSInteger, JLCycScrollPosition) {
 
 @end
 
-@interface JLPageObject  : NSObject
-@property(nonatomic) BOOL isInRange;
-@property(nonatomic) CGFloat page;
-@end
+
 
 
 NS_ASSUME_NONNULL_END

@@ -122,10 +122,6 @@
     self.frame = CGRectMake(self.jl_x, self.jl_y, X, H);
     _minimumSize = CGSizeMake(X, H);
 }
--(void)animatedWithDot:(UIView *)dot
-{
-    
-}
 -(CGSize)sizeForNumberOfPages:(NSInteger)pageCount
 {
     if (self.allowUpdatePageIndicator) {

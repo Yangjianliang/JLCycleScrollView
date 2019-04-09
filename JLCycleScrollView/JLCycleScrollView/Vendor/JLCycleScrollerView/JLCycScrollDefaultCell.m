@@ -7,13 +7,13 @@
 //
 
 #import "JLCycScrollDefaultCell.h"
+
 #import "UIImageView+WebCache.h"
 
 @implementation JLCycScrollDefaultCell
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
         self.backgroundColor = [UIColor whiteColor];
-        [self.contentView addSubview:self.imageView];
     }
     return self;
 }
@@ -21,16 +21,17 @@
 {
     if (!_imageView) {
         UIImageView *imageView = [[UIImageView alloc] init];
-//        imageView.contentMode = UIViewContentModeScaleAspectFill;
-//        imageView.clipsToBounds = YES;
         _imageView = imageView;
+        [self.contentView addSubview:_imageView];
     }
     return _imageView;
 }
 -(void)layoutSubviews
 {
     [super layoutSubviews];
-    self.imageView.frame = self.bounds;
+    if (_imageView) {
+        _imageView.frame = self.bounds;
+    }
 }
 - (void)awakeFromNib {
     [super awakeFromNib];
@@ -46,11 +47,7 @@
 {
     if (data) {
         if ([data isKindOfClass:[NSString class]]) {
-            if ([data hasPrefix:@"http"]) {
-                [self.imageView sd_setImageWithURL:[NSURL URLWithString:data] placeholderImage:nil ];
-            } else {
-                self.imageView.image = [UIImage imageNamed:data];
-            }
+            [self.imageView sd_setImageWithURL:[NSURL URLWithString:data] placeholderImage:nil ];
         }else if ([data isKindOfClass:[NSURL class]]) {
             [self.imageView sd_setImageWithURL:data placeholderImage:nil];
         }else if ([data isKindOfClass:[UIImage class]]) {
